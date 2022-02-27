@@ -1,16 +1,19 @@
 const bcrypt = require("bcrypt");
 const jwt =  require("jsonwebtoken");
-//const { errors } = require("puppeteer");
+const fs = require("fs");
 const db = require("../models/");
 const User = db.User;
 
 exports.signup = (req, res) => {
+    //console.log(req)
     bcrypt
         .hash(req.body.password, 10)
         .then( (hash) => {
             const newUser =  User.create({
+                username : req.body.username,
                 email:req.body.email,
-                password:hash
+                password:hash,
+                //avatarUrl: req.file.filename
             })
                 .then( () => res.json("utilisateur créé"))
                 .catch(err =>  res.json(err.errors[0].message));
