@@ -1,18 +1,31 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
+
 
 export default function SignInForm() {
     //const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setpassword] = useState();
 
+    let navigate = useNavigate();
+
     const signIn = (e) =>  {
         e.preventDefault();
         fetch("http://localhost:3000/api/auth/login", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
+            credentials: "include",
+            headers: {"Content-Type": "application/json",
+        },
             body: JSON.stringify({email: email, password: password})
         })
-        .then(() => console.log("vous êtes connecté"))
+        .then((res) => {
+                if(res.ok) {
+                   // navigate("/");
+                } else {
+                    console.log("erreur");
+                }
+            }
+        )
         .catch(() => console.log("Impossible de se connecter"))
     }
    

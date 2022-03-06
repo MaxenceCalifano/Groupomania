@@ -1,0 +1,9 @@
+form {
+    display: flex;
+    padding: 20px;
+    align-content: space-around;
+    flex-wrap: wrap;
+  }
+  form > * {
+    margin: 10px;
+  }

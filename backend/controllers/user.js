@@ -5,7 +5,7 @@ const db = require("../models/");
 const User = db.User;
 
 exports.signup = (req, res) => {
-    //console.log(req)
+    console.log(req.file);
     bcrypt
         .hash(req.body.password, 10)
         .then( (hash) => {
@@ -15,8 +15,8 @@ exports.signup = (req, res) => {
                 password:hash,
                 //avatarUrl: req.file.filename
             })
-                .then( () => res.json("utilisateur créé"))
-                .catch(err =>  res.json(err.errors[0].message));
+                .then( () => res.status(201).json("utilisateur créé"))
+                .catch(err =>  res.status(401).json(err.errors[0].message));
         })  
 }
 
@@ -34,13 +34,14 @@ exports.login = (req, res, next) => {
             if(!result) {
                 return res.status(401).json({error: "mot de passe erroné"});  
             }
-            res.status(200).json({
-                token: jwt.sign( {userId : user.uuid}, 
-                                 "token",
-                                 { expiresIn: "72h", }) 
-                // récupere la valeur uuid dans la table 
-                //et l'assign à userId, elle est encodé avec la clé
-            })
+           
+            const token = jwt.sign( {userId : user.uuid}, "token",
+                { expiresIn: "72h", });
+
+            res.cookie("access_token", token, {
+                httpOnly: true,
+                secure: false
+            }).json({token}).status(200)
           }
         )
     })
