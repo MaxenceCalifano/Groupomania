@@ -40,10 +40,14 @@ exports.login = (req, res, next) => {
 
             res.cookie("access_token", token, {
                 httpOnly: true,
-                secure: false
+                secure: true
             }).json({token}).status(200)
           }
         )
     })
     //.then (() => res.json("test"))
+}
+
+exports.logout = (req, res, next) => {
+     res.clearCookie("access_token").status(200).send("L'utilisateur a été déconnécté");
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import Post from './post';
 
+import { useNavigate } from "react-router";
 
 
 import { useState, useEffect } from "react";
@@ -8,14 +9,12 @@ import { useState, useEffect } from "react";
 export default function Posts(props) {
 
     const [posts, setPosts] = useState([]);
-
+    const navigate = useNavigate();
     useEffect( () => {
      // const userUUID = jwt.verify(req.cookies.access_token, "token");
 
       fetch("http://localhost:3000/api/", { 
         method: "GET",
-        /* withCredentials: "true",
-        mode: 'no-cors', */
         credentials: "include",
         headers: {
             Accept: 'application/json',
@@ -26,9 +25,13 @@ export default function Posts(props) {
     })
           .then( res => res.json())
           .then(value => {
-  
-              setPosts(value.posts)
-            }
+              if(value.posts !== undefined) {
+                setPosts(value.posts)
+
+              } else {
+                navigate("/login");
+              }
+            } 
           )
           .catch((err) => console.log(err))
     }, [])

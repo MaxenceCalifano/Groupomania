@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 
 
-export default function SignInForm() {
+export default function SignInForm(props) {
     //const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setpassword] = useState();
@@ -19,8 +19,10 @@ export default function SignInForm() {
             body: JSON.stringify({email: email, password: password})
         })
         .then((res) => {
-                if(res.ok) {
-                   // navigate("/");
+                if(res.ok) { 
+                    navigate("/")
+                    props.changeLogState(props.isConnected)
+
                 } else {
                     console.log("erreur");
                 }
