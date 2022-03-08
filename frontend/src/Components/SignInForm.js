@@ -42,7 +42,7 @@ export default function SignInForm(props) {
                     <input type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
                     
                     <label htmlFor={"password"}>Entrez votre mot de passe</label>
-                    <input type={"text"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
+                    <input type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
 
                     <button onClick={signIn} >valider</button>
                 </form>

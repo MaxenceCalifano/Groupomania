@@ -18,11 +18,28 @@ exports.newPost = (req, res, next) => {
 };
 
 exports.modifyPost = (req, res, next) => {
-
+    Post.update( 
+        {title: req.body.title,
+        text: req.body.text},
+        {
+        where: { uuid: req.body.uuid},  
+    })
+    .then( () => res.status(200).send("post modifié"))
+    .catch( (err => console.log(err)))
 };
 
-exports.deletePost = (req, res, next) => {
+/*await User.update({ lastName: "Doe" }, {
+  where: {
+    lastName: null
+  }
+}); */
 
+exports.deletePost = (req, res, next) => {
+    Post.destroy({
+        where: { uuid: req.body.uuid}
+    })
+    .then( () => res.status(200).send("post supprimé"))
+    .catch( (err => console.log(err)))
 };
 //----------------------------------
 exports.getAllPosts = (req, res, next) => {

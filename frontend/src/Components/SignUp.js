@@ -36,7 +36,7 @@ export default function SignUp() {
                     <input type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
                     
                     <label htmlFor={"password"}>Entrez votre mot de passe</label>
-                    <input type={"text"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
+                    <input type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
 
                     <label htmlFor={"avatar"}>Chargez une photo de profile</label>
                     <input type={"file"} name={"image"} accept={"image/png, image/jpeg, image/jpg"}

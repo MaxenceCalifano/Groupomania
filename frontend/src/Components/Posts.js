@@ -1,18 +1,19 @@
 import React from "react";
 import Post from './post';
+import NewPost from './NewPost';
+
 
 import { useNavigate } from "react-router";
 
 
 import { useState, useEffect } from "react";
 
-export default function Posts(props) {
+export default function Posts() {
 
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
-    useEffect( () => {
-     // const userUUID = jwt.verify(req.cookies.access_token, "token");
 
+    const getAllPosts = () => {
       fetch("http://localhost:3000/api/", { 
         method: "GET",
         credentials: "include",
@@ -34,11 +35,15 @@ export default function Posts(props) {
             } 
           )
           .catch((err) => console.log(err))
-    }, [])
+    }
+    useEffect( () => getAllPosts(), 
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+    [])
     return (
         <div>
+          <NewPost getAllPosts={getAllPosts}/>
         {posts.map( (post, key) => {
-          return (<Post key={key} title={post.title} text={post.text} />)  
+          return (<Post key={key} post={post} getAllPosts={getAllPosts}/>)  
         })}  
       </div>
     );
