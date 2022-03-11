@@ -1,4 +1,4 @@
-const db = require("../models");
+/* const db = require("../models");
 const Post = db.Post;
 const jwt =  require("jsonwebtoken");
 
@@ -28,11 +28,7 @@ exports.modifyPost = (req, res, next) => {
     .catch( (err => console.log(err)))
 };
 
-/*await User.update({ lastName: "Doe" }, {
-  where: {
-    lastName: null
-  }
-}); */
+
 
 exports.deletePost = (req, res, next) => {
     Post.destroy({
@@ -56,4 +52,4 @@ exports.likeUnlike = (req, res, next) => {
 exports.comment = (req, res, next) => {
 
 };
-//-----------------------------------
+//----------------------------------- */

@@ -1,4 +1,43 @@
-'use strict';
+const sql = require("./db");
+
+//constructeur
+
+const User = function(user) {
+  this.uuid = user.uuid,
+  this.username = user.username;
+  this.email = user.email;
+  this.password = user.password;
+  this.avatarUrl = user.avatarUrl;
+}
+
+User.create = (newUser, result) => {
+  sql.query("INSERT INTO users SET ?", newUser,(err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    console.log("created user: ", { id: res.insertId, ...newUser });
+    result(null, { id: res.insertId, ...newUser });
+  });
+}
+
+User.findOne = (email, result) => {
+  sql.query(`SELECT * FROM users WHERE email = "${email}"`, (err, res) => {
+    if(err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if(res.length){
+       console.log(res);
+       return res.password
+       
+    }
+  })
+}
+module.exports =  User;
+/* 'use strict';
 const validate = require("validator");
 const {
   Model
@@ -6,11 +45,11 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
+    *
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
-     */
+    
     static associate(models) {
       // define association here
     }
@@ -50,4 +89,4 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
   });
   return User
-}
+} */
