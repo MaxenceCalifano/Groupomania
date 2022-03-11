@@ -1,35 +1,39 @@
-/* const db = require("../models");
-const Post = db.Post;
-const jwt =  require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const { v4: uuidv4 } = require('uuid');
 
+const Post = require("../models/post")
+const sql = require("../models/db");
 
-// Concerne le propriétaire du post
 exports.newPost = (req, res, next) => {
-    //console.log(jwt.verify(req.cookies.access_token, "token"))
-    const userUUID = jwt.verify(req.cookies.access_token, "token");
-    Post.create({
-         userId : userUUID.userId,
-        // récuperer l'id de l'utilisateur
+
+    const post = new Post({
+        uuid : uuidv4(),
+        userId : jwt.verify(req.cookies.access_token, "token",).userId,
         title: req.body.title,
         text: req.body.text
     })
-    .then( () => res.status(201).json("post créé"))
-    .catch(err => console.error(err));
-};
-
-exports.modifyPost = (req, res, next) => {
-    Post.update( 
-        {title: req.body.title,
-        text: req.body.text},
-        {
-        where: { uuid: req.body.uuid},  
+    Post.create(post, (err,data) => {
+        if (err) 
+          res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the user."
+        });
+        else res.send(data)
     })
-    .then( () => res.status(200).send("post modifié"))
-    .catch( (err => console.log(err)))
+
 };
 
-
-
+exports.getAllPosts = (req, res, next) => {
+    sql.query("SELECT * FROM posts", (err, resp) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+          res.status(200).json({posts:resp})
+        });
+};
+/*
 exports.deletePost = (req, res, next) => {
     Post.destroy({
         where: { uuid: req.body.uuid}

@@ -1,26 +1,24 @@
-/* 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Post extends Model {
-   
-    static associate(models) {
-      // define association here
+const sql = require("./db");
+
+//constructeur
+
+const Post = function(post) {
+  this.uuid = post.uuid,
+  this.userId = post.userId,
+  this.title = post.title;
+  this.text = post.text;
+}
+
+Post.create = (newPost, result) => {
+  sql.query("INSERT INTO posts SET ?", newPost, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
     }
-  }
-  Post.init({
-    uuid: { //génere un identifiant unique
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
-    },
-    userId: DataTypes.STRING, // Identifiant du créateur du post
-    title: DataTypes.STRING,
-    text: DataTypes.STRING,
-    like: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Post',
+    console.log("created post: ", { id: res.insertId, ...newPost });
+    result(null, { id: res.insertId, ...newPost });
   });
-  return Post;
-}; */
+}
+
+module.exports =  Post;
