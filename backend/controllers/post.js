@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const Post = require("../models/post")
 const sql = require("../models/db");
+const User = require("../models/user");
 
 exports.newPost = (req, res, next) => {
 
@@ -23,7 +24,7 @@ exports.newPost = (req, res, next) => {
 
 };
 
-exports.getAllPosts = (req, res, next) => {
+exports.getAllPosts = (req, res) => {
     sql.query("SELECT * FROM posts", (err, resp) => {
         if (err) {
             console.log("error: ", err);
@@ -32,6 +33,23 @@ exports.getAllPosts = (req, res, next) => {
           }
           res.status(200).json({posts:resp})
         });
+};
+
+exports.modifyPost = (req, res) => {
+    console.log("body.uuid", req.body.uuid)
+    const postModifications = {
+        uuid: req.body.uuid,
+        title: req.body.title,
+        text: req.body.text
+    }
+    Post.modifyPost(postModifications, (err,data) => {
+        if (err) 
+          res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the user."
+        });
+        else res.send(data)
+    });
 };
 /*
 exports.deletePost = (req, res, next) => {
@@ -42,11 +60,6 @@ exports.deletePost = (req, res, next) => {
     .catch( (err => console.log(err)))
 };
 //----------------------------------
-exports.getAllPosts = (req, res, next) => {
-    Post.findAll()
-    .then( (posts) => res.status(200).json({posts}))
-    .catch(err => console.error(err));
-};
 
 // Fonctionnalité sur les posts des autres ou le sien
 exports.likeUnlike = (req, res, next) => {

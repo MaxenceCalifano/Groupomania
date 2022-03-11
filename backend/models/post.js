@@ -21,4 +21,16 @@ Post.create = (newPost, result) => {
   });
 }
 
+Post.modifyPost = (postModifications, result) => {
+  sql.query(`UPDATE posts SET ? WHERE uuid = "${postModifications.uuid}"`, 
+    postModifications, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      result(null, {...postModifications})
+    })
+}
+
 module.exports =  Post;
