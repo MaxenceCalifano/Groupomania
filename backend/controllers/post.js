@@ -36,20 +36,34 @@ exports.getAllPosts = (req, res) => {
 };
 
 exports.modifyPost = (req, res) => {
-    console.log("body.uuid", req.body.uuid)
-    const postModifications = {
-        uuid: req.body.uuid,
-        title: req.body.title,
-        text: req.body.text
-    }
-    Post.modifyPost(postModifications, (err,data) => {
-        if (err) 
-          res.status(500).send({
-          message:
-            err.message || "Some error occurred while modifying the post."
+
+    sql.query(`SELECT * FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+       
+          if(req.userId !==resp[0].userId) {
+            res.status(401).json({
+                message: "You're not allowed to modify this post"
+            })
+        } else {
+            const postModifications = {
+                uuid: req.body.uuid,
+                title: req.body.title,
+                text: req.body.text
+            }
+            Post.modifyPost(postModifications, (err,data) => {
+                if (err) 
+                  res.status(500).send({
+                  message:
+                    err.message || "Some error occurred while modifying the post."
+                });
+                else res.send(data)
+            });
+        }
         });
-        else res.send(data)
-    });
 };
 
 exports.deletePost = (req, res) => {

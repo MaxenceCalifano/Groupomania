@@ -15,8 +15,10 @@ export default function Header(props) {
    }
 
    let button;
-    if(localStorage.getItem("isLoggedIn")) {
+    if(localStorage.getItem("isLoggedIn") === "true") {
         button = <button onClick={logout} >Se déconnecter</button>
+    } else {
+        button = "";
     }
 
     return(
