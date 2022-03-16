@@ -20,8 +20,8 @@ export default function SignInForm(props) {
         })
         .then((res) => {
                 if(res.ok) { 
+                    localStorage.setItem("isLoggedIn", true)
                     navigate("/")
-                    props.changeLogState(props.isConnected)
 
                 } else {
                     console.log("erreur");

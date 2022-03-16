@@ -14,7 +14,7 @@ export default function Posts() {
     const navigate = useNavigate();
 
     const getAllPosts = () => {
-      fetch("http://localhost:3000/api/", { 
+      fetch("http://localhost:3000/api/posts", { 
         method: "GET",
         credentials: "include",
         headers: {

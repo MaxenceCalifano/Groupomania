@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router";
 
 export default function Header(props) {
-
+    console.log(localStorage.getItem("isLoggedIn"))
     const navigate =  useNavigate();
 
    const logout = () => {
@@ -10,13 +10,15 @@ export default function Header(props) {
         method: "GET",
         credentials: "include",
     })
-    props.changeLogState(props.isConnected);
+    localStorage.removeItem("isLoggedIn")
     navigate("/login");
    }
+
    let button;
-    if(props.isConnected) {
+    if(localStorage.getItem("isLoggedIn")) {
         button = <button onClick={logout} >Se déconnecter</button>
     }
+
     return(
   
         <header>

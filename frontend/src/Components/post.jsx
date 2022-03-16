@@ -1,18 +1,22 @@
 import React from "react";
 import '../css/post.css';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Post(props) {
     const [isInEditMode, setEditMode] = useState(false);
     const [title, setTitle] = useState();
     const [text, setText] = useState();
+    const [comment, setComment] = useState();
+    const [comments, setComments] = useState([]); // All comments
+
+
     const toogleEditMode = () => {
         setEditMode(!isInEditMode)
     }
 
     const deletePost = () => {
-        fetch("http://localhost:3000/api/", {
+        fetch("http://localhost:3000/api/posts", {
             method: "DELETE",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -24,7 +28,7 @@ export default function Post(props) {
     }
 
     const modifyPost = () => {
-        fetch("http://localhost:3000/api/", {
+        fetch("http://localhost:3000/api/posts", {
             method: "PUT",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -40,6 +44,52 @@ export default function Post(props) {
             })
 
     }
+
+    const postComment = () => {
+        fetch(`http://localhost:3000/api/comments/${props.post.uuid}`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                postId: props.post.uuid,
+                text: comment,
+            }),
+        })
+            .then(() => {
+                /* props.getAllPosts()
+                setEditMode(); */
+                getAllComments();
+            })
+    }
+
+    const getAllComments = () => {
+        fetch(`http://localhost:3000/api/comments/${props.post.uuid}`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Credentials": true,
+                credentials: "include",
+            },
+        })
+            .then(res => res.json())
+            .then(value => {
+                console.log(value);
+                if (value.comments !== undefined) {
+                    setComments(value.comments)
+
+                } else {
+                    console.log("aucun commentaires");
+                }
+            }
+            )
+            .catch((err) => console.log(err))
+    }
+
+    useEffect(() => getAllComments(),
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+        []);
 
     return (
         <div>
@@ -67,7 +117,16 @@ export default function Post(props) {
                 }
             </div >
             <div>
-                <input defaultValue={"écrire un commentaire"} type={"text"} />
+                {
+                    comments.map((comment, key) => {
+                        return <div key={key}>
+                            {comment.text}
+                        </div>
+                    })
+                }
+                <input defaultValue={"écrire un commentaire"} type={"text"} onChange={(e) => setComment(e.target.value)} />
+                <input type={"submit"} value={"Valider"} onClick={postComment} />
+
             </div>
         </div>
     );

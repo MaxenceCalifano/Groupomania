@@ -4,12 +4,13 @@ dotenv.config();
 
 module.exports = (req, res, next) => {
   try {
-    console.log(req.cookies)
+   // console.log(req.cookies)
 
     const token = req.cookies.access_token;
     const decodedToken = jwt.verify(token, "token");
     const userId = decodedToken.userId;
 
+    req.userId = userId;
 
     if (!userId) {
       throw "Invalid user ID";

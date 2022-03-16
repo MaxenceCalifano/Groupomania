@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
+const commentRoutes =  require("./routes/comment");
 
 dotenv.config();
 
@@ -23,7 +24,8 @@ app.use(cors(corsOptions));
 app.use(express.json()); //Intercepte toutes les requetes qui ont comme content-type application/json et met leur body à disposition
 //app.use("api/auth", userRoutes);
 app.use("/api/auth", userRoutes); // A chaque fois que l'ont va à api/auth, utiliser userRoutes
-app.use("/api/", postRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/comments", commentRoutes);
 app.get('/', (req, res) => {
     res.json({message: "ça marche"});
 })

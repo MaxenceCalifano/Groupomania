@@ -46,27 +46,30 @@ exports.modifyPost = (req, res) => {
         if (err) 
           res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the user."
+            err.message || "Some error occurred while modifying the post."
         });
         else res.send(data)
     });
 };
-/*
-exports.deletePost = (req, res, next) => {
-    Post.destroy({
-        where: { uuid: req.body.uuid}
-    })
-    .then( () => res.status(200).send("post supprimé"))
-    .catch( (err => console.log(err)))
+
+exports.deletePost = (req, res) => {
+    sql.query(`DELETE FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+          res.status(200).json({message: "post supprimé"})
+        });
 };
-//----------------------------------
+
+/*
+--------------------------------
 
 // Fonctionnalité sur les posts des autres ou le sien
 exports.likeUnlike = (req, res, next) => {
 
 };
 
-exports.comment = (req, res, next) => {
 
-};
 //----------------------------------- */

@@ -14,8 +14,16 @@ function App() {
   
   const [isConnected, setIsConnected] = useState(false);
 
+  if(!localStorage.getItem("isLoggedIn")) {
+    localStorage.setItem("isLoggedIn", false);
+  }/*  else {
+    //isLoggedIn();
+  } */
+
   function isLoggedIn(isConnected) {
+    
     setIsConnected(!isConnected);
+    localStorage.setItem("isLoggedIn", !isConnected);
   }
 
   return (

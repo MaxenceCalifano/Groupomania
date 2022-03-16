@@ -7,7 +7,7 @@ export default function NewPost(props) {
     const [text, setText] = useState();
 
     const post = () => {
-        fetch("http://localhost:3000/api", {
+        fetch("http://localhost:3000/api/posts", {
         method: "POST",
         credentials: "include",
         headers: {"Content-Type": "application/json"},
