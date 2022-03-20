@@ -30,29 +30,38 @@ export default function NewPost(props) {
         setEditMode(!isInEditMode)
     }
 
+    if(isInEditMode) {
+        document.body.style.overflow = "hidden";
+    } else {
+        document.body.style.overflow = "auto";
+
+    }
+
     return (
         <div className="newPost">
            <input className=" newPost-input startPost" name="text" type="text" placeholder="Ecrivez quelque chose..." onClick={toogleEditMode} ></input>
 
         {
             isInEditMode ?
-            <div className="newPost-input createNewPost">
-            <div className="createNewPost-header">
-                <p>Créer un post</p>
-                <Button style={{border: "none", color:"#282828"}} onClick={toogleEditMode} action="X"/>
-            </div>    
+            <div>
+                <div className="modale_background_overlay"></div>
+                <div className="newPost-input createNewPost">
+                <div className="createNewPost-header">
+                    <p>Créer un post</p>
+                    <Button style={{border: "none", color:"#282828"}} onClick={toogleEditMode} action="X"/>
+                </div>    
 
-            <div className="postContent">
-                <input className="postTitle" name={"title"} type={"text"} placeholder={"Donnez un titre à votre post"}
-                onChange={ (e) => setTitle(e.target.value)}></input>
+                <div className="postContent">
+                    <input className="postTitle" name={"title"} type={"text"} placeholder={"Donnez un titre à votre post"}
+                    onChange={ (e) => setTitle(e.target.value)}></input>
 
-                <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" className="postText" name="postText"
-                rows={10} onChange={ (e) => setText(e.target.value)}></textarea>
-            </div>
-
-               
-                <Button onClick={post} action="Poster" style={{color:"#0B5E9E"}} />
+                    <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" className="postText" name="postText"
+                    rows={10} onChange={ (e) => setText(e.target.value)}></textarea>
                 </div>
+
+                    <Button onClick={post} action="Poster" style={{color:"#0B5E9E"}} />
+                    </div>
+            </div>
             : ""
         }
         </div>
