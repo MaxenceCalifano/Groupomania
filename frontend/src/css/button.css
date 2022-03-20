@@ -1,0 +1,7 @@
+.defaultButton {
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 4px 9px;
+    border: 2px solid;
+}

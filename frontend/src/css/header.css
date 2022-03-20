@@ -1,0 +1,15 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+}
+
+.header-link {
+    width: 20%;
+}
+
+.header-icon {
+    width: 100%;
+    height: auto;
+}

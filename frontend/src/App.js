@@ -7,35 +7,29 @@ import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
-  //Faire un était isConnected et le passer en props aux éléments qui en ont besoin comme header par ex
+  const [username, setUsername] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(()=> {
+    if(localStorage.getItem("loggedInUser")) {
+      setIsLoggedIn(true);
+      setUsername(localStorage.getItem("loggedInUser"))
+    }
+  }, [])
   
-  const [isConnected, setIsConnected] = useState(false);
-
-  if(!localStorage.getItem("isLoggedIn")) {
-    localStorage.setItem("isLoggedIn", false);
-  }/*  else {
-    //isLoggedIn();
-  } */
-
-  function isLoggedIn(isConnected) {
-    
-    setIsConnected(!isConnected);
-    localStorage.setItem("isLoggedIn", !isConnected);
-  }
-
   return (
     <div className="App">
-      <Header isConnected={isConnected} changeLogState={isLoggedIn} />
+      <Header setUsername={setUsername} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>
         <Routes>
           
-          <Route path='/' element={<Posts/>}>
+          <Route path='/' element={<Posts username={username} />}>
           </Route>
 
           <Route path="login" element={<Login/>}>
-            <Route path="signIn" element={<SignInForm isConnected={isConnected} changeLogState={isLoggedIn}/>}/>
+            <Route path="signIn" element={<SignInForm setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />}/>
             <Route path="signup" element={<SignUp/>}/>
           </Route>
          

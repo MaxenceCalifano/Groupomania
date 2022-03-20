@@ -1,8 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import '../css/header.css';
+import icon from "../img/icon-left-font.png";
+import Button from "./button";
 
 export default function Header(props) {
-    console.log(localStorage.getItem("isLoggedIn"))
+  
     const navigate =  useNavigate();
 
    const logout = () => {
@@ -10,13 +13,15 @@ export default function Header(props) {
         method: "GET",
         credentials: "include",
     })
-    localStorage.removeItem("isLoggedIn")
+    props.setIsLoggedIn(false)
+    props.setUsername("")
+    localStorage.removeItem("loggedInUser")
     navigate("/login");
    }
 
    let button;
-    if(localStorage.getItem("isLoggedIn") === "true") {
-        button = <button onClick={logout} >Se déconnecter</button>
+    if(props.isLoggedIn/* localStorage.getItem("loggedInUser") */) {
+        button = <Button style={{color:"#F62C01"}} onClick={logout} action={"DÉCONNEXION"}/>
     } else {
         button = "";
     }
@@ -24,9 +29,8 @@ export default function Header(props) {
     return(
   
         <header>
-            <a href="http://localhost:3001"><h1>Groupomania</h1></a>
+            <a className="header-link" href="http://localhost:3001"> <img className="header-icon" src={icon} alt="logo de Groupomania"></img> </a>
             {button}
-            
         </header>
     );
 }

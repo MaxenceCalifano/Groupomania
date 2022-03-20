@@ -1,0 +1,54 @@
+/* .App > *:not(.createNewPost) {
+    color: red;
+    filter: blur(4px);
+} */
+.newPost-input {
+    box-shadow: 4px 2px 12px 0px rgba(0,0,0,0.57);
+    border-radius: 9px;
+}
+
+.createNewPost {
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    width: 50vw;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.createNewPost-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.deleteButton {
+    border: none;
+    color: green;
+}
+.postText {
+    resize: none;
+}
+.startPost {
+    padding: 10px;
+    width: 90%;
+    border: none;
+}
+.postTitle {
+    margin: 10px 0;
+}
+
+.postContent {
+    display: flex;
+    flex-direction: column;
+}
+/* remove default styles */
+textarea:focus, input:focus{
+    outline: none;
+}
+input, textarea {
+    border: none;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import '../css/post.css';
+import Button from '../Components/button'
 
 import { useState, useEffect } from "react";
 
@@ -75,7 +76,6 @@ export default function Post(props) {
         })
             .then(res => res.json())
             .then(value => {
-                console.log(value);
                 if (value.comments !== undefined) {
                     setComments(value.comments)
 
@@ -111,8 +111,14 @@ export default function Post(props) {
                         <div>
                             <h3>{props.post.title}</h3>
                             <p>{props.post.text}</p>
-                            <button onClick={deletePost}>Supprimer</button>
-                            <button onClick={toogleEditMode}>Modifier</button>
+                            {props.username === props.post.username ?
+                                <div>
+                                    <button onClick={deletePost}>Supprimer</button>
+                                    <button onClick={toogleEditMode}>Modifier</button>
+                                </div>
+                                : ""
+                            }
+
                         </div>
                 }
             </div >
@@ -124,7 +130,7 @@ export default function Post(props) {
                         </div>
                     })
                 }
-                <input defaultValue={"écrire un commentaire"} type={"text"} onChange={(e) => setComment(e.target.value)} />
+                <input placeholder="écrire un commentaire" type={"text"} onChange={(e) => setComment(e.target.value)} />
                 <input type={"submit"} value={"Valider"} onClick={postComment} />
 
             </div>

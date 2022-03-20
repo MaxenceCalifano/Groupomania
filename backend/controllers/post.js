@@ -5,23 +5,31 @@ const Post = require("../models/post")
 const sql = require("../models/db");
 const User = require("../models/user");
 
-exports.newPost = (req, res, next) => {
 
-    const post = new Post({
-        uuid : uuidv4(),
-        userId : jwt.verify(req.cookies.access_token, "token",).userId,
-        title: req.body.title,
-        text: req.body.text
-    })
-    Post.create(post, (err,data) => {
-        if (err) 
-          res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the user."
-        });
-        else res.send(data)
-    })
+exports.newPost = (req, res) => {
+    sql.query(`SELECT * FROM users WHERE uuid = "${req.userId}"`, (err, resp) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }  
 
+        const post = new Post({
+            uuid : uuidv4(),
+            username : resp[0].username,
+            userId : jwt.verify(req.cookies.access_token, "token",).userId,
+            title: req.body.title,
+            text: req.body.text
+        })
+        Post.create(post, (err,data) => {
+            if (err) 
+              res.status(500).send({
+              message:
+                err.message || "Some error occurred while creating the user."
+            });
+            else res.send(data)
+            })
+        })
 };
 
 exports.getAllPosts = (req, res) => {
@@ -31,6 +39,7 @@ exports.getAllPosts = (req, res) => {
             result(err, null);
             return;
           }
+          console.log(resp)
           res.status(200).json({posts:resp})
         });
 };
@@ -67,23 +76,26 @@ exports.modifyPost = (req, res) => {
 };
 
 exports.deletePost = (req, res) => {
-    sql.query(`DELETE FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+    sql.query(`SELECT * FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
           }
-          res.status(200).json({message: "post supprimé"})
-        });
-};
-
-/*
---------------------------------
-
-// Fonctionnalité sur les posts des autres ou le sien
-exports.likeUnlike = (req, res, next) => {
-
-};
-
-
-//----------------------------------- */
+          if(req.userId !==resp[0].userId) {
+            res.status(401).json({
+                message: "You're not allowed to delete this post"
+            })
+        } else {
+            sql.query(`DELETE FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                    return;
+                  }
+                  res.status(200).json({message: "post supprimé"})
+                });
+        }
+    
+    });
+}

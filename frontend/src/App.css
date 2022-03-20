@@ -6,7 +6,10 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+/* .App > *:not(.newPosts) {
+  color: red;
+  filter: blur(4px);
+} */
 
 .App-header {
   background-color: #282c34;

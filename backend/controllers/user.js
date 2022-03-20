@@ -50,7 +50,7 @@ exports.signup = (req, res) => {
             if(result[0] == undefined) {
                 return res.status(401).json({error: "utilisateur inconnu"});
             }
-            console.log("userIdresult",result)
+            console.log(result)
 
             bcrypt.compare(req.body.password, result[0].password)
             .then( (comparedPassword) => {
@@ -59,10 +59,11 @@ exports.signup = (req, res) => {
                 }
                 const token = jwt.sign({userId : result[0].uuid}, "token",
                     { expiresIn: "72h" });
-                    res.cookie("access_token", token, {
+
+                res.cookie("access_token", token, {
                         httpOnly: true,
                         secure: true
-                    }).json({token}).status(200)
+                    }).json({username: result[0].username}).status(200)
             })
         } 
     })

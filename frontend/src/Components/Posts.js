@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 
 import { useState, useEffect } from "react";
 
-export default function Posts() {
+export default function Posts(props) {
 
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
@@ -40,11 +40,11 @@ export default function Posts() {
     //eslint-disable-next-line react-hooks/exhaustive-deps
     [])
     return (
-        <div>
+        <div className="posts">
           <NewPost getAllPosts={getAllPosts}/>
-        {posts.map( (post, key) => {
-          return (<Post key={key} post={post} getAllPosts={getAllPosts}/>)  
-        })}  
+          {posts.map( (post, key) => {
+            return (<Post key={key} post={post} username={props.username} getAllPosts={getAllPosts}/>)  
+          })}  
       </div>
     );
 }

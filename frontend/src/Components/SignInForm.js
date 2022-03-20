@@ -20,9 +20,13 @@ export default function SignInForm(props) {
         })
         .then((res) => {
                 if(res.ok) { 
-                    localStorage.setItem("isLoggedIn", true)
+                   res.json()
+                   .then(value => {
+                    props.setUsername(value.username)
+                    props.setIsLoggedIn(true)
+                    localStorage.setItem("loggedInUser", value.username)
                     navigate("/")
-
+                   })
                 } else {
                     console.log("erreur");
                 }
@@ -35,8 +39,6 @@ export default function SignInForm(props) {
         <div>
             <h1>S'identifier</h1>
                 <form>
-                   {/*  <label htmlFor={"username"}>Entrez un nom d'utiliisateur</label>
-                    <input type={"text"} name={"ussername"} onChange={(e) => setUsername(e.target.value)} ></input> */}
 
                     <label htmlFor={"email"}>Entrez votre adresse email</label>
                     <input type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
