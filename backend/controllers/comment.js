@@ -11,6 +11,7 @@ exports.newComment = (req, res) => {
           }  
         const comment = new Comment({
             uuid: uuidv4(),
+            username : resp[0].username,
             userId : req.userId,//jwt.verify(req.cookies.access_token, "token",).userId,
             text: req.body.text,
             postId : req.body.postId
@@ -39,3 +40,33 @@ exports.getAllPostComments = (req, res) => {
           res.status(200).json({comments:resp})
         });
 }
+
+exports.modifyComment = (req, res) => {
+
+    sql.query(`SELECT * FROM comments WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+       
+          if(req.userId !==resp[0].userId) {
+            res.status(401).json({
+                message: "You're not allowed to modify this comment"
+            })
+        } else {
+            const commentModifications = {
+                uuid: req.body.uuid, //Will not be modified, it's used to search the item in DB
+                text: req.body.text
+            }
+            Comment.modifyComment(commentModifications, (err,data) => {
+                if (err) 
+                  res.status(500).send({
+                  message:
+                    err.message || "Some error occurred while modifying the comment."
+                });
+                else res.send(data)
+            });
+        }
+        });
+};
