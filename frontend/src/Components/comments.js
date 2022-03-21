@@ -1,20 +1,22 @@
 import React from "react";
 
 import { useState, useEffect } from "react";
+import Comment from "./comment";
 
 export default function Comments(props){
 
-    const [text, setText] = useState();
     const [comment, setComment] = useState();
     const [comments, setComments] = useState([]); // All comments
+ 
 
+ 
     const postComment = () => {
         fetch(`http://localhost:3000/api/comments/${props.postId}`, {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                postId: props.post.uuid,
+                postId: props.postId,
                 text: comment,
             }),
         })
@@ -23,22 +25,6 @@ export default function Comments(props){
             })
     }
 
-    const modifyComment = () => {
-        fetch(`http://localhost:3000/api/comments/${props.postId}`, {
-            method: "PUT",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                uuid: props.post.uuid,
-                text: text,
-            }),
-        })
-            .then(() => {
-                props.getAllPosts()
-               // setEditMode();
-            })
-
-    }
 
     const getAllComments = () => {
         fetch(`http://localhost:3000/api/comments/${props.postId}`, {
@@ -72,17 +58,12 @@ export default function Comments(props){
         <div>
     {
         comments.map((comment, key) => {
-            return <div className="comment" key={key}>
-                <p>{comment.username}</p>
-                <p>{comment.text}</p>
-                {/*   {props.username === comment.username ?
-                    <div>
-                        <button onClick={console.log("supprimer comm")}>Supprimer</button>
-                        <button onClick={console.log("modifier comm")}>Modifier</button>
-                    </div>
-                    : ""
-                } */}
-            </div>
+            return <Comment postId={props.postId}
+                            getAllComments={getAllComments}
+                            key={key}
+                            comment={comment}
+                            username={props.username}
+                            />
         })
     }
     <input placeholder="écrire un commentaire" type={"text"} onChange={(e) => setComment(e.target.value)} />

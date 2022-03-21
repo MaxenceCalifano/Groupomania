@@ -39,7 +39,7 @@ exports.getAllPosts = (req, res) => {
             result(err, null);
             return;
           }
-          console.log(resp)
+         // console.log(resp)
           res.status(200).json({posts:resp})
         });
 };

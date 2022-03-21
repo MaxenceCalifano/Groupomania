@@ -77,7 +77,7 @@ export default function Post(props) {
                         </div>
                 }
             </div >
-            <Comments postId={props.post.uuid} />
+            <Comments username={props.username} postId={props.post.uuid} />
         </div>
     );
 }
