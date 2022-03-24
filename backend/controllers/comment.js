@@ -70,3 +70,28 @@ exports.modifyComment = (req, res) => {
         }
         });
 };
+
+exports.deleteComment = (req, res) => {
+    sql.query(`SELECT * FROM comments WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+          if(req.userId !==resp[0].userId) {
+            res.status(401).json({
+                message: "You're not allowed to delete this post"
+            })
+        } else {
+            sql.query(`DELETE FROM comments WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                    return;
+                  }
+                  res.status(200).json({message: "commentaire supprimé"})
+                });
+        }
+    
+    });
+}

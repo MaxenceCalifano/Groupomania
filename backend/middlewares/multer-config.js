@@ -3,11 +3,13 @@ const multer = require("multer");
 const MIME_TYPES = {
     'image/jpg': 'jpg',
     'image/jpeg': 'jpg',
-    'image/png': 'png'
+    'image/png': 'png',
+    'image/gif': 'gif',
   };
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
+
     callback(null, "images"); // On passe le nom du dossier en destination
     },
     filename: (req, file, callback) => {

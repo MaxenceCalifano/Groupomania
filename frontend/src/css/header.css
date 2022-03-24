@@ -3,6 +3,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 2%;
+    background-color: #091f43;
 }
 
 .header-link {
@@ -12,4 +13,14 @@ header {
 .header-icon {
     width: 100%;
     height: auto;
+}
+
+.logoutButton {
+    color:#fd2d01;
+}
+
+.logoutButton:hover {
+    background-color: #fd2d01;
+    color:rgb(255, 255, 255);
+    border: 2px solid #091f43;
 }

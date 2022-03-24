@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import "../css/comment.css";
 
 
 export default function Comment(props) {
@@ -22,6 +23,20 @@ export default function Comment(props) {
             })
 
     }
+
+    const deleteComment = () => {
+        fetch("http://localhost:3000/api/comments", {
+            method: "DELETE",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                uuid: props.comment.uuid,
+            }),
+        })
+        .then(()=> {
+            props.getAllComments();
+        })
+    }
     return(
         <div className="comment">
                 <p>{props.comment.username}</p>
@@ -40,8 +55,9 @@ export default function Comment(props) {
                         </div>
                         :
                         <div>
-                        {/*  <button onClick={console.log("supprimer comm")}>Supprimer</button> */}
                             <button onClick={setEditMode}>Modifier</button>
+                            <button onClick={deleteComment}>Supprimer</button>
+
                         </div>
                         : "" /*If not owner nothing is diplayed */
                 } 

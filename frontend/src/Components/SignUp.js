@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../css/homePageform.css';
+import Button from "./button";
 
 export default function SignUp() {
     const [username, setUsername] = useState();
@@ -30,19 +31,19 @@ export default function SignUp() {
             <h1>S'inscrire</h1>
                 <form>
                     <label htmlFor={"username"}>Entrez un nom d'utilisateur</label>
-                    <input type={"text"} name={"ussername"} onChange={(e) => setUsername(e.target.value)} ></input>
+                    <input className="input" type={"text"} name={"ussername"} onChange={(e) => setUsername(e.target.value)} ></input>
 
                     <label htmlFor={"email"}>Entrez votre adresse email</label>
-                    <input type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
+                    <input className="input" type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
                     
                     <label htmlFor={"password"}>Entrez votre mot de passe</label>
-                    <input type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
+                    <input className="input" type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
 
                     <label htmlFor={"avatar"}>Chargez une photo de profile</label>
-                    <input type={"file"} name={"image"} accept={"image/png, image/jpeg, image/jpg"}
+                    <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg" enctype="multipart/form-data" formMethod="POST"
                     onChange={(e) => setAvatar(e.target.value)} ></input>
 
-                    <button onClick={signUp} >valider</button>
+                    <Button className={"signupButton"} onClick={signUp} action="Créer un compte"/> 
                 </form>
                 <p>{message}</p>
         </div>

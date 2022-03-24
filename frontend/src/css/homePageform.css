@@ -1,9 +1,52 @@
+nav {
+ padding:  25px;
+ display: flex;
+ justify-content: center;
+}
+.navLinkLeft {
+  border-radius: 5px 0 0 5px;
+
+}
+.navLinkRight {
+  border-radius: 0 5px 5px 0;
+
+}
+.navLinks {
+  border: 2px solid #091f43;
+  padding: 0.5rem;
+  margin: 5px 0;
+  text-decoration: none;
+  color: #091f43;
+  width: 12%;
+}
+
+.navLinks:focus {
+  background-color: #091f43;
+  color: #fff;
+}
+
 form {
     display: flex;
-    padding: 20px;
     align-content: space-around;
     flex-wrap: wrap;
+    flex-direction: column;
   }
   form > * {
-    margin: 10px;
+    margin: 0.5rem;
+  }
+
+  .input {
+    border-radius: 9px;
+    padding: 10px;
+    background-color: #e8f0fe;
+  }
+
+  .signinButton, .signupButton {
+    color: #d24f59;
+  }
+
+  .signinButton:hover, .signupButton:hover {
+    background-color: #d24f59;
+    border: 2px solid #d24f59;
+    color: #fff;
   }

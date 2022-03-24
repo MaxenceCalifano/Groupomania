@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import Button from "./button";
 
 
 export default function SignInForm(props) {
@@ -41,12 +42,12 @@ export default function SignInForm(props) {
                 <form>
 
                     <label htmlFor={"email"}>Entrez votre adresse email</label>
-                    <input type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
+                    <input className="input" type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
                     
                     <label htmlFor={"password"}>Entrez votre mot de passe</label>
-                    <input type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
+                    <input className="input" type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
 
-                    <button onClick={signIn} >valider</button>
+                    <Button className={"signinButton"} onClick={signIn} action="Se connecter"/>
                 </form>
         </div>
     );

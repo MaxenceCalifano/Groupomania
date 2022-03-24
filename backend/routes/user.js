@@ -4,7 +4,7 @@ const multer = require("../middlewares/multer-config");
 
 const userController = require("../controllers/user");
 
-router.post("/signup", userController.signup);
+router.post("/signup", multer, userController.signup);
 router.post("/login", userController.login);
 router.get("/logout", userController.logout);
 

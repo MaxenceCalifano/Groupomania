@@ -87,7 +87,7 @@ exports.deletePost = (req, res) => {
                 message: "You're not allowed to delete this post"
             })
         } else {
-            sql.query(`DELETE FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+            sql.query(`DELETE FROM posts WHERE uuid = "${req.body.uuid}"`, (err) => {
                 if (err) {
                     console.log("error: ", err);
                     result(err, null);
@@ -98,4 +98,17 @@ exports.deletePost = (req, res) => {
         }
     
     });
+}
+
+exports.likeDislike = (req, res) => {
+    sql.query(`SELECT * FROM likes WHERE postId="${req.body.postId}"`, (err, resp) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+        /* switch (req.body.like) {
+            case 1: 
+        }  */
+    })
 }
