@@ -8,6 +8,8 @@ const sql = require("../models/db");
 const User = require("../models/user");
 
 exports.signup = (req, res) => {
+  console.log(req.file);
+  
     //Check request
     if (!req.body) {
         res.status(400).send({
@@ -24,7 +26,7 @@ exports.signup = (req, res) => {
                 username : req.body.username,
                 email : req.body.email,
                 password : hash,
-                avatarUrl : req.body.avatarUrl,
+                avatarUrl : req.file.filename,
               });
               User.create(user, (err,data) => {
                 if (err) 
@@ -32,7 +34,7 @@ exports.signup = (req, res) => {
                   message:
                     err.message || "Some error occurred while creating the user."
                 });
-                else res.send(data)
+                else res.json({data})
             })
         })
 }
@@ -71,4 +73,9 @@ exports.signup = (req, res) => {
 
 exports.logout = (req, res, next) => {
      res.clearCookie("access_token").status(200).send("L'utilisateur a été déconnécté");
+} 
+
+exports.test = (req, res) => {
+  console.log(req.file)
+  res.status(200)
 } 
