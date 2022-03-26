@@ -1,12 +1,12 @@
 import React from "react";
 import Post from './post';
 import NewPost from './NewPost';
-
+import Profile from "./profile";
 
 import { useNavigate } from "react-router";
-
-
 import { useState, useEffect } from "react";
+
+import '../css/posts.css'
 
 export default function Posts(props) {
 
@@ -41,7 +41,11 @@ export default function Posts(props) {
     [])
     return (
         <div className="posts">
+          <div className="profileAndNewPost" >
+          <Profile/>
           <NewPost getAllPosts={getAllPosts}/>
+          </div>
+
           {posts.map( (post, key) => {
             return (<Post key={key} post={post} username={props.username} getAllPosts={getAllPosts}/>)  
           })}  

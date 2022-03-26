@@ -39,7 +39,7 @@ exports.signup = (req, res) => {
         })
 }
 
- exports.login = (req, res, next) => {
+ exports.login = (req, res) => {
     sql.query(`SELECT * FROM users WHERE email = "${req.body.email}"`, (err, result) => {
      //console.log( result )
 
@@ -71,11 +71,25 @@ exports.signup = (req, res) => {
     })
 }
 
-exports.logout = (req, res, next) => {
+exports.logout = (req, res) => {
      res.clearCookie("access_token").status(200).send("L'utilisateur a été déconnécté");
 } 
 
-exports.test = (req, res) => {
-  console.log(req.file)
-  res.status(200)
+exports.getUser = (req, res) => {
+  console.log(req.userId)
+  sql.query(`SELECT * FROM users WHERE uuid = "${req.userId}"`, (err, result) => {
+       if (err) 
+         res.status(500).send({
+         message:
+           err.message || "Some error occurred while looking for the user."
+       });
+       else {
+           if(result[0] == undefined) {
+               return res.status(401).json({error: "utilisateur inconnu"});
+           }
+           console.log(result)
+
+           res.status(200).json({user: result})
+       } 
+   })
 } 
