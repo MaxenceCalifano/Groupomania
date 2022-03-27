@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useState } from "react";
 import "../css/comment.css";
 
@@ -6,6 +6,32 @@ import "../css/comment.css";
 export default function Comment(props) {
     const [comment, setComment] = useState();
     const [isInEditMode, setEditMode] = useState(false);
+    const [avatar, setavatar] = useState();
+   
+    useEffect(
+        () => {
+            const getUser = () => {
+                fetch(`http://localhost:3000/api/auth/${props.comment.username}`, {
+                credentials: "include",
+                method: "POST",
+                headers: {"Content-Type": "application/json",},
+                body: 
+                    JSON.stringify({username: props.comment.username})
+                ,
+            })
+                .then( res => res.json())
+                .then(value => { 
+                    console.log(value)
+                    fetch(`http://localhost:3000/images/${value.avatarUrl}`)
+                    .then( res => res.blob())
+                    .then( imageBlob =>  setavatar(URL.createObjectURL(imageBlob)))
+                    } )
+            };
+            getUser()
+        }, 
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+    []   
+    )
 
     const modifyComment = () => {
         fetch(`http://localhost:3000/api/comments/${props.postId}`, {
@@ -38,8 +64,10 @@ export default function Comment(props) {
         })
     }
     return(
+        <div className="commentWrapper">
+            <img className="ownerAvatar" src={avatar} alt="ownerAvatar" />
         <div className="comment">
-                <p>{props.comment.username}</p>
+                <p className="commentOwner">{props.comment.username}</p>
                 <p>{props.comment.text}</p>
 
                 {/* Display only for comment owner */}
@@ -48,6 +76,7 @@ export default function Comment(props) {
                         isInEditMode ?
 
                         <div>
+                            
                         <input name={"title"} type={"text"} placeholder={"Modifiez votre commentaire"}
                         onChange={(e) => setComment(e.target.value)} />
 
@@ -55,6 +84,11 @@ export default function Comment(props) {
                         </div>
                         :
                         <div>
+                            <div className="commentOptions">
+                                <span className="dot"></span>
+                                <span className="dot"></span>
+                                <span className="dot"></span>
+                            </div>
                             <button onClick={setEditMode}>Modifier</button>
                             <button onClick={deleteComment}>Supprimer</button>
 
@@ -62,5 +96,6 @@ export default function Comment(props) {
                         : "" /*If not owner nothing is diplayed */
                 } 
             </div>
+        </div>
     )
 }

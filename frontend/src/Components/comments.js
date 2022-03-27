@@ -3,6 +3,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Comment from "./comment";
 
+import "../css/comments.css";
+
 export default function Comments(props){
 
     const [comment, setComment] = useState();
@@ -53,12 +55,21 @@ export default function Comments(props){
     useEffect(() => getAllComments(),
         //eslint-disable-next-line react-hooks/exhaustive-deps
         []);
-
+        let commentText = "";
+    if(comments.length <1) {
+        commentText = " commentaire";
+    } else {
+        commentText = " commentaires";
+    }
     return (
         <div>
+                <p className="comments" onClick={() => setIsFolded(!isFolded)}>
+                    {comments.length}{commentText}</p>
+
+                <input placeholder="écrire un commentaire" type={"text"} onChange={(e) => setComment(e.target.value)} />
+                <input type={"submit"} value={"Valider"} onClick={postComment} />
             {
-                isFolded ?
-                <div>Nombre de commentaires</div>
+                isFolded ? ""
                          :
                          comments.map((comment, key) => {
                             return <Comment postId={props.postId}
@@ -69,8 +80,6 @@ export default function Comments(props){
                                             />
                         })
             }
-    <input placeholder="écrire un commentaire" type={"text"} onChange={(e) => setComment(e.target.value)} />
-    <input type={"submit"} value={"Valider"} onClick={postComment} />
 
 </div>
     )

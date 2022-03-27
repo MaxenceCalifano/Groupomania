@@ -76,8 +76,7 @@ exports.logout = (req, res) => {
 } 
 
 exports.getUser = (req, res) => {
-  console.log(req.userId)
-  sql.query(`SELECT * FROM users WHERE uuid = "${req.userId}"`, (err, result) => {
+  sql.query(`SELECT * FROM users WHERE username = "${req.body.username}"`, (err, result) => {
        if (err) 
          res.status(500).send({
          message:
@@ -89,7 +88,8 @@ exports.getUser = (req, res) => {
            }
            console.log(result)
 
-           res.status(200).json({user: result})
+           res.status(200).json({username: result[0].username,
+                                avatarUrl:result[0].avatarUrl})
        } 
    })
 } 

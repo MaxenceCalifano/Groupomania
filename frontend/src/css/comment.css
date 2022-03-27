@@ -1,3 +1,30 @@
+.commentWrapper {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+}
+
 .comment {
     border-radius: 9px;
+    padding: 1px 10px;
+    flex-grow: 2;
+}
+
+.commentOwner {
+    font-weight: bold;
+}
+
+.ownerAvatar  {
+    object-fit: cover;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.dot{
+  height: 5px;
+  width: 5px;
+  background-color: rgb(31, 31, 31);
+  border-radius: 50%;
+  display: inline-block;
 }

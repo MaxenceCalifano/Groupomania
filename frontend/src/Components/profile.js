@@ -6,17 +6,20 @@ export default function Profile() {
     const [avatar, setavatar] = useState();
 
    
-//const imageObjectURL = URL.createObjectURL(imageBlob);
-    useEffect(
-        
+    useEffect(     
         () => {
             const getUser = () => {
                 fetch(`http://localhost:3000/api/auth/${username}`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json",},
+                body: 
+                    JSON.stringify({username: username})
+                ,
                 credentials: "include",
             })
                 .then( res => res.json())
                 .then(value => { 
-                    fetch(`http://localhost:3000/images/${value.user[0].avatarUrl}`)
+                    fetch(`http://localhost:3000/images/${value.avatarUrl}`)
                     .then( res => res.blob())
                     .then( imageBlob =>  setavatar(URL.createObjectURL(imageBlob)))
                     } )
@@ -24,8 +27,7 @@ export default function Profile() {
             getUser()
         }, 
     //eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-        
+    []   
     )
     return(
         <div className="profile">  
