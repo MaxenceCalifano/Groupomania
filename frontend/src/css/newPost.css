@@ -41,10 +41,9 @@
 }
 .startPost {
     padding: 10px;
-    width: 90%;
+    width: 96%;
     border: none;
     margin: 10px 0;
-    flex-grow: 2;
 }
 .postTitle {
     margin: 10px 0;

@@ -7,7 +7,7 @@ export default function Comments(props){
 
     const [comment, setComment] = useState();
     const [comments, setComments] = useState([]); // All comments
- 
+    const [isFolded, setIsFolded] = useState(true);
 
  
     const postComment = () => {
@@ -56,16 +56,19 @@ export default function Comments(props){
 
     return (
         <div>
-    {
-        comments.map((comment, key) => {
-            return <Comment postId={props.postId}
-                            getAllComments={getAllComments}
-                            key={key}
-                            comment={comment}
-                            username={props.username}
-                            />
-        })
-    }
+            {
+                isFolded ?
+                <div>Nombre de commentaires</div>
+                         :
+                         comments.map((comment, key) => {
+                            return <Comment postId={props.postId}
+                                            getAllComments={getAllComments}
+                                            key={key}
+                                            comment={comment}
+                                            username={props.username}
+                                            />
+                        })
+            }
     <input placeholder="écrire un commentaire" type={"text"} onChange={(e) => setComment(e.target.value)} />
     <input type={"submit"} value={"Valider"} onClick={postComment} />
 
