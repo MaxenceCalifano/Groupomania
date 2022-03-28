@@ -9,7 +9,7 @@ const cors = require('cors');
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
 const commentRoutes =  require("./routes/comment");
-
+const likesRoutes = require("./routes/like");
 dotenv.config();
 
 const app = express();
@@ -29,6 +29,7 @@ app.use("/images", express.static(path.join(__dirname, "images"))); // Sert les 
 app.use("/api/auth", userRoutes); // A chaque fois que l'ont va à api/auth, utiliser userRoutes
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
+app.use("/api/likes", likesRoutes)
 app.get('/', (req, res) => {
     res.json({message: "ça marche"});
 })

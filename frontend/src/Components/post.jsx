@@ -3,13 +3,13 @@ import '../css/post.css';
 import Button from '../Components/button';
 import Comments from "./comments";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Post(props) {
     const [isInEditMode, setEditMode] = useState(false);
     const [title, setTitle] = useState();
     const [text, setText] = useState();
-
+    const [numberOfLikes, SetNumberOfLikes] = useState(0);
 
 
     const toogleEditMode = () => {
@@ -46,7 +46,7 @@ export default function Post(props) {
 
     }
     const likeUnlike = () => {
-        fetch(`http://localhost:3000/api/posts/${props.post.uuid}`, {
+        fetch(`http://localhost:3000/api/likes/${props.post.uuid}`, {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -54,7 +54,20 @@ export default function Post(props) {
                 postId: props.post.uuid,
             }),
         })
+            .then(getNumberOfLikes)
     }
+
+    const getNumberOfLikes = () => {
+        fetch(`http://localhost:3000/api/likes/${props.post.uuid}`, {
+            credentials: "include",
+        })
+            .then(res => res.json())
+            .then(likes => SetNumberOfLikes(likes.numberOfLikes));
+    }
+
+    useEffect(() => {
+        getNumberOfLikes()
+    }, [])
     return (
         <div>
             <div className="post">
@@ -75,6 +88,7 @@ export default function Post(props) {
                         <div>
                             <h3>{props.post.title}</h3>
                             <p>{props.post.text}</p>
+                            <p>mention j'aime : {numberOfLikes}</p>
                             {props.username === props.post.username ?
                                 <div>
                                     <Button onClick={deletePost} action="Supprimer" />
