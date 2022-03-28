@@ -45,7 +45,16 @@ export default function Post(props) {
             })
 
     }
-
+    const likeUnlike = () => {
+        fetch(`http://localhost:3000/api/posts/${props.post.uuid}`, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                postId: props.post.uuid,
+            }),
+        })
+    }
     return (
         <div>
             <div className="post">
@@ -78,6 +87,8 @@ export default function Post(props) {
                 }
             </div >
             <Comments username={props.username} postId={props.post.uuid} />
+            <Button onClick={likeUnlike} action="like" />
+
         </div>
     );
 }

@@ -56,7 +56,7 @@ export default function Comments(props){
         //eslint-disable-next-line react-hooks/exhaustive-deps
         []);
         let commentText = "";
-    if(comments.length <1) {
+    if(comments.length <2) {
         commentText = " commentaire";
     } else {
         commentText = " commentaires";
