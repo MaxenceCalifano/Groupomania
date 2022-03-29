@@ -1,10 +1,20 @@
 .post {
     box-shadow: 4px 2px 12px 0px rgba(0,0,0,0.57);
     border-radius: 9px;
-    padding: 0.2rem;
+    padding: 0.2rem 1rem;
 }
 
 .comment {
     background-color: rgb(213, 213, 213);
 
+}
+
+.postActions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.socialDetails {
+    display: flex;
+    justify-content: space-between;
 }

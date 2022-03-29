@@ -7,25 +7,7 @@ import "../css/comments.css";
 
 export default function Comments(props){
 
-    const [comment, setComment] = useState();
     const [comments, setComments] = useState([]); // All comments
-    const [isFolded, setIsFolded] = useState(true);
-
- 
-    const postComment = () => {
-        fetch(`http://localhost:3000/api/comments/${props.postId}`, {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                postId: props.postId,
-                text: comment,
-            }),
-        })
-            .then(() => {
-                getAllComments();
-            })
-    }
 
 
     const getAllComments = () => {
@@ -55,21 +37,16 @@ export default function Comments(props){
     useEffect(() => getAllComments(),
         //eslint-disable-next-line react-hooks/exhaustive-deps
         []);
-        let commentText = "";
-    if(comments.length <2) {
-        commentText = " commentaire";
-    } else {
-        commentText = " commentaires";
-    }
+
     return (
         <div>
-                <p className="comments" onClick={() => setIsFolded(!isFolded)}>
-                    {comments.length}{commentText}</p>
+                {/* <p className="comments" onClick={() => setIsFolded(!isFolded)}>
+                    {comments.length}{commentText}</p> 
 
                 <input placeholder="écrire un commentaire" type={"text"} onChange={(e) => setComment(e.target.value)} />
-                <input type={"submit"} value={"Valider"} onClick={postComment} />
+                <input type={"submit"} value={"Valider"} onClick={postComment} />*/}
             {
-                isFolded ? ""
+                props.isFolded ? ""
                          :
                          comments.map((comment, key) => {
                             return <Comment postId={props.postId}
