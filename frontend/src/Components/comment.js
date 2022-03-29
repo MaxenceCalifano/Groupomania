@@ -67,7 +67,14 @@ export default function Comment(props) {
         <div className="commentWrapper">
             <img className="ownerAvatar" src={avatar} alt="ownerAvatar" />
         <div className="comment">
-                <p className="commentOwner">{props.comment.username}</p>
+            <div className="commentHeader">
+            <p className="commentOwner">{props.comment.username}</p>
+            <div className="commentOptions">
+                                <span className="dot"></span>
+                                <span className="dot"></span>
+                                <span className="dot"></span>
+                            </div>
+            </div>
                 <p>{props.comment.text}</p>
 
                 {/* Display only for comment owner */}
@@ -84,11 +91,6 @@ export default function Comment(props) {
                         </div>
                         :
                         <div>
-                            <div className="commentOptions">
-                                <span className="dot"></span>
-                                <span className="dot"></span>
-                                <span className="dot"></span>
-                            </div>
                             <button onClick={setEditMode}>Modifier</button>
                             <button onClick={deleteComment}>Supprimer</button>
 

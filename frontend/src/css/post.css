@@ -2,19 +2,80 @@
     box-shadow: 4px 2px 12px 0px rgba(0,0,0,0.57);
     border-radius: 9px;
     padding: 0.2rem 1rem;
+    margin: 1rem 0;
 }
 
 .comment {
     background-color: rgb(213, 213, 213);
 
 }
+.numberOfLikes {
+    display: flex;
+    align-items: center;
+}
+.numberOfLikes--circle {
+    border-radius: 50%;
+    background-color: #37527C;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 5px;
+}
 
-.postActions {
+.numberOfLikes--thumb {
+    color: white;
+    vertical-align: bottom;
+    position: relative;
+    top: 1px;
+}
+.socialActions {
     display: flex;
     justify-content: space-around;
 }
-
+.socialActions--button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+.socialActions--icons {
+    margin: 0 10px;
+    color: #37527C;
+    height: 20px;
+}
+.socialActions--button:hover {
+    background-color: #d9e0eb;
+}
 .socialDetails {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.commentInput {
+    display: flex;
+    gap: 5px;
+}
+
+.commentInput input:first-child {
+    width: 100%;
+    border: 2px solid #37527C;
+    border-radius: 14px;
+    padding: 4px;
+}
+
+.commentInput--button {
+    border: 2px solid #37527C;
+    background-color: #37527C;
+    border-radius: 14px;
+    padding: 4px;
+    cursor: pointer;
+    color: #fff;
+}
+.commentInput--button:hover {
+    background-color: #fff;
+    color: #37527C;
+
 }
