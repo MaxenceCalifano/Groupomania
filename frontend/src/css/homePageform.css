@@ -20,9 +20,12 @@ nav {
   width: 12%;
 }
 
-.navLinks:focus {
+.navLinks--focus {
   background-color: #091f43;
   color: #fff;
+}
+h1 {
+  text-align: center;
 }
 
 form {

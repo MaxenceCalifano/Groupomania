@@ -30,7 +30,7 @@ export default function Posts(props) {
                 setPosts(value.posts)
 
               } else {
-                navigate("/login");
+                navigate("/login/signIn");
               }
             } 
           )

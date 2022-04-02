@@ -16,7 +16,7 @@ export default function Header(props) {
     props.setIsLoggedIn(false)
     props.setUsername("")
     localStorage.removeItem("loggedInUser")
-    navigate("/login");
+    navigate("/login/signIn");
    }
 
     return(

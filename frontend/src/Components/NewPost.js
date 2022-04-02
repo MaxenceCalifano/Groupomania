@@ -62,7 +62,7 @@ export default function NewPost(props) {
                 </div>    
 
                 <div className="postContent">
-                    <input className="postTitle" name={"title"} type={"text"} placeholder={"Donnez un titre à votre post"}
+                    <input autoFocus className="postTitle" name={"title"} type={"text"} placeholder={"Donnez un titre à votre post"}
                     onChange={ (e) => setTitle(e.target.value)}></input>
 
                     <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" className="postText" name="postText"
