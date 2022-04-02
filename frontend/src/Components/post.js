@@ -8,6 +8,7 @@ import { faThumbsUp, faMessage } from '@fortawesome/free-solid-svg-icons'
 
 
 import { useState, useEffect } from "react";
+import OptionsControl from "./optionsControl";
 
 export default function Post(props) {
     const [isInEditMode, setEditMode] = useState(false);
@@ -17,7 +18,6 @@ export default function Post(props) {
     const [comments, setComments] = useState([]); // All comments
     const [isFolded, setIsFolded] = useState(true);
     const [comment, setComment] = useState();
-
     const [showCommentInput, setShowCommentInput] = useState(false);
     const [avatar, setavatar] = useState();
     
@@ -133,6 +133,7 @@ export default function Post(props) {
         })
             .then(() => {
                 getAllComments();
+                setShowCommentInput(!showCommentInput);
             })
     }
     let commentText = "";
@@ -167,14 +168,21 @@ export default function Post(props) {
                             </div>
                             :
                             <div>
+                                <div className="postHeader">
                                 <div className="postOwner">
-                                    <Avatar avatar={avatar} altText="avatar de l'auteur(e) du post"/>
-                                    <p>{props.post.username}</p>
+                                        <Avatar avatar={avatar} altText="avatar de l'auteur(e) du post"/>
+                                        <p>{props.post.username}</p>
+                                    </div>
+                                    {props.username === props.post.username ?
+                                    
+                                        <OptionsControl modify={toogleEditMode} delete={deletePost}/>
+                                        : ""
+                                    }
                                 </div>
                                 <hr />
                                 <h3>{props.post.title}</h3>
                                 <p>{props.post.text}</p>
-                                <img src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
+                                <img className="postImage" alt={props.post.mediaUrl} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
                                 <div className="socialDetails">
                                     <span className="numberOfLikes">
                                         <span className="numberOfLikes--circle">
@@ -185,15 +193,6 @@ export default function Post(props) {
                                     <p className="comments" onClick={() => setIsFolded(!isFolded)}>
                                         {comments.length}{commentText}</p>
                                 </div>
-
-                                {props.username === props.post.username ?
-                                    <div>
-                                        <Button onClick={deletePost} action="Supprimer" />
-                                        <Button onClick={toogleEditMode} action="Modifier" />
-                                    </div>
-                                    : ""
-                                }
-
                             </div>
                     }
                 </div >

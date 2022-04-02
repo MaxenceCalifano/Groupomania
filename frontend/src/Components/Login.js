@@ -9,10 +9,10 @@ export default function Login() {
     return (
         <div>
             <nav>
-                <Link className={"navLinkLeft navLinks " + (location.pathname ==="/login/signup" ? "" : "navLinks--focus")} to="signIn">Se connecter</Link>
-                <Link className={"navLinkRight navLinks " + (location.pathname ==="/login/signup" ? "navLinks--focus" : "")} to="signup">S'inscrire</Link>
+                <Link className={"navLinkLeft navLinks " + (location.pathname === "/login/signup" ? "" : "navLinks--focus")} to="signIn">Se connecter</Link>
+                <Link className={"navLinkRight navLinks " + (location.pathname === "/login/signup" ? "navLinks--focus" : "")} to="signup">S'inscrire</Link>
             </nav>
-        <Outlet/>
+            <Outlet/>
         </div>
         
     );

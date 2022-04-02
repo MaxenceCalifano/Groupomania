@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import { useState } from "react";
 import "../css/comment.css";
 import Avatar from "./avatar";
+import OptionsControl from "./optionsControl";
 
 
 export default function Comment(props) {
@@ -33,7 +34,9 @@ export default function Comment(props) {
     //eslint-disable-next-line react-hooks/exhaustive-deps
     []   
     )
-
+    function toogleEditMode() {
+        setEditMode(!isInEditMode)
+    }
     const modifyComment = () => {
         fetch(`http://localhost:3000/api/comments/${props.postId}`, {
             method: "PUT",
@@ -46,7 +49,7 @@ export default function Comment(props) {
         })
             .then(() => {
                 props.getAllComments();
-                setEditMode();
+                toogleEditMode();
             })
 
     }
@@ -71,12 +74,13 @@ export default function Comment(props) {
             <div className="commentHeader">
             <p className="commentOwner">{props.comment.username}</p>
             {props.username === props.comment.username ?
-                <div className="commentOptions">
-                                    <span className="dot"></span>
-                                    <span className="dot"></span>
-                                    <span className="dot"></span>
-                </div> :""
+
+                <OptionsControl modify={toogleEditMode} delete={deleteComment} />
+            :""
+               
             }
+            
+            
             </div>
                 <p>{props.comment.text}</p>
 
@@ -92,12 +96,7 @@ export default function Comment(props) {
 
                         <input type={"submit"} value={"Valider"} onClick={() => modifyComment()} />
                         </div>
-                        :
-                        <div>
-                            <button onClick={setEditMode}>Modifier</button>
-                            <button onClick={deleteComment}>Supprimer</button>
-
-                        </div>
+                        : ""
                         : "" /*If not owner nothing is diplayed */
                 } 
             </div>

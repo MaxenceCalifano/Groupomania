@@ -4,6 +4,10 @@
     padding: 1rem;
     margin: 1rem 0;
 }
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+}
 .postOwner {
     display: flex;
     align-items: flex-start;
@@ -12,6 +16,11 @@
 .postOwner p {
     margin-top: 0;
     font-weight: bold;
+}
+
+.postImage {
+    margin: auto;
+    height: 50vh;
 }
 .comment {
     background-color: rgb(213, 213, 213);
