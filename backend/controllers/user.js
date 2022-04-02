@@ -52,7 +52,6 @@ exports.signup = (req, res) => {
             if(result[0] == undefined) {
                 return res.status(401).json({error: "utilisateur inconnu"});
             }
-            console.log(result)
 
             bcrypt.compare(req.body.password, result[0].password)
             .then( (comparedPassword) => {
@@ -86,7 +85,6 @@ exports.getUser = (req, res) => {
            if(result[0] == undefined) {
                return res.status(401).json({error: "utilisateur inconnu"});
            }
-           console.log(result)
 
            res.status(200).json({username: result[0].username,
                                 avatarUrl:result[0].avatarUrl})

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../css/homePageform.css';
 import Button from "./button";
 
+
 export default function SignUp() {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
@@ -56,10 +57,13 @@ export default function SignUp() {
                     <input className="input" type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
 
                     <label htmlFor={"avatar"}>Chargez une photo de profile</label>
+
                     <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg"
                     onChange={getFile} ></input>
-                    {<img src={image.preview} alt="avatar" width='100' height='auto'/>}
-                    <Button className={"signupButton"} onClick={signUp} action="Créer un compte"/> 
+                    {image.preview !=="" ? <img src={image.preview} alt="avatar" width='100' height='auto'/>
+                    : ""    
+                }
+                    <Button className={"signupButton"} onClick={signUp} action="Créer un compte"/>
                 </form>
                 <p>{message}</p>
         </div>

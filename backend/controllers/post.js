@@ -6,6 +6,7 @@ const sql = require("../models/db");
 
 
 exports.newPost = (req, res) => {
+    console.log(req.body.media);
     sql.query(`SELECT * FROM users WHERE uuid = "${req.userId}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);
@@ -18,7 +19,8 @@ exports.newPost = (req, res) => {
             username : resp[0].username,
             userId : jwt.verify(req.cookies.access_token, "token",).userId,
             title: req.body.title,
-            text: req.body.text
+            text: req.body.text,
+            mediaUrl: req.file.filename,
         })
         Post.create(post, (err,data) => {
             if (err) 
@@ -81,6 +83,7 @@ exports.deletePost = (req, res) => {
             result(err, null);
             return;
           }
+          console.log(resp)
           if(req.userId !==resp[0].userId) {
             res.status(401).json({
                 message: "You're not allowed to delete this post"

@@ -25,7 +25,6 @@ exports.newComment = (req, res) => {
             });
             else res.send(data)
         })
-        console.log(req.userId);
         }
 )}
 

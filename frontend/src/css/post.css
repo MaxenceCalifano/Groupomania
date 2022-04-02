@@ -1,10 +1,18 @@
 .post {
     box-shadow: 4px 2px 12px 0px rgba(0,0,0,0.57);
     border-radius: 9px;
-    padding: 0.2rem 1rem;
+    padding: 1rem;
     margin: 1rem 0;
 }
-
+.postOwner {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+.postOwner p {
+    margin-top: 0;
+    font-weight: bold;
+}
 .comment {
     background-color: rgb(213, 213, 213);
 

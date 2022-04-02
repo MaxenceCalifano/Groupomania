@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import { useState } from "react";
 import "../css/comment.css";
+import Avatar from "./avatar";
 
 
 export default function Comment(props) {
@@ -10,7 +11,7 @@ export default function Comment(props) {
    
     useEffect(
         () => {
-            const getUser = () => {
+            const getUserAvatar = () => {
                 fetch(`http://localhost:3000/api/auth/${props.comment.username}`, {
                 credentials: "include",
                 method: "POST",
@@ -27,7 +28,7 @@ export default function Comment(props) {
                     .then( imageBlob =>  setavatar(URL.createObjectURL(imageBlob)))
                     } )
             };
-            getUser()
+            getUserAvatar()
         }, 
     //eslint-disable-next-line react-hooks/exhaustive-deps
     []   
@@ -65,15 +66,17 @@ export default function Comment(props) {
     }
     return(
         <div className="commentWrapper">
-            <img className="ownerAvatar" src={avatar} alt="ownerAvatar" />
+            <Avatar avatar={avatar} altText="avatar de l'auteur(e) du commentaire"/>
         <div className="comment">
             <div className="commentHeader">
             <p className="commentOwner">{props.comment.username}</p>
-            <div className="commentOptions">
-                                <span className="dot"></span>
-                                <span className="dot"></span>
-                                <span className="dot"></span>
-                            </div>
+            {props.username === props.comment.username ?
+                <div className="commentOptions">
+                                    <span className="dot"></span>
+                                    <span className="dot"></span>
+                                    <span className="dot"></span>
+                </div> :""
+            }
             </div>
                 <p>{props.comment.text}</p>
 

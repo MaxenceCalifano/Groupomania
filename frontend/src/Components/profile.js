@@ -33,7 +33,7 @@ export default function Profile() {
         <div className="profile">  
                 <img className="avatar" src={avatar} alt="avatar"></img>
             <div>
-            <a href={username}>Votre profile:</a>
+            <a href={username}>Votre profil:</a>
             <p>{username}</p>
             </div>
         </div>

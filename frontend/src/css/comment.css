@@ -9,16 +9,13 @@
     padding: 1px 10px;
     flex-grow: 2;
 }
-
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .commentOwner {
     font-weight: bold;
-}
-
-.ownerAvatar  {
-    object-fit: cover;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
 }
 
 .dot{

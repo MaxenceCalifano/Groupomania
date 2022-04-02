@@ -25,8 +25,10 @@ export default function Header(props) {
             <a className="header-link" href="http://localhost:3001"> <img className="header-icon" src={icon} alt="logo de Groupomania"></img> </a>
            
             {
-                props.isLoggedIn ? 
-                     <Button className="logoutButton" onClick={logout} action={"DÉCONNEXION"}/>
+                props.isLoggedIn ?
+                        <div>
+                            <Button className="logoutButton" onClick={logout} action={"DÉCONNEXION"}/>
+                        </div>   
                :
                 ""
                 }

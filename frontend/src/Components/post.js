@@ -1,6 +1,7 @@
 import React from "react";
 import '../css/post.css';
-import Button from '../Components/button';
+import Button from './button';
+import Avatar from "./avatar";
 import Comments from "./comments";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faMessage } from '@fortawesome/free-solid-svg-icons'
@@ -18,6 +19,27 @@ export default function Post(props) {
     const [comment, setComment] = useState();
 
     const [showCommentInput, setShowCommentInput] = useState(false);
+    const [avatar, setavatar] = useState();
+
+    const mediaUrl = URL.createObjectURL(props.post.mediaUrl);
+
+    const getUserAvatar = () => {
+        fetch(`http://localhost:3000/api/auth/${props.post.username}`, {
+            credentials: "include",
+            method: "POST",
+            headers: { "Content-Type": "application/json", },
+            body:
+                JSON.stringify({ username: props.post.username })
+            ,
+        })
+            .then(res => res.json())
+            .then(value => {
+                console.log(value)
+                fetch(`http://localhost:3000/images/${value.avatarUrl}`)
+                    .then(res => res.blob())
+                    .then(imageBlob => setavatar(URL.createObjectURL(imageBlob)))
+            })
+    };
 
 
     const toogleEditMode = () => {
@@ -121,6 +143,7 @@ export default function Post(props) {
     useEffect(() => {
         getNumberOfLikes();
         getAllComments();
+        getUserAvatar();
     },
         //eslint-disable-next-line react-hooks/exhaustive-deps
         [])
@@ -143,9 +166,14 @@ export default function Post(props) {
                             </div>
                             :
                             <div>
+                                <div className="postOwner">
+                                    <Avatar avatar={avatar} altText="avatar de l'auteur(e) du post"/>
+                                    <p>{props.post.username}</p>
+                                </div>
+                                <hr />
                                 <h3>{props.post.title}</h3>
                                 <p>{props.post.text}</p>
-
+                                <img src={mediaUrl}></img>
                                 <div className="socialDetails">
                                     <span className="numberOfLikes">
                                         <span className="numberOfLikes--circle">

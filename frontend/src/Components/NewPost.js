@@ -7,17 +7,27 @@ export default function NewPost(props) {
 
     const [title, setTitle] = useState();
     const [text, setText] = useState();
+    const [image, setImage] = useState({preview:"", data:""});
+
     const [isInEditMode, setEditMode] = useState(false);
+
+    const getFile = (e) => {
+        const img = {
+            preview: URL.createObjectURL(e.target.files[0]),
+            data:  e.target.files[0],
+        }
+        setImage(img);
+    }
+    let formData = new FormData();
+    formData.append('title', title);
+    formData.append('text', text);
+    formData.append('image', image.data);
 
     const post = () => {
         fetch("http://localhost:3000/api/posts", {
         method: "POST",
         credentials: "include",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            title: title,
-            text: text,
-        })
+        body: formData,
     })
     .then( res => {
         if(res.ok) props.getAllPosts()
@@ -57,6 +67,11 @@ export default function NewPost(props) {
 
                     <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" className="postText" name="postText"
                     rows={10} onChange={ (e) => setText(e.target.value)}></textarea>
+                    <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg"
+                    onChange={getFile} ></input>
+                    {image.preview !=="" ? <img src={image.preview} alt="avatar" width='100' height='auto'/>
+                    : ""    
+                }
                 </div>
 
                     <Button onClick={post} action="Poster" style={{color:"#0B5E9E"}} />
