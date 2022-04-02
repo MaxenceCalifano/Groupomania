@@ -20,9 +20,7 @@ export default function Post(props) {
 
     const [showCommentInput, setShowCommentInput] = useState(false);
     const [avatar, setavatar] = useState();
-
-    const mediaUrl = URL.createObjectURL(props.post.mediaUrl);
-
+    
     const getUserAvatar = () => {
         fetch(`http://localhost:3000/api/auth/${props.post.username}`, {
             credentials: "include",
@@ -37,7 +35,10 @@ export default function Post(props) {
                 console.log(value)
                 fetch(`http://localhost:3000/images/${value.avatarUrl}`)
                     .then(res => res.blob())
-                    .then(imageBlob => setavatar(URL.createObjectURL(imageBlob)))
+                    .then(imageBlob => {
+                        
+                        setavatar(URL.createObjectURL(imageBlob))
+                    } )
             })
     };
 
@@ -173,7 +174,7 @@ export default function Post(props) {
                                 <hr />
                                 <h3>{props.post.title}</h3>
                                 <p>{props.post.text}</p>
-                                <img src={mediaUrl}></img>
+                                <img src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
                                 <div className="socialDetails">
                                     <span className="numberOfLikes">
                                         <span className="numberOfLikes--circle">

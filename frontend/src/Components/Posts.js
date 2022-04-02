@@ -23,7 +23,7 @@ export default function Posts(props) {
             "Access-Control-Allow-Credentials": true,
             credentials: "include",
         },
-    })
+    })    
           .then( res => res.json())
           .then(value => {
               if(value.posts !== undefined) {
