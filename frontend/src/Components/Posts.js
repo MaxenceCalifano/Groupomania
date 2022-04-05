@@ -1,7 +1,6 @@
 import React from "react";
 import Post from './post';
 import NewPost from './NewPost';
-import Profile from "./profile";
 
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
@@ -42,7 +41,6 @@ export default function Posts(props) {
     return (
         <div className="posts">
           <div className="profileAndNewPost" >
-          <Profile/>
           <NewPost getAllPosts={getAllPosts}/>
           </div>
 

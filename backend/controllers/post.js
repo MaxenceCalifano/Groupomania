@@ -6,7 +6,6 @@ const sql = require("../models/db");
 
 
 exports.newPost = (req, res) => {
-    console.log(req.body.media);
     sql.query(`SELECT * FROM users WHERE uuid = "${req.userId}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);
@@ -62,7 +61,8 @@ exports.modifyPost = (req, res) => {
             const postModifications = {
                 uuid: req.body.uuid,
                 title: req.body.title,
-                text: req.body.text
+                text: req.body.text,
+                mediaUrl: req.file.filename,
             }
             Post.modifyPost(postModifications, (err,data) => {
                 if (err) 

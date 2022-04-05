@@ -90,4 +90,8 @@ exports.getUser = (req, res) => {
                                 avatarUrl:result[0].avatarUrl})
        } 
    })
-} 
+}
+
+exports.modifyUser = (req, res) => {
+  
+}

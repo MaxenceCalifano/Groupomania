@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import '../css/header.css';
 import icon from "../img/icon-left-font-monochrome-white.png";
 import Button from "./button";
+import Profile from "./profileCart";
 
 export default function Header(props) {
   
@@ -26,7 +27,8 @@ export default function Header(props) {
            
             {
                 props.isLoggedIn ?
-                        <div>
+                        <div className="userOptions">
+                            <Profile/>
                             <Button className="logoutButton" onClick={logout} action={"DÉCONNEXION"}/>
                         </div>   
                :

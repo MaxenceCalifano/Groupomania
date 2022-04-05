@@ -8,6 +8,7 @@ import Login from './Components/Login';
 
 
 import { useState, useEffect } from 'react';
+import Profile from './Components/profile';
 
 function App() {
   const [username, setUsername] = useState();
@@ -25,14 +26,16 @@ function App() {
     <div className="App">
       <Header setUsername={setUsername} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}/>
         <Routes>
-          
-          <Route path='/' element={<Posts username={username} />}>
-          </Route>
+          <Route path='/' element={<Posts username={username} />}/>
+         
 
           <Route path="login" element={<Login/>}>
             <Route path="signIn" element={<SignInForm setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />}/>
             <Route path="signup" element={<SignUp/>}/>
           </Route>
+
+          <Route path='/profile' element={<Profile/>}/>
+
          
           {/*  En cas d'erreur d'URL */}
           <Route path='*' element={ 

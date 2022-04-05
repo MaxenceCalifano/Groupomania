@@ -41,7 +41,6 @@ exports.getAllPostComments = (req, res) => {
 }
 
 exports.modifyComment = (req, res) => {
-    console.log("modify comm")
     sql.query(`SELECT * FROM comments WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);

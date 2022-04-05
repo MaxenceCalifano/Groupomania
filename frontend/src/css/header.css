@@ -14,7 +14,10 @@ header {
     width: 100%;
     height: auto;
 }
-
+.userOptions {
+    display: flex;
+    flex-direction: column;
+}
 .logoutButton {
     color:#fd2d01;
 }

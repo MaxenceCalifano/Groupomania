@@ -1,7 +1,8 @@
 import React from "react";
 import '../css/post.css';
-import Button from './button';
+
 import Avatar from "./avatar";
+import PostModale from "./postModale";
 import Comments from "./comments";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faMessage } from '@fortawesome/free-solid-svg-icons'
@@ -20,6 +21,17 @@ export default function Post(props) {
     const [comment, setComment] = useState();
     const [showCommentInput, setShowCommentInput] = useState(false);
     const [avatar, setavatar] = useState();
+    const [image, setImage] = useState({preview:"", data:""});
+
+   
+
+    const getFile = (e) => {
+        const img = {
+            preview: URL.createObjectURL(e.target.files[0]),
+            data:  e.target.files[0],
+        }
+        setImage(img);
+    }
     
     const getUserAvatar = () => {
         fetch(`http://localhost:3000/api/auth/${props.post.username}`, {
@@ -58,17 +70,18 @@ export default function Post(props) {
         })
         props.getAllPosts()
     }
+    let formData = new FormData();
+    formData.append('uuid', props.post.uuid);
+    formData.append('title', title);
+    formData.append('text', text);
+    formData.append('image', image.data);
 
     const modifyPost = () => {
         fetch("http://localhost:3000/api/posts", {
             method: "PUT",
             credentials: "include",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                uuid: props.post.uuid,
-                title: title,
-                text: text,
-            }),
+            //headers: { "Content-Type": "application/json" },
+            body: formData,
         })
             .then(() => {
                 props.getAllPosts()
@@ -149,6 +162,13 @@ export default function Post(props) {
     },
         //eslint-disable-next-line react-hooks/exhaustive-deps
         [])
+
+        if(isInEditMode) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+    
+        }
     return (
         <div>
             <div className="post">
@@ -156,7 +176,11 @@ export default function Post(props) {
                     {
                         isInEditMode ?
                             <div>
-                                <label htmlFor={"title"}>Titre du post</label>
+                                <div className="modale_background_overlay" style={{"top": "auto", "marginTop": "-300px"}}></div>
+                                <PostModale style={{"margin-top": "30px"}} getFile={getFile} toogleEditMode={toogleEditMode} 
+                                    image={image} setTitle={setTitle} setText={setText} post={modifyPost} />
+
+                                {/* <label htmlFor={"title"}>Titre du post</label>
                                 <input name={"title"} type={"text"} defaultValue={"Ecrivez un titre"}
                                     onChange={(e) => setTitle(e.target.value)} />
 
@@ -164,9 +188,9 @@ export default function Post(props) {
                                 <input name={"title"} type={"text"} defaultValue={"Ecrivez un post"}
                                     onChange={(e) => setText(e.target.value)} />
 
-                                <input type={"submit"} value={"Valider"} onClick={modifyPost} />
+                                <input type={"submit"} value={"Valider"} onClick={modifyPost} /> */}
                             </div>
-                            :
+                            :""}
                             <div>
                                 <div className="postHeader">
                                 <div className="postOwner">
@@ -194,7 +218,7 @@ export default function Post(props) {
                                         {comments.length}{commentText}</p>
                                 </div>
                             </div>
-                    }
+                    
                 </div >
                 <hr />
                 <div className="socialActions">
@@ -217,7 +241,7 @@ export default function Post(props) {
                     </div>
                     : ""
             }
-            <Comments username={props.username} postId={props.post.uuid} isFolded={isFolded} comment={comment} comments={comments} getAllComments={getAllComments} />
+                <Comments username={props.username} postId={props.post.uuid} isFolded={isFolded} comment={comment} comments={comments} getAllComments={getAllComments} />
         </div>
     );
 }
