@@ -1,3 +1,4 @@
+const req = require("express/lib/request");
 const sql = require("./db");
 
 //constructeur
@@ -34,6 +35,30 @@ User.findOne = (email, result) => {
        return res.password
        
     }
+  })
+}
+User.modifyPassword = (newPassword, result) => {
+  sql.query(`UPDATE users SET ? WHERE uuid = "${newPassword.uuid}"`, 
+  newPassword, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    result(null, {message: "password has been updated"})
+  })
+}
+module.exports =  User;
+
+User.modifyUser = (userModifications, result) => {
+  sql.query(`UPDATE users SET ? WHERE uuid = "${userModifications.uuid}"`, 
+  userModifications, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    result(null, {...userModifications})
   })
 }
 module.exports =  User;

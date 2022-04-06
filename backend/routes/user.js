@@ -9,6 +9,7 @@ router.post("/signup", multer, userController.signup);
 router.post("/login", userController.login);
 router.get("/logout", userController.logout);
 router.post("/:user", auth, userController.getUser);
+router.put("/:user", auth, multer, userController.modifyUser);
 
 
 module.exports = router;

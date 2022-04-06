@@ -33,7 +33,7 @@ export default function Profile() {
         <div className="profile">  
                 <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img>
             <div>
-                <Link to={"/profile"}>Votre profil:</Link>
+                <Link to={"/profile"}>Votre profil :</Link>
             <p>{username}</p>
             <Routes>
         <Route path='/' ></Route>

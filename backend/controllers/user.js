@@ -92,6 +92,69 @@ exports.getUser = (req, res) => {
    })
 }
 
+exports.modifyPassword = (req, res) => {
+  /* sql.query(`SELECT * FROM user WHERE uuid = "${req.userId}"`, (err, resp) => {
+    if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      } */
+      bcrypt.hash(req.body.password, 10)
+        .then(hash => {
+          const newPassword = {
+            uuid: req.userId,
+            password: hash,
+            //avatarUrl: req.file.filename,
+        }
+        User.modifyPassword(newPassword, (err,data) => {
+          if (err) 
+            res.status(500).send({
+            message:
+              err.message || "Some error occurred while modifying the password."
+          });
+          else res.send(data)
+      });
+        })
+        
+        
+   // });
+}
+
 exports.modifyUser = (req, res) => {
-  
+
+      function checkAndSendUserModifications(reqBody, userModifications) {
+        for (value in reqBody) { //check and add only valid values
+          if(reqBody[value] !== undefined) {
+            userModifications[value] = reqBody[value];
+          }
+        }
+        
+       User.modifyUser(userModifications, (err,data) => {
+         if (err) 
+           res.status(500).send({
+           message:
+             err.message || "Some error occurred while modifying the post."
+         });
+         else res.send(data)
+        });
+      }
+
+
+      if(req.body.password !== undefined) {
+        bcrypt.hash(req.body.password, 10)
+          .then(hash => {
+            const userModifications = {
+              uuid: req.userId,
+              password: hash,
+           } 
+           checkAndSendUserModifications(req.body, userModifications)
+      })
+      } else {
+        const userModifications = {
+          uuid: req.userId,
+       } 
+       checkAndSendUserModifications(req.body, userModifications)
+      }
+        
+   // });
 }
