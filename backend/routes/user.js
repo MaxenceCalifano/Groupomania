@@ -8,6 +8,7 @@ const userController = require("../controllers/user");
 router.post("/signup", multer, userController.signup);
 router.post("/login", userController.login);
 router.get("/logout", userController.logout);
+router.get("/:user", auth, userController.getPrivateUserInfos);
 router.post("/:user", auth, userController.getUser);
 router.put("/:user", auth, multer, userController.modifyUser);
 

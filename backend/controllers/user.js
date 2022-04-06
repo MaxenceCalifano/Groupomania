@@ -85,47 +85,48 @@ exports.getUser = (req, res) => {
            if(result[0] == undefined) {
                return res.status(401).json({error: "utilisateur inconnu"});
            }
-
            res.status(200).json({username: result[0].username,
                                 avatarUrl:result[0].avatarUrl})
        } 
    })
 }
 
-exports.modifyPassword = (req, res) => {
-  /* sql.query(`SELECT * FROM user WHERE uuid = "${req.userId}"`, (err, resp) => {
-    if (err) {
-        console.log("error: ", err);
-        result(err, null);
-        return;
-      } */
-      bcrypt.hash(req.body.password, 10)
-        .then(hash => {
-          const newPassword = {
-            uuid: req.userId,
-            password: hash,
-            //avatarUrl: req.file.filename,
-        }
-        User.modifyPassword(newPassword, (err,data) => {
-          if (err) 
-            res.status(500).send({
-            message:
-              err.message || "Some error occurred while modifying the password."
-          });
-          else res.send(data)
-      });
-        })
-        
-        
-   // });
+exports.getPrivateUserInfos = (req, res) => {
+  sql.query(`SELECT * FROM users WHERE uuid = "${req.userId}"`, (err, result) => {
+       if (err) 
+         res.status(500).send({
+         message:
+           err.message || "Some error occurred while looking for the user."
+       });
+       else {
+           if(result[0] == undefined) {
+               return res.status(401).json({error: "utilisateur inconnu"});
+           }
+
+           res.status(200).json({result: result[0]})
+       } 
+   })
 }
 
 exports.modifyUser = (req, res) => {
+ 
+      /*
+      *@ param {object} reqBody - values in the body of the request
+      *@ param {object} userModifications - an object containing userId and password hash if it needs to be modified
 
+      */
       function checkAndSendUserModifications(reqBody, userModifications) {
         for (value in reqBody) { //check and add only valid values
           if(reqBody[value] !== undefined) {
+            if (value === "password" || value === "image") {
+             //Do nothing
+            } else {
             userModifications[value] = reqBody[value];
+            
+            if (req.file !== undefined) {
+              userModifications.avatarUrl = req.file.filename;
+            }
+            }
           }
         }
         
@@ -140,7 +141,8 @@ exports.modifyUser = (req, res) => {
       }
 
 
-      if(req.body.password !== undefined) {
+      if(req.body.password !== "undefined") {
+        console.log(req.body.password)
         bcrypt.hash(req.body.password, 10)
           .then(hash => {
             const userModifications = {
@@ -155,6 +157,4 @@ exports.modifyUser = (req, res) => {
        } 
        checkAndSendUserModifications(req.body, userModifications)
       }
-        
-   // });
 }
