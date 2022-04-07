@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import '../css/homePageform.css';
 import Button from "./button";
+import PasswordStrengthMeter from "./PasswordStrengthMeter";
 
 
 export default function SignUp() {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
-    const [password, setpassword] = useState();
+    const [password, setpassword] = useState("");
     const [image, setImage] = useState({preview:"", data:""});
     const [message, setMessage] = useState();
 
@@ -55,6 +56,7 @@ export default function SignUp() {
                     
                     <label htmlFor={"password"}>Entrez votre mot de passe</label>
                     <input className="input" type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
+                    <PasswordStrengthMeter password={password} />
 
                     <label htmlFor={"avatar"}>Chargez une photo de profile</label>
 
