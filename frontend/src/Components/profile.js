@@ -25,16 +25,14 @@ function Profile(props) {
     
 
     const modifyProfile = () => {
-        fetch(`http://localhost:3000/api/auth/${props.username}`, {
+        fetch(`http://localhost:3000/api/auth/private/${props.username}`, {
             method: "PUT",
             credentials: "include",
             body: formData,
         })
             .then( resp => resp.json())
             .then( value => {
-                console.log(value.username)
                 if(value.username !== undefined) {
-                    console.log("value si pas undefined",value)
                 props.setUsername(value.username)
                 localStorage.setItem("loggedInUser", value.username)
                 }
@@ -45,7 +43,7 @@ function Profile(props) {
 
     useEffect(     
         () => {       
-                fetch(`http://localhost:3000/api/auth/${props.username}`, {
+                fetch(`http://localhost:3000/api/auth/private/${props.username}`, {
                 credentials: "include",
             })
                 .then( res => res.json())

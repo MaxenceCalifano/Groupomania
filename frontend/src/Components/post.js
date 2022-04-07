@@ -36,11 +36,6 @@ export default function Post(props) {
     const getUserAvatar = () => {
         fetch(`http://localhost:3000/api/auth/${props.post.username}`, {
             credentials: "include",
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
-            body:
-                JSON.stringify({ username: props.post.username })
-            ,
         })
             .then(res => res.json())
             .then(value => {

@@ -75,7 +75,7 @@ exports.logout = (req, res) => {
 } 
 
 exports.getUser = (req, res) => {
-  sql.query(`SELECT * FROM users WHERE username = "${req.body.username}"`, (err, result) => {
+  sql.query(`SELECT * FROM users WHERE username = "${req.params.user}"`, (err, result) => {
        if (err) 
          res.status(500).send({
          message:

@@ -1,16 +1,22 @@
 .profile {
-    box-shadow: 4px 2px 12px 0px rgba(0,0,0,0.57);
+    box-shadow: 4px 2px 12px 0px rgba(0, 0, 0, 0.57);
     border-radius: 9px;
     padding: 10px;
     display: flex;
     align-items: center;
     text-align: center;
-    background-color: #37527C;
+    color: #fff;
 }
+
 .profile p {
     margin: 0 5px;
 }
+
 .profile a {
     text-decoration: none;
-    color: black;
+    color: #fff;
+}
+
+.profile a:hover {
+    text-decoration: underline;
 }

@@ -15,11 +15,6 @@ export default function Comment(props) {
             const getUserAvatar = () => {
                 fetch(`http://localhost:3000/api/auth/${props.comment.username}`, {
                 credentials: "include",
-                method: "POST",
-                headers: {"Content-Type": "application/json",},
-                body: 
-                    JSON.stringify({username: props.comment.username})
-                ,
             })
                 .then( res => res.json())
                 .then(value => { 
