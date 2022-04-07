@@ -117,15 +117,17 @@ exports.modifyUser = (req, res) => {
       */
       function checkAndSendUserModifications(reqBody, userModifications) {
         for (value in reqBody) { //check and add only valid values
-          if(reqBody[value] !== undefined) {
+
+          if(reqBody[value] !== "undefined") {
+
             if (value === "password" || value === "image") {
              //Do nothing
             } else {
-            userModifications[value] = reqBody[value];
-            
-            if (req.file !== undefined) {
-              userModifications.avatarUrl = req.file.filename;
-            }
+              userModifications[value] = reqBody[value];
+              
+              if (req.file !== undefined) {
+                userModifications.avatarUrl = req.file.filename;
+              }
             }
           }
         }
@@ -142,7 +144,6 @@ exports.modifyUser = (req, res) => {
 
 
       if(req.body.password !== "undefined") {
-        console.log(req.body.password)
         bcrypt.hash(req.body.password, 10)
           .then(hash => {
             const userModifications = {

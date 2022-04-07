@@ -44,7 +44,7 @@ exports.likeUnlike = (req, res) => {
 }
 
 exports.getAllLikes = (req, res) => {
-    console.log(req.params)
+   // console.log(req.params)
     sql.query(`SELECT * FROM likes WHERE postId = "${req.params.postId}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);

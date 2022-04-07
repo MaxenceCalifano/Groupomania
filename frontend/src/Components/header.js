@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import '../css/header.css';
 import icon from "../img/icon-left-font-monochrome-white.png";
 import Button from "./button";
-import Profile from "./profileCart";
+import ProfileCart from "./profileCart";
 
 export default function Header(props) {
   
@@ -14,10 +14,12 @@ export default function Header(props) {
         method: "GET",
         credentials: "include",
     })
-    props.setIsLoggedIn(false)
-    props.setUsername("")
-    localStorage.removeItem("loggedInUser")
-    navigate("/login/signIn");
+    .then(() => {
+        props.setIsLoggedIn(false);
+        props.setUsername("");
+        localStorage.removeItem("loggedInUser");
+        navigate("/login/signIn");
+    })
    }
 
     return(
@@ -28,7 +30,7 @@ export default function Header(props) {
             {
                 props.isLoggedIn ?
                         <div className="userOptions">
-                            <Profile/>
+                            <ProfileCart username={props.username}/>
                             <Button className="logoutButton" onClick={logout} action={"DÉCONNEXION"}/>
                         </div>   
                :

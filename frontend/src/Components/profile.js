@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import Button from "./button";
-function Profile() {
+function Profile(props) {
 
-    const [username, setUsername] = useState(localStorage.getItem("loggedInUser"));
+    const [username, setUsername] = useState();
     const [avatar, setavatar] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -25,13 +25,19 @@ function Profile() {
     
 
     const modifyProfile = () => {
-        fetch(`http://localhost:3000/api/auth/${username}`, {
+        fetch(`http://localhost:3000/api/auth/${props.username}`, {
             method: "PUT",
             credentials: "include",
             body: formData,
         })
-            .then(() => {
-                //change editMode
+            .then( resp => resp.json())
+            .then( value => {
+                console.log(value.username)
+                if(value.username !== undefined) {
+                    console.log("value si pas undefined",value)
+                props.setUsername(value.username)
+                localStorage.setItem("loggedInUser", value.username)
+                }
                 setIsInEditMode(false);
             })
 
@@ -39,14 +45,16 @@ function Profile() {
 
     useEffect(     
         () => {       
-                fetch(`http://localhost:3000/api/auth/${username}`, {
+                fetch(`http://localhost:3000/api/auth/${props.username}`, {
                 credentials: "include",
             })
                 .then( res => res.json())
                 .then(value => {
-                    console.log(value.result)
-                    setavatar(value.result.avatarUrl)
-                    setEmail(value.result.email)
+                    
+                        setavatar(value.result.avatarUrl)
+                        setEmail(value.result.email)
+                    
+                    
                     /* const img = {
                         preview: URL.createObjectURL(value.result.avatarUrl),
                         image:""
@@ -54,29 +62,34 @@ function Profile() {
                     setImage(img);*/
                     } ) 
             
-        }, 
-    //eslint-disable-next-line react-hooks/exhaustive-deps
+        }
+         //eslint-disable-next-line react-hooks/exhaustive-deps
+    
       
     )
     return ( 
         <div>
             {isInEditMode ?
             <div>
-                <label for="username">Modifier votre pseudo</label>
-                <input placeholder={username} onChange={(e) => setUsername(e.target.value)} type="text"></input>
-                <label for="email">Modifier votre e-mail</label>
-                <input placeholder={email} type="text"></input>
-                <label for="password">Modifier votre mot de passe</label>
-                <input placeholder="*********" type="password" autoComplete="new-password" onChange={(e) => setPassword(e.target.value)}></input>
+                <label htmlFor="username">Modifier votre pseudo</label>
+                <input placeholder={props.username} onChange={(e) => setUsername(e.target.value)} type="text"></input>
+
+                <label htmlFor="email">Modifier votre e-mail</label>
+                <input onChange={(e) => setEmail(e.target.value)} placeholder={email} type="text"></input>
+
+                <label htmlFor="password">Modifier votre mot de passe</label>
+                <input onChange={(e) => setPassword(e.target.value)} placeholder="*********" type="password" autoComplete="new-password"></input>
+
                 <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg" onChange={getFile}/>
                 <img src={image.preview} alt="avatar" width='100' height='auto'/>  
+
                 <Button onClick={modifyProfile} action="Valider les modifications"/>
             </div>
             
             :
             <div>
             <p>Votre Profil : </p>
-            <p>Pseudo : {username}</p>   
+            <p>Pseudo : {props.username}</p>   
             <p>e-mail : {email}</p>
             <p>********</p>   
             <span>Photo de profil : </span> <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img>

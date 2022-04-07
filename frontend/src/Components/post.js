@@ -44,7 +44,6 @@ export default function Post(props) {
         })
             .then(res => res.json())
             .then(value => {
-                console.log(value)
                 fetch(`http://localhost:3000/images/${value.avatarUrl}`)
                     .then(res => res.blob())
                     .then(imageBlob => {

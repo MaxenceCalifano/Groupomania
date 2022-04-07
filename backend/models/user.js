@@ -31,7 +31,6 @@ User.findOne = (email, result) => {
       return;
     }
     if(res.length){
-       console.log(res);
        return res.password
        
     }
