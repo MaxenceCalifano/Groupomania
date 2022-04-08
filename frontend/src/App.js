@@ -24,17 +24,17 @@ function App() {
   
   return (
     <div className="App">
-      <Header setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn}  setUsername={setUsername} username={username}/>
+      <Header isLoggedIn={isLoggedIn}  setUsername={setUsername} username={username}/>
         <Routes>
           <Route path='/' element={<Posts username={username} />}/>
          
+          <Route path='profile' element={<Profile username={username} setUsername={setUsername} setIsLoggedIn={setIsLoggedIn}/>}/>
 
           <Route path="login" element={<Login/>}>
             <Route path="signIn" element={<SignInForm setIsLoggedIn={setIsLoggedIn} setUsername={setUsername} />}/>
             <Route path="signup" element={<SignUp/>}/>
           </Route>
 
-          <Route path='/profile' element={<Profile username={username} setUsername={setUsername}/>}/>
 
          
           {/*  En cas d'erreur d'URL */}
@@ -46,12 +46,7 @@ function App() {
 
       </Routes>
         
-      {/* <nav>
-      <Link to="signIn">Se déconnecter</Link>
-      </nav>
-      <Outlet/> */}
-
-      
+  
     </div>
   );
 }

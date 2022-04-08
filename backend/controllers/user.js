@@ -159,3 +159,15 @@ exports.modifyUser = (req, res) => {
        checkAndSendUserModifications(req.body, userModifications)
       }
 }
+
+exports.deleteUser = (req, res) => {
+
+    sql.query(`DELETE FROM users WHERE uuid = "${req.userId}"`, (err) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+          res.status(200).json({message: "utilisateur supprimé"})
+        });
+}

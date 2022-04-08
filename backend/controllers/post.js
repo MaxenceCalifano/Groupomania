@@ -77,6 +77,7 @@ exports.modifyPost = (req, res) => {
 };
 
 exports.deletePost = (req, res) => {
+    // First check if the request comes from the post owner
     sql.query(`SELECT * FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);

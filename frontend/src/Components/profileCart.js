@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import '../css/profileCart.css';
 
 export default function Profile(props) {
@@ -22,14 +22,12 @@ export default function Profile(props) {
     )
     return(
         <div className="profile">  
-                <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img>
+        {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
+                
             <div>
-                <Link to={"/profile"}>Votre profil :</Link>
+                <Link to={"profile"}>Votre profil :</Link>
             <p>{props.username}</p>
-            <Routes>
-        <Route path='/' ></Route>
-    
-        </Routes>
+            
             </div>
         </div>
     )

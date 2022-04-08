@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate } from "react-router";
 import Button from "./button";
 function Profile(props) {
 
@@ -23,7 +24,7 @@ function Profile(props) {
     formData.append('password', password);
     formData.append('image', image.data);
     
-
+    
     const modifyProfile = () => {
         fetch(`http://localhost:3000/api/auth/${props.username}`, {
             method: "PUT",
@@ -61,10 +62,23 @@ function Profile(props) {
                     } ) 
             
         }
-         //eslint-disable-next-line react-hooks/exhaustive-deps
-    
-      
+         //eslint-disable-next-line react-hooks/exhaustive-deps  
     )
+    
+    const navigate =  useNavigate()
+    const logout = () => {
+        fetch("http://localhost:3000/api/auth/logout", { 
+            method: "GET",
+            credentials: "include",
+        })
+        .then(() => {
+            props.setIsLoggedIn(false);
+            props.setUsername("");
+            localStorage.removeItem("loggedInUser");
+            navigate("/login/signIn");
+        })
+       }
+
     return ( 
         <div>
             {isInEditMode ?
@@ -84,15 +98,16 @@ function Profile(props) {
                 <Button onClick={modifyProfile} action="Valider les modifications"/>
             </div>
             
-            :
+            : // Not in edit mode
             <div>
             <p>Votre Profil : </p>
             <p>Pseudo : {props.username}</p>   
             <p>e-mail : {email}</p>
             <p>********</p>   
-            <span>Photo de profil : </span> <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img>
+            <span>Photo de profil : </span> {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}
             <Button onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
 
+            <Button className="logoutButton" onClick={logout} action={"Se déconnecter"}/>
             </div>
         }        </div>
      );
