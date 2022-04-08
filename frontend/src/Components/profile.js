@@ -9,6 +9,8 @@ function Profile(props) {
     const [password, setPassword] = useState();
     const [image, setImage] = useState({preview:"", data:""});
     const [isInEditMode, setIsInEditMode] = useState(false);
+    const [displayDeleteWarning, setDisplayWarning] = useState(false);
+    const [userDeletedMessage, setUserDeletedMessage] = useState();
     
     const getFile = (e) => {
             const img = {
@@ -40,6 +42,23 @@ function Profile(props) {
                 setIsInEditMode(false);
             })
 
+    }
+    const deleteProfile = () => {
+        fetch('http://localhost:3000/api/auth/', {
+            method: "DELETE",
+            credentials: "include",
+        })
+            .then( resp =>  {
+                if (resp.ok) {
+                    function goToSignup() {
+                        logout() // remove cookie and localStorage  
+                        navigate("/login/signUp")
+                    }
+                    setUserDeletedMessage("Votre compte a été supprimé, vous allez être redirigé vers la page d'inscription");
+                    setTimeout(goToSignup, 5000)
+                }
+      
+            })
     }
 
     useEffect(     
@@ -81,7 +100,10 @@ function Profile(props) {
 
     return ( 
         <div>
-            {isInEditMode ?
+            {userDeletedMessage !== undefined ? <p>{userDeletedMessage}</p>
+            :
+            <div>
+                {isInEditMode ?
             <div>
                 <label htmlFor="username">Modifier votre pseudo</label>
                 <input placeholder={props.username} onChange={(e) => setUsername(e.target.value)} type="text"></input>
@@ -108,8 +130,24 @@ function Profile(props) {
             <Button onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
 
             <Button className="logoutButton" onClick={logout} action={"Se déconnecter"}/>
+            <Button className="deletetButton" onClick={() => setDisplayWarning(true)} action={"Supprimer le compte"}/>
+            {displayDeleteWarning ?
+                <div>
+                    <strong>Cette action est irréversible, voulez-vous vraiment supprimer votre compte Groupomania ?</strong>
+                    <Button onClick={deleteProfile} action={"Oui je veux suprimer mon compte"}/>
+                    <Button onClick={() => setDisplayWarning(false)} action={"Non, annuler la demande"}/>
+
+                </div>      
+                :
+                ""
+        }
+
             </div>
-        }        </div>
+        }        
+            </div>
+        }
+            
+</div>
      );
 }
 

@@ -14,16 +14,18 @@ header {
     width: 100%;
     height: auto;
 }
+
 .userOptions {
     display: flex;
     flex-direction: column;
 }
+
 .logoutButton {
-    color:#fd2d01;
+    color: #37527C;
 }
 
 .logoutButton:hover {
-    background-color: #fd2d01;
-    color:rgb(255, 255, 255);
-    border: 2px solid #fd2d01;
+    background-color: #37527C;
+    color: rgb(255, 255, 255);
+    border: 2px solid #37527C;
 }
