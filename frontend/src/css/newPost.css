@@ -6,11 +6,13 @@
     top: 0;
     left: 0;
 }
+
 .newPost {
     flex-grow: 2;
 }
+
 .newPost-input {
-    box-shadow: 4px 2px 12px 0px rgba(0,0,0,0.57);
+    box-shadow: 4px 2px 12px 0px rgba(0, 0, 0, 0.57);
     border-radius: 9px;
 }
 
@@ -18,27 +20,26 @@
     position: absolute;
     z-index: 1;
     background-color: white;
-    left:0;
-    right:0;
-    margin-left:auto;
-    margin-right:auto;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
     width: 50vw;
     padding: 10px;
     display: flex;
     flex-direction: column;
 }
+
 .createNewPost-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.deleteButton {
-    border: none;
-    color: green;
-}
+
 .postText {
     resize: none;
 }
+
 .startPost {
     padding: 15px;
     width: 96%;
@@ -48,9 +49,11 @@
     border-radius: 50px;
     background-color: #e6eaf2;
 }
+
 .startPost:hover {
-  background-color: #d9e0eb;
+    background-color: #d9e0eb;
 }
+
 .postTitle {
     margin: 10px 0;
 }
@@ -59,10 +62,19 @@
     display: flex;
     flex-direction: column;
 }
+
 /* remove default styles */
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
     outline: none;
 }
-input, textarea {
+
+input,
+textarea {
     border: none;
+}
+
+
+.imageInput+label {
+    cursor: pointer;
 }

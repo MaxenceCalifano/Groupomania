@@ -19,8 +19,11 @@ exports.newPost = (req, res) => {
             userId : jwt.verify(req.cookies.access_token, "token",).userId,
             title: req.body.title,
             text: req.body.text,
-            mediaUrl: req.file.filename,
         })
+        //check if post has no media
+        if (req.file !== undefined) {
+            post.mediaUrl = req.file.filename;
+          }
         Post.create(post, (err,data) => {
             if (err) 
               res.status(500).send({
@@ -62,8 +65,11 @@ exports.modifyPost = (req, res) => {
                 uuid: req.body.uuid,
                 title: req.body.title,
                 text: req.body.text,
-                mediaUrl: req.file.filename,
             }
+            //check if post has media or not
+            if (req.file !== undefined) {
+            postModifications.mediaUrl = req.file.filename;
+          }
             Post.modifyPost(postModifications, (err,data) => {
                 if (err) 
                   res.status(500).send({

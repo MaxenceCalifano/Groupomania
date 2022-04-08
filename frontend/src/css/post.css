@@ -24,6 +24,7 @@
 .postImage {
     margin: auto;
     height: 50vh;
+    align-self: center;
 }
 
 .comment {

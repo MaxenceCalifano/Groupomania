@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Link } from "react-router-dom";
-import '../css/profileCart.css';
+import '../css/profileCard.css';
 
 export default function Profile(props) {
     const [avatar, setavatar] = useState();
@@ -21,7 +21,7 @@ export default function Profile(props) {
       
     )
     return(
-        <div className="profile">  
+        <div className="profileCard">  
         {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
                 
             <div>

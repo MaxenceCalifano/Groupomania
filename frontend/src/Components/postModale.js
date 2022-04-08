@@ -17,8 +17,9 @@ export default function PostModale(props) {
 
                         <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" className="postText" name="postText"
                         rows={10} onChange={ (e) => props.setText(e.target.value)}></textarea>
-                        <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg"
-                        onChange={props.getFile} ></input>
+
+                        <input className="imageInput" type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg"
+                        onChange={props.getFile} />
                         {props.image.preview !=="" ? <img src={props.image.preview} alt="avatar" width='100' height='auto'/>
                         : ""    
                     }

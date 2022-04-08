@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router";
 import Button from "./button";
+import "../css/profile.css";
+
 function Profile(props) {
 
     const [username, setUsername] = useState();
@@ -99,12 +101,12 @@ function Profile(props) {
        }
 
     return ( 
-        <div>
+        <div className="profile" >
             {userDeletedMessage !== undefined ? <p>{userDeletedMessage}</p>
             :
             <div>
                 {isInEditMode ?
-            <div>
+            <div className="editProfile">
                 <label htmlFor="username">Modifier votre pseudo</label>
                 <input placeholder={props.username} onChange={(e) => setUsername(e.target.value)} type="text"></input>
 
@@ -115,26 +117,36 @@ function Profile(props) {
                 <input onChange={(e) => setPassword(e.target.value)} placeholder="*********" type="password" autoComplete="new-password"></input>
 
                 <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg" onChange={getFile}/>
-                <img src={image.preview} alt="avatar" width='100' height='auto'/>  
+                {image.preview !== "" ? <img src={image.preview} alt="avatar" width='100' height='auto'/> : "" } 
+                
+                <div>
+                    <Button onClick={modifyProfile} action="Valider les modifications"/>
+                    <Button onClick={() => setIsInEditMode(false)} action="Annuler les modifications"/>
+                </div>
+                
 
-                <Button onClick={modifyProfile} action="Valider les modifications"/>
             </div>
             
             : // Not in edit mode
             <div>
-            <p>Votre Profil : </p>
+            <p className="title">Votre Profil : </p>
             <p>Pseudo : {props.username}</p>   
             <p>e-mail : {email}</p>
             <p>********</p>   
             <span>Photo de profil : </span> {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}
-            <Button onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
+            
+            <div>
+                <Button onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
+                <Button className="logoutButton" onClick={logout} action={"Se déconnecter"}/>
+            </div>
+            
 
-            <Button className="logoutButton" onClick={logout} action={"Se déconnecter"}/>
-            <Button className="deletetButton" onClick={() => setDisplayWarning(true)} action={"Supprimer le compte"}/>
+            <Button className="deleteButton" onClick={() => setDisplayWarning(true)} action={"Supprimer le compte"}/>
+
             {displayDeleteWarning ?
                 <div>
-                    <strong>Cette action est irréversible, voulez-vous vraiment supprimer votre compte Groupomania ?</strong>
-                    <Button onClick={deleteProfile} action={"Oui je veux suprimer mon compte"}/>
+                    <strong className="deleteWarning">Cette action est irréversible, voulez-vous vraiment supprimer votre compte Groupomania ?</strong>
+                    <Button onClick={deleteProfile} action={"Oui, supprimer mon compte"}/>
                     <Button onClick={() => setDisplayWarning(false)} action={"Non, annuler la demande"}/>
 
                 </div>      

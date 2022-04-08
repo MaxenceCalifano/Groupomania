@@ -26,8 +26,11 @@ exports.signup = (req, res) => {
                 username : req.body.username,
                 email : req.body.email,
                 password : hash,
-                avatarUrl : req.file.filename,
+                //avatarUrl : req.file.filename,
               });
+              if (req.file !== undefined) {
+                user.avatarUrl = req.file.filename;
+              }
               User.create(user, (err,data) => {
                 if (err) 
                   res.status(500).send({

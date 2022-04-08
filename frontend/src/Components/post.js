@@ -189,19 +189,23 @@ export default function Post(props) {
                                     }
                                 </div>
                                 <hr />
-                                <h3>{props.post.title}</h3>
-                                <p>{props.post.text}</p>
-                                <img className="postImage" alt={`Post de ${props.username}`} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
-                                <div className="socialDetails">
-                                    <span className="numberOfLikes">
-                                        <span className="numberOfLikes--circle">
-                                            <FontAwesomeIcon className="numberOfLikes--thumb" icon={faThumbsUp} />
+
+                                <div className="postContent">
+                                    <h3>{props.post.title}</h3>
+                                    <p>{props.post.text}</p>
+                                    <img className="postImage" alt={`Post de ${props.username}`} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
+                                    <div className="socialDetails">
+                                        <span className="numberOfLikes">
+                                            <span className="numberOfLikes--circle">
+                                                <FontAwesomeIcon className="numberOfLikes--thumb" icon={faThumbsUp} />
+                                            </span>
+                                            {numberOfLikes}
                                         </span>
-                                        {numberOfLikes}
-                                    </span>
-                                    <p className="comments" onClick={() => setIsFolded(!isFolded)}>
-                                        {comments.length}{commentText}</p>
+                                        <p className="comments" onClick={() => setIsFolded(!isFolded)}>
+                                            {comments.length}{commentText}</p>
+                                    </div>
                                 </div>
+                                
                             </div>
                     
                 </div >
