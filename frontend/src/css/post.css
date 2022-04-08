@@ -1,18 +1,21 @@
 .post {
-    box-shadow: 4px 2px 12px 0px rgba(0,0,0,0.57);
+    box-shadow: 4px 2px 12px 0px rgba(0, 0, 0, 0.57);
     border-radius: 9px;
     padding: 1rem;
     margin: 1rem 0;
 }
+
 .postHeader {
     display: flex;
     justify-content: space-between;
 }
+
 .postOwner {
     display: flex;
     align-items: flex-start;
     gap: 10px;
 }
+
 .postOwner p {
     margin-top: 0;
     font-weight: bold;
@@ -22,14 +25,17 @@
     margin: auto;
     height: 50vh;
 }
+
 .comment {
     background-color: rgb(213, 213, 213);
 
 }
+
 .numberOfLikes {
     display: flex;
     align-items: center;
 }
+
 .numberOfLikes--circle {
     border-radius: 50%;
     background-color: #37527C;
@@ -38,6 +44,7 @@
     display: inline-block;
     text-align: center;
     margin-right: 5px;
+    z-index: -1;
 }
 
 .numberOfLikes--thumb {
@@ -46,10 +53,12 @@
     position: relative;
     top: 1px;
 }
+
 .socialActions {
     display: flex;
     justify-content: space-around;
 }
+
 .socialActions--button {
     border: none;
     background-color: transparent;
@@ -57,14 +66,17 @@
     padding: 10px;
     border-radius: 5px;
 }
+
 .socialActions--icons {
     margin: 0 10px;
     color: #37527C;
     height: 20px;
 }
+
 .socialActions--button:hover {
     background-color: #d9e0eb;
 }
+
 .socialDetails {
     display: flex;
     justify-content: space-between;
@@ -91,6 +103,7 @@
     cursor: pointer;
     color: #fff;
 }
+
 .commentInput--button:hover {
     background-color: #fff;
     color: #37527C;

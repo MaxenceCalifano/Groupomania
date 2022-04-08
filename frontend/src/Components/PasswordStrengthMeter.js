@@ -28,7 +28,7 @@ export default function PasswordStrengthMeter(props) {
             <label>
                 <strong>Force du mot de passe:</strong> {createPasswordLabel(testedPassword)}
             </label>
-            <progress className={`password-strength-meter-progress strength-${createPasswordLabel(testedPassword)}`}
+            <progress className={`password-strength-meter-progress strength-${testedPassword.score}`}
                         value={testedPassword.score} max="4" />
             
             

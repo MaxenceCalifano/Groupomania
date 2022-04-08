@@ -174,15 +174,6 @@ export default function Post(props) {
                                 <PostModale style={{"margin-top": "30px"}} getFile={getFile} toogleEditMode={toogleEditMode} 
                                     image={image} setTitle={setTitle} setText={setText} post={modifyPost} />
 
-                                {/* <label htmlFor={"title"}>Titre du post</label>
-                                <input name={"title"} type={"text"} defaultValue={"Ecrivez un titre"}
-                                    onChange={(e) => setTitle(e.target.value)} />
-
-                                <label htmlFor={"text"}>Contenu</label>
-                                <input name={"title"} type={"text"} defaultValue={"Ecrivez un post"}
-                                    onChange={(e) => setText(e.target.value)} />
-
-                                <input type={"submit"} value={"Valider"} onClick={modifyPost} /> */}
                             </div>
                             :""}
                             <div>
@@ -200,7 +191,7 @@ export default function Post(props) {
                                 <hr />
                                 <h3>{props.post.title}</h3>
                                 <p>{props.post.text}</p>
-                                <img className="postImage" alt={props.post.mediaUrl} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
+                                <img className="postImage" alt={`Post de ${props.username}`} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
                                 <div className="socialDetails">
                                     <span className="numberOfLikes">
                                         <span className="numberOfLikes--circle">

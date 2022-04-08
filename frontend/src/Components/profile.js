@@ -25,7 +25,7 @@ function Profile(props) {
     
 
     const modifyProfile = () => {
-        fetch(`http://localhost:3000/api/auth/private/${props.username}`, {
+        fetch(`http://localhost:3000/api/auth/${props.username}`, {
             method: "PUT",
             credentials: "include",
             body: formData,
