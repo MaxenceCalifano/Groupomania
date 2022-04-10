@@ -22,7 +22,7 @@ exports.signup = (req, res) => {
         .hash(req.body.password, 10)
         .then( hash => {
             const user = new User({
-                uuid : uuidv4(),
+                //uuid : uuidv4(),
                 username : req.body.username,
                 email : req.body.email,
                 password : hash,
@@ -61,7 +61,7 @@ exports.signup = (req, res) => {
                 if(!comparedPassword) {
                     return res.status(401).json({error: "mot de passe erroné"});  
                 }
-                const token = jwt.sign({userId : result[0].uuid}, "token",
+                const token = jwt.sign({userId : result[0].id}, "token",
                     { expiresIn: "72h" });
 
                 res.cookie("access_token", token, {

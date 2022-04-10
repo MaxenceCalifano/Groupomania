@@ -4,7 +4,7 @@ const sql = require("./db");
 
 const Post = function(post) {
   this.username = post.username,
-  this.uuid = post.uuid,
+  //this.uuid = post.uuid,
   this.userId = post.userId,
   this.title = post.title;
   this.text = post.text;
@@ -20,7 +20,7 @@ Post.create = (newPost, result) => {
     }
     result(null, {
       username: newPost.username,
-      uuid: newPost.uuid,
+      //id: newPost.uuid,
       title: newPost.title,
       text: newPost.text
     });
@@ -28,7 +28,7 @@ Post.create = (newPost, result) => {
 }
 
 Post.modifyPost = (postModifications, result) => {
-  sql.query(`UPDATE posts SET ? WHERE uuid = "${postModifications.uuid}"`, 
+  sql.query(`UPDATE posts SET ? WHERE id = "${postModifications.id}"`, 
     postModifications, (err, res) => {
       if (err) {
         console.log("error: ", err);

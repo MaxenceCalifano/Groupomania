@@ -6,7 +6,7 @@ const sql = require("../models/db");
 
 
 exports.newPost = (req, res) => {
-    sql.query(`SELECT * FROM users WHERE uuid = "${req.userId}"`, (err, resp) => {
+    sql.query(`SELECT * FROM users WHERE id = "${req.userId}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -14,7 +14,7 @@ exports.newPost = (req, res) => {
           }  
 
         const post = new Post({
-            uuid : uuidv4(),
+           // uuid : uuidv4(),
             username : resp[0].username,
             userId : jwt.verify(req.cookies.access_token, "token",).userId,
             title: req.body.title,
@@ -35,7 +35,7 @@ exports.newPost = (req, res) => {
         })
 };
 
-exports.getAllPosts = (req, res) => {
+exports.getAllPosts = (req,res) => {
     sql.query("SELECT * FROM posts", (err, resp) => {
         if (err) {
             console.log("error: ", err);
@@ -49,20 +49,21 @@ exports.getAllPosts = (req, res) => {
 
 exports.modifyPost = (req, res) => {
 
-    sql.query(`SELECT * FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+    sql.query(`SELECT * FROM posts WHERE id = "${req.body.id}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
           }
        
-          if(req.userId !==resp[0].userId) { //Compare id in the request with id of the post 
+          if(req.userId != resp[0].userId) { //Compare id in the request with id of the post 
+            console.log(req.userId, resp[0].userId)
             res.status(401).json({
                 message: "You're not allowed to modify this post"
             })
         } else {
             const postModifications = {
-                uuid: req.body.uuid,
+                id: req.body.id,
                 title: req.body.title,
                 text: req.body.text,
             }
@@ -84,19 +85,19 @@ exports.modifyPost = (req, res) => {
 
 exports.deletePost = (req, res) => {
     // First check if the request comes from the post owner
-    sql.query(`SELECT * FROM posts WHERE uuid = "${req.body.uuid}"`, (err, resp) => {
+    sql.query(`SELECT * FROM posts WHERE id = "${req.body.id}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
           }
           console.log(resp)
-          if(req.userId !==resp[0].userId) {
+          if(req.userId != resp[0].userId) {
             res.status(401).json({
                 message: "You're not allowed to delete this post"
             })
         } else {
-            sql.query(`DELETE FROM posts WHERE uuid = "${req.body.uuid}"`, (err) => {
+            sql.query(`DELETE FROM posts WHERE id = "${req.body.id}"`, (err) => {
                 if (err) {
                     console.log("error: ", err);
                     result(err, null);

@@ -59,13 +59,14 @@ export default function Post(props) {
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                uuid: props.post.uuid,
+                id: props.post.id,
             }),
         })
         props.getAllPosts()
     }
+    
     let formData = new FormData();
-    formData.append('uuid', props.post.uuid);
+    formData.append('id', props.post.id);
     formData.append('title', title);
     formData.append('text', text);
     formData.append('image', image.data);

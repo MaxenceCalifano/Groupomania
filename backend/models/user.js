@@ -4,7 +4,7 @@ const sql = require("./db");
 //constructeur
 
 const User = function(user) {
-  this.uuid = user.uuid,
+  //this.uuid = user.uuid,
   this.username = user.username;
   this.email = user.email;
   this.password = user.password;
