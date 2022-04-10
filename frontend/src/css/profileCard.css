@@ -8,15 +8,11 @@
     color: #fff;
 }
 
-.profile p {
-    margin: 0 5px;
-}
-
-.profile a {
+.profileCard a {
     text-decoration: none;
     color: #fff;
 }
 
-.profile a:hover {
+.profileCard a:hover {
     text-decoration: underline;
 }

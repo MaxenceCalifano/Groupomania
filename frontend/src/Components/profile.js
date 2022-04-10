@@ -107,6 +107,9 @@ function Profile(props) {
             <div>
                 {isInEditMode ?
             <div className="editProfile">
+
+                <p className="title">Modifier votre Profil : </p>
+
                 <label htmlFor="username">Modifier votre pseudo</label>
                 <input placeholder={props.username} onChange={(e) => setUsername(e.target.value)} type="text"></input>
 

@@ -26,3 +26,12 @@ button {
     font-size: large;
     font-weight: bold;
 }
+
+.editProfile input[type="text"],
+.editProfile input[type="password"] {
+    margin-bottom: 20px;
+    border: 1px solid #d9e0eb;
+    border-radius: 5px;
+    background-color: #f1f7ff;
+    width: 30%;
+}
