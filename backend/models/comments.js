@@ -2,8 +2,6 @@
 const sql = require("./db");
 
 const Comment = function(comment) {
-  this.uuid = comment.uuid,
-  this.username = comment.username
   this.userId = comment.userId,
   this.text = comment.text;
   this.postId = comment.postId;
@@ -22,7 +20,7 @@ Comment.create = (newComment, result) => {
 }
 
 Comment.modifyComment = (commentModifications, result) => {
-  sql.query(`UPDATE comments SET ? WHERE uuid = "${commentModifications.uuid}"`, 
+  sql.query(`UPDATE comments SET ? WHERE id = "${commentModifications.id}"`, 
     commentModifications, (err, res) => {
       if (err) {
         console.log("error: ", err);

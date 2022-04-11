@@ -6,7 +6,6 @@ const Like = require("../models/like");
 
 exports.likeUnlike = (req, res) => {
 
-    // SELECT * FROM comments WHERE username = 'maxence'AND postID = '58f5fde0-c65a-4e20-96d0-8538e6ba53fb';
     sql.query(`SELECT * FROM likes WHERE postId="${req.body.postId}" AND userID = "${req.userId}"`, (err, resp) => {
         if (err) {
             console.log("error: ", err);

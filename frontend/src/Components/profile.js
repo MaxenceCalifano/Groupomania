@@ -70,7 +70,6 @@ function Profile(props) {
             })
                 .then( res => res.json())
                 .then(value => {
-                    
                         setavatar(value.result.avatarUrl)
                         setEmail(value.result.email)
                     

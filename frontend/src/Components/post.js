@@ -59,14 +59,14 @@ export default function Post(props) {
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                id: props.post.id,
+                id: props.post.postID,
             }),
         })
         props.getAllPosts()
     }
     
     let formData = new FormData();
-    formData.append('id', props.post.id);
+    formData.append('id', props.post.postID);
     formData.append('title', title);
     formData.append('text', text);
     formData.append('image', image.data);
@@ -85,19 +85,19 @@ export default function Post(props) {
 
     }
     const likeUnlike = () => {
-        fetch(`http://localhost:3000/api/likes/${props.post.uuid}`, {
+        fetch(`http://localhost:3000/api/likes/${props.post.postID}`, {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                postId: props.post.uuid,
+                postId: props.post.postID,
             }),
         })
             .then(getNumberOfLikes)
     }
 
     const getNumberOfLikes = () => {
-        fetch(`http://localhost:3000/api/likes/${props.post.uuid}`, {
+        fetch(`http://localhost:3000/api/likes/${props.post.postID}`, {
             credentials: "include",
         })
             .then(res => res.json())
@@ -106,7 +106,7 @@ export default function Post(props) {
     //Comments
 
     const getAllComments = () => {
-        fetch(`http://localhost:3000/api/comments/${props.post.uuid}`, {
+        fetch(`http://localhost:3000/api/comments/${props.post.postID}`, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -130,12 +130,12 @@ export default function Post(props) {
     }
 
     const postComment = () => {
-        fetch(`http://localhost:3000/api/comments/${props.post.uuid}`, {
+        fetch(`http://localhost:3000/api/comments/${props.post.postID}`, {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                postId: props.post.uuid,
+                postId: props.post.postID,
                 text: comment,
             }),
         })
@@ -231,7 +231,7 @@ export default function Post(props) {
                     </div>
                     : ""
             }
-                <Comments username={props.username} postId={props.post.uuid} isFolded={isFolded} comment={comment} comments={comments} getAllComments={getAllComments} />
+                <Comments username={props.username} postId={props.post.id} isFolded={isFolded} comment={comment} comments={comments} getAllComments={getAllComments} />
         </div>
     );
 }

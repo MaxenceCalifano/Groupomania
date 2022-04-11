@@ -95,7 +95,7 @@ exports.getUser = (req, res) => {
 }
 
 exports.getPrivateUserInfos = (req, res) => {
-  sql.query(`SELECT * FROM users WHERE uuid = "${req.userId}"`, (err, result) => {
+  sql.query(`SELECT * FROM users WHERE id = "${req.userId}"`, (err, result) => {
        if (err) 
          res.status(500).send({
          message:
@@ -150,14 +150,14 @@ exports.modifyUser = (req, res) => {
         bcrypt.hash(req.body.password, 10)
           .then(hash => {
             const userModifications = {
-              uuid: req.userId,
+              id: req.userId,
               password: hash,
            } 
            checkAndSendUserModifications(req.body, userModifications)
       })
       } else {
         const userModifications = {
-          uuid: req.userId,
+          id: req.userId,
        } 
        checkAndSendUserModifications(req.body, userModifications)
       }
@@ -165,7 +165,7 @@ exports.modifyUser = (req, res) => {
 
 exports.deleteUser = (req, res) => {
 
-    sql.query(`DELETE FROM users WHERE uuid = "${req.userId}"`, (err) => {
+    sql.query(`DELETE FROM users WHERE id = "${req.userId}"`, (err) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

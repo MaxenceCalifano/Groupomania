@@ -3,8 +3,6 @@ const sql = require("./db");
 //constructeur
 
 const Post = function(post) {
-  this.username = post.username,
-  //this.uuid = post.uuid,
   this.userId = post.userId,
   this.title = post.title;
   this.text = post.text;
@@ -19,7 +17,7 @@ Post.create = (newPost, result) => {
       return;
     }
     result(null, {
-      username: newPost.username,
+      /* username: newPost.username, */
       //id: newPost.uuid,
       title: newPost.title,
       text: newPost.text

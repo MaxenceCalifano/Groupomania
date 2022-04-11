@@ -38,7 +38,7 @@ export default function Comment(props) {
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                uuid: props.comment.uuid,
+                id: props.comment.commentId,
                 text: comment,
             }),
         })
@@ -55,7 +55,7 @@ export default function Comment(props) {
             credentials: "include",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                uuid: props.comment.uuid,
+                id: props.comment.commentId,
             }),
         })
         .then(()=> {

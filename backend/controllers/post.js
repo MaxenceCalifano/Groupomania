@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { v4: uuidv4 } = require('uuid');
+
 
 const Post = require("../models/post")
 const sql = require("../models/db");
@@ -14,8 +14,6 @@ exports.newPost = (req, res) => {
           }  
 
         const post = new Post({
-           // uuid : uuidv4(),
-            username : resp[0].username,
             userId : jwt.verify(req.cookies.access_token, "token",).userId,
             title: req.body.title,
             text: req.body.text,
@@ -36,13 +34,12 @@ exports.newPost = (req, res) => {
 };
 
 exports.getAllPosts = (req,res) => {
-    sql.query("SELECT * FROM posts", (err, resp) => {
+    sql.query("SELECT *, p.id AS postID FROM posts p JOIN users ON p.userID = users.id", (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
           }
-         // console.log(resp)
           res.status(200).json({posts:resp})
         });
 };
@@ -56,8 +53,7 @@ exports.modifyPost = (req, res) => {
             return;
           }
        
-          if(req.userId != resp[0].userId) { //Compare id in the request with id of the post 
-            console.log(req.userId, resp[0].userId)
+          if(req.userID != resp[0].userId) { //Compare id in the request with id of the post 
             res.status(401).json({
                 message: "You're not allowed to modify this post"
             })
@@ -91,8 +87,7 @@ exports.deletePost = (req, res) => {
             result(err, null);
             return;
           }
-          console.log(resp)
-          if(req.userId != resp[0].userId) {
+          if(req.userID != resp[0].userId) {
             res.status(401).json({
                 message: "You're not allowed to delete this post"
             })

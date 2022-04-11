@@ -38,7 +38,7 @@ User.findOne = (email, result) => {
 }
 
 User.modifyUser = (userModifications, result) => {
-  sql.query(`UPDATE users SET ? WHERE uuid = "${userModifications.uuid}"`, 
+  sql.query(`UPDATE users SET ? WHERE id = "${userModifications.id}"`, 
   userModifications, (err, res) => {
     if (err) {
       console.log("error: ", err);
