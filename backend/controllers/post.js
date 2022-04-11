@@ -92,6 +92,7 @@ exports.deletePost = (req, res) => {
                 message: "You're not allowed to delete this post"
             })
         } else {
+          // Delete posts comments and likes
           sql.query(`DELETE FROM comments WHERE postId = "${req.body.id}"`, (err) => {
             if (err) {
                 console.log("error: ", err);
@@ -108,6 +109,8 @@ exports.deletePost = (req, res) => {
                 }
               //  res.status(200).json({message: "likes supprimé"})
               });
+
+            //then delete the posts
             sql.query(`DELETE FROM posts WHERE id = "${req.body.id}"`, (err) => {
                 if (err) {
                     console.log("error: ", err);

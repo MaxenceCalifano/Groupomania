@@ -165,6 +165,30 @@ exports.modifyUser = (req, res) => {
 
 exports.deleteUser = (req, res) => {
 
+  // Delete all data associated with the user
+  sql.query(`DELETE FROM likes WHERE userId = "${req.userId}"`, (err) => {
+    if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+    });
+    sql.query(`DELETE FROM comments WHERE userId = "${req.userId}"`, (err) => {
+      if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        }
+      });
+      sql.query(`DELETE FROM posts WHERE userID = "${req.userId}"`, (err) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+          }
+        });
+
+    // Then delete the user
     sql.query(`DELETE FROM users WHERE id = "${req.userId}"`, (err) => {
         if (err) {
             console.log("error: ", err);
