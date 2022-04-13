@@ -7,6 +7,7 @@ export default function NewPost(props) {
 
     const [title, setTitle] = useState();
     const [text, setText] = useState();
+    const [caption, setCaption] = useState();
     const [image, setImage] = useState({preview:"", data:""});
 
     const [isInEditMode, setEditMode] = useState(false);
@@ -22,6 +23,7 @@ export default function NewPost(props) {
     formData.append('title', title);
     formData.append('text', text);
     formData.append('image', image.data);
+    formData.append('caption', caption);
 
     const post = () => {
         fetch("http://localhost:3000/api/posts", {
@@ -55,7 +57,9 @@ export default function NewPost(props) {
             isInEditMode ?
             <div>
                 <div className="modale_background_overlay"></div>
-                <PostModale getFile={getFile} toogleEditMode={toogleEditMode} image={image} setTitle={setTitle} setText={setText} post={post} />
+                <PostModale getFile={getFile} toogleEditMode={toogleEditMode}
+                            image={image} setTitle={setTitle} setText={setText} 
+                            setCaption={setCaption} post={post} />
             </div>
             : ""
         }

@@ -8,21 +8,22 @@ export default function PostModale(props) {
                 <div className="newPost-input createNewPost">
                     <div className="createNewPost-header">
                         <p>Créer un post</p>
-                        <Button style={{border: "none", color:"#282828"}} onClick={props.toogleEditMode} action="X"/>
+                    <Button style={{border: "none", color:"#282828", textAlign: "end"}} onClick={props.toogleEditMode} action="X"/>
                     </div>    
 
                     <div className="postContent">
                         <input autoFocus className="postTitle" name={"title"} type={"text"} placeholder={"Donnez un titre à votre post"}
-                        onChange={ (e) => props.setTitle(e.target.value)}></input>
+                       defaultValue={props.title} onChange={ (e) => props.setTitle(e.target.value)}></input>
 
-                        <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" className="postText" name="postText"
+                        <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" defaultValue={props.text} className="postText" name="postText"
                         rows={10} onChange={ (e) => props.setText(e.target.value)}></textarea>
 
                         <input className="imageInput" type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg"
                         onChange={props.getFile} />
-                        {props.image.preview !=="" ? <img src={props.image.preview} alt="avatar" width='100' height='auto'/>
-                        : ""    
-                    }
+                        {props.image.preview !==""
+                            ? <img src={props.image.preview} alt="avatar" width='100' height='auto'/>
+                            : "" }
+                        <input type="text" placeholder={"Décrivez l'image en quelque mots"} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>    
                     </div>
 
                     <Button onClick={props.post} action="Poster" style={{color:"#0B5E9E"}} />

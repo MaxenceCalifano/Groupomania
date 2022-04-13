@@ -22,6 +22,8 @@ export default function Post(props) {
     const [showCommentInput, setShowCommentInput] = useState(false);
     const [avatar, setavatar] = useState();
     const [image, setImage] = useState({preview:"", data:""});
+    const [caption, setCaption] = useState();
+
 
    
 
@@ -69,6 +71,7 @@ export default function Post(props) {
     formData.append('id', props.post.postID);
     formData.append('title', title);
     formData.append('text', text);
+    formData.append('caption', caption);
     formData.append('image', image.data);
 
     const modifyPost = () => {
@@ -173,7 +176,7 @@ export default function Post(props) {
                             <div>
                                 <div className="modale_background_overlay" style={{"top": "auto", "marginTop": "-300px"}}></div>
                                 <PostModale style={{"margin-top": "30px"}} getFile={getFile} toogleEditMode={toogleEditMode} 
-                                    image={image} setTitle={setTitle} setText={setText} post={modifyPost} />
+                                    image={image} setTitle={setTitle} text={props.post.text} title={props.post.title} setText={setText} post={modifyPost} setCaption={setCaption}/>
 
                             </div>
                             :""}
@@ -194,7 +197,10 @@ export default function Post(props) {
                                 <div className="postContent">
                                     <h3>{props.post.title}</h3>
                                     <p>{props.post.text}</p>
-                                    <img className="postImage" alt={`Post de ${props.username}`} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
+                                    {props.post.mediaUrl != null ?
+                                    <img className="postImage" alt={props.post.caption} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
+                                    :""
+                                }
                                     <div className="socialDetails">
                                         <span className="numberOfLikes">
                                             <span className="numberOfLikes--circle">

@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import '../css/homePageform.css';
-import Button from "./button";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
-
+import Button from "./button";
 
 export default function SignUp() {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setpassword] = useState("");
+    const [repeatedPassword, setRepetedPassword] = useState();
     const [image, setImage] = useState({preview:"", data:""});
     const [message, setMessage] = useState();
+
+    const [passwordDifferenceMessage, setPasswordDifferenceMessage] = useState();
 
     const getFile = (e) => {
         const img = {
@@ -19,6 +21,13 @@ export default function SignUp() {
         setImage(img);
     }
     
+    const checkPasswords = () => {
+        if(password !== repeatedPassword) {
+            setPasswordDifferenceMessage("Les mots de passe ne sont pas identiques");
+        } else {
+            setPasswordDifferenceMessage("")
+        }
+    }
     const signUp = (e) =>  {
         e.preventDefault();
 
@@ -49,14 +58,20 @@ export default function SignUp() {
             <h1>S'inscrire</h1>
                 <form>
                     <label htmlFor={"username"}>Entrez un nom d'utilisateur</label>
-                    <input className="input" type={"text"} name={"username"} onChange={(e) => setUsername(e.target.value)} ></input>
+                    <input required className="input" type={"text"} name={"username"} onChange={(e) => setUsername(e.target.value)} ></input>
 
                     <label htmlFor={"email"}>Entrez votre adresse email</label>
-                    <input className="input" type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
+                    <input required className="input" type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
                     
                     <label htmlFor={"password"}>Entrez votre mot de passe</label>
-                    <input className="input" type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
+                    <input required className="input" type={"password"} name={"password"}  onChange={(e) => setpassword(e.target.value)} onBlur={checkPasswords}></input>
+                    <label htmlFor={"repeatedPassword"}>Répétez le mot de passe</label>
+                    <input  required className="input" type={"password"} name={"repeatedPassword"} onChange={(e) => setRepetedPassword(e.target.value)} onBlur={checkPasswords} ></input>
+                    
+                    <p className="passwordWarning">{passwordDifferenceMessage}</p>
+                    
                     <PasswordStrengthMeter password={password} />
+
 
                     <label htmlFor={"avatar"}>Chargez une photo de profile</label>
 

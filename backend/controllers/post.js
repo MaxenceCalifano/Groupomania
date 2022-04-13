@@ -17,6 +17,7 @@ exports.newPost = (req, res) => {
             userId : jwt.verify(req.cookies.access_token, "token",).userId,
             title: req.body.title,
             text: req.body.text,
+            caption: req.body.caption,
         })
         //check if post has no media
         if (req.file !== undefined) {
@@ -62,6 +63,7 @@ exports.modifyPost = (req, res) => {
                 id: req.body.id,
                 title: req.body.title,
                 text: req.body.text,
+                caption: req.body.caption,
             }
             //check if post has media or not
             if (req.file !== undefined) {

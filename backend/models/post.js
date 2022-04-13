@@ -7,6 +7,7 @@ const Post = function(post) {
   this.title = post.title;
   this.text = post.text;
   this.mediaUrl = post.mediaUrl;
+  this.caption = post.caption;
 }
 
 Post.create = (newPost, result) => {

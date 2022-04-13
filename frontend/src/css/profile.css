@@ -7,10 +7,6 @@
     flex-direction: column;
 }
 
-button {
-    width: 20%;
-}
-
 .deleteButton {
     background-color: red;
     border-color: red;
