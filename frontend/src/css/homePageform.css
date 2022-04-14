@@ -66,10 +66,20 @@ form>* {
   font-weight: bold;
 }
 
-form input:required {
-  border: 1px solid black;
+form input {
+  border: 1px solid #d9e0eb;
 }
 
 form input:focus:invalid {
   border: 1px solid red;
+}
+
+.inputWithValidation {
+  display: flex;
+  flex-direction: column;
+}
+
+.input--warningMessage {
+  color: red;
+  font-weight: bold;
 }

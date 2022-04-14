@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../css/homePageform.css';
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import Button from "./button";
+import InputWithvalidation from "./inputWithValidation";
 
 export default function SignUp() {
     const [username, setUsername] = useState();
@@ -10,6 +11,7 @@ export default function SignUp() {
     const [repeatedPassword, setRepetedPassword] = useState();
     const [image, setImage] = useState({preview:"", data:""});
     const [message, setMessage] = useState();
+
 
     const [passwordDifferenceMessage, setPasswordDifferenceMessage] = useState();
 
@@ -57,11 +59,25 @@ export default function SignUp() {
         <div>
             <h1>S'inscrire</h1>
                 <form>
-                    <label htmlFor={"username"}>Entrez un nom d'utilisateur</label>
-                    <input required className="input" type={"text"} name={"username"} onChange={(e) => setUsername(e.target.value)} ></input>
+                <InputWithvalidation label="username" 
+                    checks={["valueMissing"]} 
+                    inputProps={{type:"text", required: true}}
+                    labelText="Entrez un nom d'utilisateur"
+                    id="username"
+                    errorMessage="Veuillez choisir un nom d'utilisateur"
+                    setValue={setUsername}
+                    />
+                
+                <InputWithvalidation label="e-mail" 
+                    checks={["typeMismatch", "valueMissing"]} 
+                    inputProps={{type:"email" , required: true}}
+                    labelText="Entrez votre adresse email"
+                    id="email"
+                    errorMessage="Veuillez renseigner une adresse e-mail valide"
+                    setValue={setEmail}
+                    />
 
-                    <label htmlFor={"email"}>Entrez votre adresse email</label>
-                    <input required className="input" type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>
+                   
                     
                     <label htmlFor={"password"}>Entrez votre mot de passe</label>
                     <input required className="input" type={"password"} name={"password"}  onChange={(e) => setpassword(e.target.value)} onBlur={checkPasswords}></input>
@@ -71,9 +87,9 @@ export default function SignUp() {
                     <p className="passwordWarning">{passwordDifferenceMessage}</p>
                     
                     <PasswordStrengthMeter password={password} />
+                    
 
-
-                    <label htmlFor={"avatar"}>Chargez une photo de profile</label>
+                    <label htmlFor={"avatar"}>Chargez une photo de profil</label>
 
                     <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg"
                     onChange={getFile} ></input>

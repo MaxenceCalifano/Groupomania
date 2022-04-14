@@ -23,7 +23,7 @@ export default function PostModale(props) {
                         {props.image.preview !==""
                             ? <img src={props.image.preview} alt="avatar" width='100' height='auto'/>
                             : "" }
-                        <input type="text" placeholder={"Décrivez l'image en quelque mots"} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>    
+                        <input type="text" placeholder={"Décrivez l'image en quelque mots"} defaultValue={props.caption} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>    
                     </div>
 
                     <Button onClick={props.post} action="Poster" style={{color:"#0B5E9E"}} />
