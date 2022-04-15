@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../css/homePageform.css';
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import Button from "./button";
@@ -11,9 +11,17 @@ export default function SignUp() {
     const [repeatedPassword, setRepetedPassword] = useState();
     const [image, setImage] = useState({preview:"", data:""});
     const [message, setMessage] = useState();
-
-
     const [passwordDifferenceMessage, setPasswordDifferenceMessage] = useState();
+    const [validationIsDisabled, setValidationIsDisabled] = useState(true);
+
+    const [inputsChecks, setInputsChecks] = useState({
+        username: false,
+        email: false,
+        password: false,
+        repeatedPassword: false,
+    });
+
+
 
     const getFile = (e) => {
         const img = {
@@ -55,34 +63,73 @@ export default function SignUp() {
         .catch((err) => console.error(err));
     }
    
+    useEffect( ()=>{
+        console.log(Object.values(inputsChecks).every(Boolean))
+      
+       if(Object.values(inputsChecks).every(Boolean)){
+            setValidationIsDisabled(false);
+       }
+        }     
+    ,[inputsChecks] )
     return(
         <div>
             <h1>S'inscrire</h1>
                 <form>
-                <InputWithvalidation label="username" 
+                <InputWithvalidation 
+                    label="username" 
                     checks={["valueMissing"]} 
                     inputProps={{type:"text", required: true}}
                     labelText="Entrez un nom d'utilisateur"
                     id="username"
                     errorMessage="Veuillez choisir un nom d'utilisateur"
                     setValue={setUsername}
+                    setInputsChecks={setInputsChecks}
+                    inputsChecks = {inputsChecks}
                     />
                 
-                <InputWithvalidation label="e-mail" 
+                <InputWithvalidation 
+                    label="email" 
                     checks={["typeMismatch", "valueMissing"]} 
                     inputProps={{type:"email" , required: true}}
                     labelText="Entrez votre adresse email"
                     id="email"
                     errorMessage="Veuillez renseigner une adresse e-mail valide"
                     setValue={setEmail}
-                    />
+                    setInputsChecks={setInputsChecks}
+                    inputsChecks = {inputsChecks}
+                />
+
+                <InputWithvalidation 
+                    label="password" 
+                    checks={["valueMissing"]} 
+                    inputProps={{type:"password" , required: true}}
+                    labelText="Entrez un mot de passe"
+                    id="password"
+                    errorMessage="Veuillez renseigner un mot de passe"
+                    setValue={setpassword}
+                    setInputsChecks={setInputsChecks}
+                    inputsChecks = {inputsChecks}
+                    checkPasswords= {checkPasswords}
+                />
+                <InputWithvalidation 
+                    label="repeatedPassword" 
+                    checks={["valueMissing"]} 
+                    inputProps={{type:"password" , required: true}}
+                    labelText="Répétez le mot de passe"
+                    id="password"
+                    errorMessage="Veuillez répeter le mot de passe"
+                    setValue={setRepetedPassword}
+                    setInputsChecks={setInputsChecks}
+                    inputsChecks = {inputsChecks}
+                    checkPasswords= {checkPasswords}
+                />
 
                    
                     
-                    <label htmlFor={"password"}>Entrez votre mot de passe</label>
-                    <input required className="input" type={"password"} name={"password"}  onChange={(e) => setpassword(e.target.value)} onBlur={checkPasswords}></input>
-                    <label htmlFor={"repeatedPassword"}>Répétez le mot de passe</label>
-                    <input  required className="input" type={"password"} name={"repeatedPassword"} onChange={(e) => setRepetedPassword(e.target.value)} onBlur={checkPasswords} ></input>
+                   {/*  <label htmlFor={"password"}>Entrez votre mot de passe</label>
+                    <input required className="input" type={"password"} name={"password"}  onChange={(e) => setpassword(e.target.value)} onBlur={checkPasswords}></input> */}
+                   {/*  <label htmlFor={"repeatedPassword"}>Répétez le mot de passe</label>
+                    <input  required className="input" type={"password"} name={"repeatedPassword"} onChange={(e) => setRepetedPassword(e.target.value)} onBlur={checkPasswords} ></input> */}
                     
                     <p className="passwordWarning">{passwordDifferenceMessage}</p>
                     
@@ -96,7 +143,7 @@ export default function SignUp() {
                     {image.preview !=="" ? <img src={image.preview} alt="avatar" width='100' height='auto'/>
                     : ""    
                 }
-                    <Button className={"signupButton"} onClick={signUp} action="Créer un compte"/>
+                    <Button disabled={validationIsDisabled} className={"signupButton"} onClick={signUp} action="Créer un compte"/>
                 </form>
                 <p>{message}</p>
         </div>
