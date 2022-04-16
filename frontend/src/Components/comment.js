@@ -68,7 +68,7 @@ export default function Comment(props) {
         <div className="comment">
             <div className="commentHeader">
             <p className="commentOwner">{props.comment.username}</p>
-            {props.username === props.comment.username ?
+            {props.username === props.comment.username || localStorage.getItem("privilege") === "1" ?
 
                 <OptionsControl modify={toogleEditMode} delete={deleteComment} />
             :""

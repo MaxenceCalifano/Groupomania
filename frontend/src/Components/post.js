@@ -25,8 +25,6 @@ export default function Post(props) {
     const [caption, setCaption] = useState();
 
 
-   
-
     const getFile = (e) => {
         const img = {
             preview: URL.createObjectURL(e.target.files[0]),
@@ -186,7 +184,7 @@ export default function Post(props) {
                                         <Avatar avatar={avatar} altText="avatar de l'auteur(e) du post"/>
                                         <p>{props.post.username}</p>
                                     </div>
-                                    {props.username === props.post.username ?
+                                    {props.username === props.post.username || localStorage.getItem("privilege") === "1" ?
                                     
                                         <OptionsControl modify={toogleEditMode} delete={deletePost}/>
                                         : ""

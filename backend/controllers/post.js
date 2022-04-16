@@ -89,7 +89,43 @@ exports.deletePost = (req, res) => {
             result(err, null);
             return;
           }
-          if(req.userID != resp[0].userId) {
+
+          if (req.userPrivilege == 1 || req.userId == resp[0].userID) {
+            sql.query(`DELETE FROM comments WHERE postId = "${req.body.id}"`, (err) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+              }
+           //   res.status(200).json({message: "commentaires supprimé"})
+            });
+            sql.query(`DELETE FROM likes WHERE postId = "${req.body.id}"`, (err) => {
+              if (err) {
+                  console.log("error: ", err);
+                  result(err, null);
+                  return;
+                }
+              //  res.status(200).json({message: "likes supprimé"})
+              });
+
+            //then delete the posts
+            sql.query(`DELETE FROM posts WHERE id = "${req.body.id}"`, (err) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                    return;
+                  }
+                  res.status(200).json({message: "post supprimé"})
+                });
+          }
+            else {
+               res.status(401).json({
+                    message: "You're not allowed to delete this post"
+                })
+            }         
+        }
+
+          /* if(req.userId != resp[0].userID) {
             res.status(401).json({
                 message: "You're not allowed to delete this post"
             })
@@ -121,7 +157,45 @@ exports.deletePost = (req, res) => {
                   }
                   res.status(200).json({message: "post supprimé"})
                 });
-        }
+        } */
     
-    });
+    );
 }
+
+          /*
+          
+          if (req.userPrivilege == 1 || req.userId == resp[0].userId) {
+            sql.query(`DELETE FROM comments WHERE postId = "${req.body.id}"`, (err) => {
+            if (err) {
+                console.log("error: ", err);
+                result(err, null);
+                return;
+              }
+           //   res.status(200).json({message: "commentaires supprimé"})
+            });
+            sql.query(`DELETE FROM likes WHERE postId = "${req.body.id}"`, (err) => {
+              if (err) {
+                  console.log("error: ", err);
+                  result(err, null);
+                  return;
+                }
+              //  res.status(200).json({message: "likes supprimé"})
+              });
+
+            //then delete the posts
+            sql.query(`DELETE FROM posts WHERE id = "${req.body.id}"`, (err) => {
+                if (err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                    return;
+                  }
+                  res.status(200).json({message: "post supprimé"})
+                });
+          }
+            else {
+               res.status(401).json({
+                    message: "You're not allowed to delete this post"
+                })
+            }         
+        }
+          */

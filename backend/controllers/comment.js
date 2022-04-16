@@ -34,7 +34,6 @@ exports.getAllPostComments = (req, res) => {
             result(err, null);
             return;
           }
-          console.log(resp)
           res.status(200).json({comments:resp})
         });
 }
@@ -75,11 +74,7 @@ exports.deleteComment = (req, res) => {
             result(err, null);
             return;
           }
-          if(req.userId != resp[0].userId) {
-            res.status(401).json({
-                message: "You're not allowed to delete this post"
-            })
-        } else {
+          if (req.userPrivilege == 1 || req.userId == resp[0].userId) {
             sql.query(`DELETE FROM comments WHERE id = "${req.body.id}"`, (err, resp) => {
                 if (err) {
                     console.log("error: ", err);
@@ -88,7 +83,13 @@ exports.deleteComment = (req, res) => {
                   }
                   res.status(200).json({message: "commentaire supprimé"})
                 });
+          }
+            else {
+               res.status(401).json({
+                    message: "You're not allowed to delete this post"
+                })
+            }         
         }
     
-    });
+    );
 }

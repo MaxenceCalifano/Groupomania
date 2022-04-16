@@ -61,13 +61,15 @@ exports.signup = (req, res) => {
                 if(!comparedPassword) {
                     return res.status(401).json({error: "mot de passe erroné"});  
                 }
-                const token = jwt.sign({userId : result[0].id}, "token",
-                    { expiresIn: "72h" });
+                const token = jwt.sign({userId : result[0].id,
+                                        privilege: result[0].privileges},
+                                         "token",
+                                        { expiresIn: "72h" });
 
                 res.cookie("access_token", token, {
                         httpOnly: true,
                         secure: true
-                    }).json({username: result[0].username}).status(200)
+                    }).json({username: result[0].username, privilege: result[0].privileges}).status(200)
             })
         } 
     })

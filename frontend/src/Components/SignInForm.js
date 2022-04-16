@@ -26,6 +26,7 @@ export default function SignInForm(props) {
                     props.setUsername(value.username)
                     props.setIsLoggedIn(true)
                     localStorage.setItem("loggedInUser", value.username)
+                    localStorage.setItem("privilege", value.privilege)
                     navigate("/")
                    })
                 } else {

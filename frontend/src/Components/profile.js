@@ -95,6 +95,7 @@ function Profile(props) {
             props.setIsLoggedIn(false);
             props.setUsername("");
             localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("privilege");
             navigate("/login/signIn");
         })
        }

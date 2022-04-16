@@ -9,8 +9,10 @@ module.exports = (req, res, next) => {
     const token = req.cookies.access_token;
     const decodedToken = jwt.verify(token, "token");
     const userId = decodedToken.userId;
+    const userPrivilege = decodedToken.privilege;
 
     req.userId = userId;
+    req.userPrivilege = userPrivilege;
 
     if (!userId) {
       throw "Invalid user ID";

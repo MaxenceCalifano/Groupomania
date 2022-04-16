@@ -12,6 +12,7 @@ import Profile from './Components/profile';
 
 function App() {
   const [username, setUsername] = useState();
+  const [privilege, setPrivilege] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   // Check if user is loggedin and get his username
