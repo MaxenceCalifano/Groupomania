@@ -117,12 +117,11 @@ exports.deletePost = (req, res) => {
                   }
                   res.status(200).json({message: "post supprimé"})
                 });
-          }
-            else {
-               res.status(401).json({
-                    message: "You're not allowed to delete this post"
-                })
-            }         
+          } else {
+            res.status(401).json({
+                  message: "You're not allowed to delete this post"
+              })
+          }         
         }
 
           /* if(req.userId != resp[0].userID) {

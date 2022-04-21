@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt =  require("jsonwebtoken");
-
-const { v4: uuidv4 } = require('uuid');
+const randToken =  require("rand-token").uid;
+const nodemailer = require("nodemailer");
 const sql = require("../models/db");
 
 
@@ -112,7 +112,96 @@ exports.getPrivateUserInfos = (req, res) => {
        } 
    })
 }
+exports.passwordReset = (req, res) => {
+  sql.query(`SELECT * FROM users WHERE email = "${req.body.email}"`, (err, result) => {
+    if (err) {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while looking for the user."
+      })
+    }
+    else {
+      
+      const token = randToken(16);
+      console.log(token);
 
+      const transporter = nodemailer.createTransport({
+        service: "hotmail",
+        auth: {
+          user: "maxence.califano@outlook.fr",
+          pass: 'Joyjoy1324'
+        }
+      });
+
+      const mailOptions = {
+        from: "maxence.califano@outlook.fr",
+        to: req.body.email,
+        subject: "Réinitialisation de votre mot de passe Groupomania",
+        html: `<p>Voici le lien pour réinitialiser votre mot de passe <a href="http://localhost:3001/reset-password?token=${token}">Lien</a></p>`
+      }
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if(error) {
+          console.log(error)
+        } else {
+          console.log("e-mail envoyé: " + info.response)
+        }
+      })
+      const userModifications = {
+        id : result[0].id,
+        token: token,
+        reinitialisationLink: new Date()
+      }
+      User.modifyUser(userModifications, (err,data) => {
+        if (err) 
+          res.status(500).send({
+          message:
+            err.message || "Some error occurred while modifying the user."
+        });
+       });
+      
+      res.status(200).json({result: "Si votre e-mail correspond à un utilisateur connu un e-mail de réinitialisation vient de vous être envoyé"})
+  }
+})
+}
+
+exports.newPassword = (req, res) => {
+  sql.query(`SELECT * FROM users WHERE token = "${req.params.token}"`, (err, result) => {
+    if (err) 
+      res.status(500).send({
+      message:
+        err.message || "Some error occurred while looking for the user."
+    });
+    else {
+      console.log(result[0])
+        if((new Date() - result[0].reinitialisationLink)/1000/60 >= 60) {
+          res.status(500).send({
+            message: "Le lien de réinitisalisation a expiré"
+          });
+        } else {
+          bcrypt
+          .hash(req.body.password, 10)
+          .then( hash => {
+              const userModifications = {
+                  id : result[0].id,
+                  password : hash,
+                  reinitialisationLink: null,
+                  token: null
+                };
+              User.modifyUser(userModifications, (err,data) => {
+                if (err) 
+                  res.status(500).send({
+                  message:
+                    err.message || "Some error occurred while modifying the user."
+                });
+              });
+              res.status(200).json({message:"Votre mot de passe a bien été mis à jour"})
+          })
+        }
+
+    } 
+})
+}
 exports.modifyUser = (req, res) => {
  
       /*
