@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import zxcvbn from 'zxcvbn';
 import "../css/passwordStrengthMeter.css"
 
@@ -23,6 +23,7 @@ export default function PasswordStrengthMeter(props) {
             return 'Weak';
         }
     }
+    useEffect(() => props.checkSecurity(testedPassword.score))
     return ( 
         <div className="password-strength-meter">
             <label>

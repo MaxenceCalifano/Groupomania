@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import '../css/homePageform.css';
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import Button from "./button";
@@ -12,7 +14,10 @@ export default function SignUp() {
     const [image, setImage] = useState({preview:"", data:""});
     const [message, setMessage] = useState();
     const [passwordDifferenceMessage, setPasswordDifferenceMessage] = useState();
+    const [passwordStrengthMessage, setPasswordStrengthMessage] = useState();
     const [validationIsDisabled, setValidationIsDisabled] = useState(true);
+    const [passwordSecurityLevel, setPasswordSecurityLevel] = useState();
+
 
     const [inputsChecks, setInputsChecks] = useState({
         username: false,
@@ -34,8 +39,12 @@ export default function SignUp() {
     const checkPasswords = () => {
         if(password !== repeatedPassword) {
             setPasswordDifferenceMessage("Les mots de passe ne sont pas identiques");
-        } else {
+        } else if(passwordSecurityLevel < 2) {
+            setPasswordStrengthMessage("Votre mot de passe est trop faible nous vous recommandons d'inclure au moins une majuscule et un caractère spécial")
             setPasswordDifferenceMessage("")
+        } else {
+            setPasswordStrengthMessage("");
+            setPasswordDifferenceMessage("");    
         }
     }
     const signUp = (e) =>  {
@@ -64,9 +73,12 @@ export default function SignUp() {
     }
    
     useEffect( ()=>{
-        console.log(Object.values(inputsChecks).every(Boolean))
-      
-       if(Object.values(inputsChecks).every(Boolean)){
+       
+      //Check if all required inputs are populated
+       if(Object.values(inputsChecks).every(Boolean) && passwordDifferenceMessage === ""){
+           if(passwordSecurityLevel < 2) {
+            setValidationIsDisabled(true);
+           } else
             setValidationIsDisabled(false);
        } else setValidationIsDisabled(true) 
         }     
@@ -124,22 +136,16 @@ export default function SignUp() {
                     checkPasswords= {checkPasswords}
                 />
 
-                   
-                    
-                   {/*  <label htmlFor={"password"}>Entrez votre mot de passe</label>
-                    <input required className="input" type={"password"} name={"password"}  onChange={(e) => setpassword(e.target.value)} onBlur={checkPasswords}></input> */}
-                   {/*  <label htmlFor={"repeatedPassword"}>Répétez le mot de passe</label>
-                    <input  required className="input" type={"password"} name={"repeatedPassword"} onChange={(e) => setRepetedPassword(e.target.value)} onBlur={checkPasswords} ></input> */}
-                    
                     <p className="passwordWarning">{passwordDifferenceMessage}</p>
+                    <p className="passwordWarning">{passwordStrengthMessage}</p>
                     
-                    <PasswordStrengthMeter password={password} />
+                    <PasswordStrengthMeter password={password} checkSecurity={setPasswordSecurityLevel}/>
                     
 
-                    <label htmlFor={"avatar"}>Chargez une photo de profil</label>
+                <label htmlFor={"avatar"}>Chargez une photo de profil</label>
 
-                    <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg"
-                    onChange={getFile} ></input>
+                <input className="fileInput" type={"file"} name={"image"} id="image" accept="image/png, image/jpeg, image/jpg" onChange={getFile}/>
+                <label htmlFor="image"><FontAwesomeIcon icon={faUpload} /> Choisir un fichier</label>
                     {image.preview !=="" ? <img src={image.preview} alt="avatar" width='100' height='auto'/>
                     : ""    
                 }
