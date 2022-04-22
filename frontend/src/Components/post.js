@@ -143,6 +143,7 @@ export default function Post(props) {
             .then(() => {
                 getAllComments();
                 setShowCommentInput(!showCommentInput);
+                setIsFolded(false);
             })
     }
     let commentText = "";

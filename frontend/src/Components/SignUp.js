@@ -68,7 +68,7 @@ export default function SignUp() {
       
        if(Object.values(inputsChecks).every(Boolean)){
             setValidationIsDisabled(false);
-       }
+       } else setValidationIsDisabled(true) 
         }     
     ,[inputsChecks] )
     return(

@@ -6,6 +6,10 @@
     border: 2px solid;
 }
 
+.defaultButton:hover {
+    transition: background-color 250ms;
+}
+
 .defaultButton:disabled,
 .defaultButton:disabled:hover {
     color: grey;

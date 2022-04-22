@@ -19,13 +19,3 @@ header {
     display: flex;
     flex-direction: column;
 }
-
-.logoutButton {
-    color: #37527C;
-}
-
-.logoutButton:hover {
-    background-color: #37527C;
-    color: rgb(255, 255, 255);
-    border: 2px solid #37527C;
-}

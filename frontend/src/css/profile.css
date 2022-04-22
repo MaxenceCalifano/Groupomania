@@ -7,11 +7,47 @@
     flex-direction: column;
 }
 
+.modifyProfileButton {
+    margin: 5px 5px 5px 0px;
+    color: #091f43;
+}
+
+.modifyProfileButton:hover {
+    background-color: #091f43;
+    color: white;
+    border-color: #091f43;
+
+}
+
+.logoutButton {
+    color: #37527C;
+}
+
+.logoutButton:hover {
+    background-color: #37527C;
+    color: rgb(255, 255, 255);
+    border-color: #37527C;
+}
+
 .deleteButton {
     background-color: red;
     border-color: red;
     color: white;
     margin: 30px 0;
+}
+
+.deleteButton:hover {
+    background-color: #d1515a;
+}
+
+.cancelModificationsButton {
+    color: #d1515a;
+}
+
+.cancelModificationsButton:hover {
+    background-color: #d1515a;
+    border-color: #d1515a;
+    color: white;
 }
 
 .deleteWarning {
@@ -30,4 +66,42 @@
     border-radius: 5px;
     background-color: #f1f7ff;
     width: 30%;
+}
+
+.showAvatar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-bold {
+    font-weight: bold;
+}
+
+.fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.fileInput+label {
+    font-weight: 500;
+    background-color: white;
+    color: #091f43;
+    border: 2px solid #091f43;
+    display: inline-block;
+    width: 149px;
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.fileInput:focus+label,
+.fileInput+label:hover {
+    background-color: #091f43;
+    color: white;
+    transition: background-color 250ms;
 }

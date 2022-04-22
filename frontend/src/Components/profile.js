@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
+
+
 import Button from "./button";
 import "../css/profile.css";
 
@@ -72,13 +76,6 @@ function Profile(props) {
                 .then(value => {
                         setavatar(value.result.avatarUrl)
                         setEmail(value.result.email)
-                    
-                    
-                    /* const img = {
-                        preview: URL.createObjectURL(value.result.avatarUrl),
-                        image:""
-                    }
-                    setImage(img);*/
                     } ) 
             
         }, []
@@ -105,26 +102,29 @@ function Profile(props) {
             {userDeletedMessage !== undefined ? <p>{userDeletedMessage}</p>
             :
             <div>
-                {isInEditMode ?
+            {isInEditMode ?
             <div className="editProfile">
 
                 <p className="title">Modifier votre Profil : </p>
 
-                <label htmlFor="username">Modifier votre pseudo</label>
+                <label htmlFor="username">Modifier votre pseudo :</label>
                 <input placeholder={props.username} onChange={(e) => setUsername(e.target.value)} type="text"></input>
 
-                <label htmlFor="email">Modifier votre e-mail</label>
+                <label htmlFor="email">Modifier votre e-mail :</label>
                 <input onChange={(e) => setEmail(e.target.value)} placeholder={email} type="text"></input>
 
-                <label htmlFor="password">Modifier votre mot de passe</label>
+                <label htmlFor="password">Modifier votre mot de passe :</label>
                 <input onChange={(e) => setPassword(e.target.value)} placeholder="*********" type="password" autoComplete="new-password"></input>
+                
+                <p>Changer de photo de profile:</p>
+                <input className="fileInput" type={"file"} name={"image"} id="image" accept="image/png, image/jpeg, image/jpg" onChange={getFile}/>
+                <label htmlFor="image"><FontAwesomeIcon icon={faUpload} /> Choisir un fichier</label>
 
-                <input type={"file"} name={"image"} accept="image/png, image/jpeg, image/jpg" onChange={getFile}/>
                 {image.preview !== "" ? <img src={image.preview} alt="avatar" width='100' height='auto'/> : "" } 
                 
                 <div>
-                    <Button onClick={modifyProfile} action="Valider les modifications"/>
-                    <Button onClick={() => setIsInEditMode(false)} action="Annuler les modifications"/>
+                    <Button className="modifyProfileButton" onClick={modifyProfile} action="Valider les modifications"/>
+                    <Button className="cancelModificationsButton" onClick={() => setIsInEditMode(false)} action="Annuler les modifications"/>
                 </div>
                 
 
@@ -133,13 +133,12 @@ function Profile(props) {
             : // Not in edit mode
             <div>
             <p className="title">Votre Profil : </p>
-            <p>Pseudo : {props.username}</p>   
-            <p>e-mail : {email}</p>
-            <p>********</p>   
-            <span>Photo de profil : </span> {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}
+            <p><span className="profile-bold">Pseudo :</span> {props.username}</p>   
+            <p><span className="profile-bold">e-mail :</span> {email}</p>
+            <span className="showAvatar"><span className="profile-bold">Photo de profil :  </span>{avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}</span>
             
             <div>
-                <Button onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
+                <Button className="modifyProfileButton" onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
                 <Button className="logoutButton" onClick={logout} action={"Se déconnecter"}/>
             </div>
             
