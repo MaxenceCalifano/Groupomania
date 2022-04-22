@@ -5,8 +5,7 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function PostModale(props) {
-
-    console.log(window.scrollY);
+    
     const viewPosition = window.scrollY + 30;
     return (
         <div>

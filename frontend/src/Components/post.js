@@ -33,7 +33,7 @@ export default function Post(props) {
         setImage(img);
     }
     
-    const getUserAvatar = () => {
+ /*    const getUserAvatar = () => {
         fetch(`http://localhost:3000/api/auth/${props.post.username}`, {
             credentials: "include",
         })
@@ -46,7 +46,7 @@ export default function Post(props) {
                         setavatar(URL.createObjectURL(imageBlob))
                     } )
             })
-    };
+    }; */
 
 
     const toogleEditMode = () => {
@@ -61,8 +61,7 @@ export default function Post(props) {
             body: JSON.stringify({
                 id: props.post.postID,
             }),
-        })
-        props.getAllPosts()
+        }).then(() => props.getAllPosts())
     }
     
     let formData = new FormData();
@@ -155,7 +154,7 @@ export default function Post(props) {
     useEffect(() => {
         getNumberOfLikes();
         getAllComments();
-        getUserAvatar();
+        //getUserAvatar();
     },
         //eslint-disable-next-line react-hooks/exhaustive-deps
         [])
@@ -182,7 +181,7 @@ export default function Post(props) {
                             <div>
                                 <div className="postHeader">
                                 <div className="postOwner">
-                                        <Avatar avatar={avatar} altText="avatar de l'auteur(e) du post"/>
+                                        <Avatar avatar={props.post.avatarURL} altText="avatar de l'auteur(e) du post"/>
                                         <p>{props.post.username}</p>
                                     </div>
                                     {props.username === props.post.username || localStorage.getItem("privilege") === "1" ?

@@ -34,7 +34,8 @@ exports.newPost = (req, res) => {
 };
 
 exports.getAllPosts = (req,res) => {
-    sql.query("SELECT *, p.id AS postID FROM posts p JOIN users ON p.userID = users.id", (err, resp) => {
+    //sql.query("SELECT *, p.id AS postID FROM posts p JOIN users ON p.userID = users.id", (err, resp) => {
+    sql.query("SELECT p.title, p.text, p.mediaUrl, p.caption, users.avatarURL, users.username, p.id AS postID FROM posts p JOIN users ON p.userID = users.id", (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

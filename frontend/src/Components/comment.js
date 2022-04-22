@@ -8,9 +8,9 @@ import OptionsControl from "./optionsControl";
 export default function Comment(props) {
     const [comment, setComment] = useState();
     const [isInEditMode, setEditMode] = useState(false);
-    const [avatar, setavatar] = useState();
+  //  const [avatar, setavatar] = useState();
    
-    useEffect(
+/*     useEffect(
         () => {
             const getUserAvatar = () => {
                 fetch(`http://localhost:3000/api/auth/${props.comment.username}`, {
@@ -28,7 +28,7 @@ export default function Comment(props) {
         }, 
     //eslint-disable-next-line react-hooks/exhaustive-deps
     []   
-    )
+    ) */
     function toogleEditMode() {
         setEditMode(!isInEditMode)
     }
@@ -64,7 +64,7 @@ export default function Comment(props) {
     }
     return(
         <div className="commentWrapper">
-            <Avatar avatar={avatar} altText="avatar de l'auteur(e) du commentaire"/>
+            <Avatar avatar={props.comment.avatarUrl} altText="avatar de l'auteur(e) du commentaire"/>
         <div className="comment">
             <div className="commentHeader">
             <p className="commentOwner">{props.comment.username}</p>

@@ -27,7 +27,7 @@ export default function Posts(props) {
           .then(value => {
               if(value.posts !== undefined) {
                 setPosts(value.posts)
-
+                console.log("getAllPosts")
               } else {
                 navigate("/login/signIn");
               }
