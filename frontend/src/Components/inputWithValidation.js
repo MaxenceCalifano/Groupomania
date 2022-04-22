@@ -19,7 +19,7 @@ function InputWithvalidation(props) {
         
         setIsValid(checksPassed);
         const inputsChecks = props.inputsChecks;
-        const label = props.label
+        //const label = props.label
         inputsChecks[props.label] = checksPassed
         props.setInputsChecks({...inputsChecks, label: checksPassed})
     }

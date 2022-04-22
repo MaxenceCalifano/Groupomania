@@ -9,6 +9,8 @@ import Login from './Components/Login';
 
 import { useState, useEffect } from 'react';
 import Profile from './Components/profile';
+import PasswordReset from './Components/passwordReset';
+import NewPassword from './Components/NewPassword';
 
 function App() {
   const [username, setUsername] = useState();
@@ -36,7 +38,8 @@ function App() {
             <Route path="signup" element={<SignUp/>}/>
           </Route>
 
-
+          <Route path='password-reset' element={<PasswordReset/>}/>
+          <Route path="reset-password/:token" element={<NewPassword/>}/>
          
           {/*  En cas d'erreur d'URL */}
           <Route path='*' element={ 

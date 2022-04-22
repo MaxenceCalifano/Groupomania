@@ -137,7 +137,7 @@ exports.passwordReset = (req, res) => {
         from: "maxence.califano@outlook.fr",
         to: req.body.email,
         subject: "Réinitialisation de votre mot de passe Groupomania",
-        html: `<p>Voici le lien pour réinitialiser votre mot de passe <a href="http://localhost:3001/reset-password?token=${token}">Lien</a></p>`
+        html: `<p>Voici le lien pour réinitialiser votre mot de passe <a href="http://localhost:3001/reset-password/${token}">Lien</a></p>`
       }
 
       transporter.sendMail(mailOptions, (error, info) => {
