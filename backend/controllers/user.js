@@ -128,6 +128,7 @@ exports.passwordReset = (req, res) => {
 
       const transporter = nodemailer.createTransport({
         service: "hotmail",
+        secure: false,
         auth: {
           user: "maxence.califano@outlook.fr",
           pass: 'Joyjoy1324'

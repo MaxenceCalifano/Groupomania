@@ -8,27 +8,7 @@ import OptionsControl from "./optionsControl";
 export default function Comment(props) {
     const [comment, setComment] = useState();
     const [isInEditMode, setEditMode] = useState(false);
-  //  const [avatar, setavatar] = useState();
-   
-/*     useEffect(
-        () => {
-            const getUserAvatar = () => {
-                fetch(`http://localhost:3000/api/auth/${props.comment.username}`, {
-                credentials: "include",
-            })
-                .then( res => res.json())
-                .then(value => { 
-                    console.log(value)
-                    fetch(`http://localhost:3000/images/${value.avatarUrl}`)
-                    .then( res => res.blob())
-                    .then( imageBlob =>  setavatar(URL.createObjectURL(imageBlob)))
-                    } )
-            };
-            getUserAvatar()
-        }, 
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-    []   
-    ) */
+
     function toogleEditMode() {
         setEditMode(!isInEditMode)
     }
@@ -84,12 +64,11 @@ export default function Comment(props) {
 
                         isInEditMode ?
 
-                        <div>
-                            
-                        <input name={"title"} type={"text"} placeholder={"Modifiez votre commentaire"}
-                        onChange={(e) => setComment(e.target.value)} />
+                        <div className="commentModifications">   
+                            <input className="modifyCommentInput" name={"title"} type={"text"} defaultValue={props.comment.text} placeholder={"Modifiez votre commentaire"}
+                            onChange={(e) => setComment(e.target.value)} />
 
-                        <input type={"submit"} value={"Valider"} onClick={() => modifyComment()} />
+                            <input className="commentInput--button" type={"submit"} value={"Valider"} onClick={() => modifyComment()} />
                         </div>
                         : ""
                         : "" /*If not owner nothing is diplayed */

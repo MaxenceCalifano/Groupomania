@@ -9,11 +9,26 @@
     padding: 1px 10px;
     flex-grow: 2;
 }
+
 .commentHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .commentOwner {
     font-weight: bold;
+}
+
+.commentModifications {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.modifyCommentInput {
+    width: 90%;
+    border: 2px solid #37527C;
+    border-radius: 14px;
+    padding: 4px;
 }

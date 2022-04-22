@@ -5,7 +5,7 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function PostModale(props) {
-    
+
     const viewPosition = window.scrollY + 30;
     return (
         <div>
@@ -20,7 +20,7 @@ export default function PostModale(props) {
                        defaultValue={props.title} onChange={ (e) => props.setTitle(e.target.value)}></input>
 
                         <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" defaultValue={props.text} className="postText" name="postText"
-                        rows={10} onChange={ (e) => props.setText(e.target.value)}></textarea>
+                        rows={7} onChange={ (e) => props.setText(e.target.value)}></textarea>
 
                         <input className="fileInput" type={"file"} name={"image"} id="image" accept="image/png, image/jpeg, image/jpg"
                         onChange={props.getFile} />

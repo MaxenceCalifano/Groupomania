@@ -112,7 +112,7 @@ function Profile(props) {
 
                 <label htmlFor="email">Modifier votre e-mail :</label>
                 <input onChange={(e) => setEmail(e.target.value)} placeholder={email} type="text"></input>
-
+                
                 <label htmlFor="password">Modifier votre mot de passe :</label>
                 <input onChange={(e) => setPassword(e.target.value)} placeholder="*********" type="password" autoComplete="new-password"></input>
                 
