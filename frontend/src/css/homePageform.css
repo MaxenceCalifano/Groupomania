@@ -20,7 +20,8 @@ nav {
   margin: 5px 0;
   text-decoration: none;
   color: #091f43;
-  width: 12%;
+  width: 25%;
+  text-align: center;
 }
 
 .navLinks--focus {

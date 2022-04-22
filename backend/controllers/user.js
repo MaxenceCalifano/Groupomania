@@ -3,6 +3,7 @@ const jwt =  require("jsonwebtoken");
 const randToken =  require("rand-token").uid;
 const nodemailer = require("nodemailer");
 const sql = require("../models/db");
+const fs = require("fs");
 
 
 const User = require("../models/user");
@@ -192,7 +193,7 @@ exports.newPassword = (req, res) => {
                 if (err) 
                   res.status(500).send({
                   message:
-                    err.message || "Some error occurred while modifying the user."
+                    err.message || "Some error occurred while modifying the password."
                 });
               });
               res.status(200).json({message:"Votre mot de passe a bien été mis à jour"})
@@ -221,6 +222,15 @@ exports.modifyUser = (req, res) => {
               
               if (req.file !== undefined) {
                 userModifications.avatarUrl = req.file.filename;
+                //Delete previous avatar image file
+                sql.query(`SELECT avatarURL FROM users WHERE id = ${req.userId}`, (err, resp) => {
+                  if (err) {
+                      console.log("error: ", err);
+                      result(err, null);
+                      return;
+                    }
+                    fs.unlink(`images/${resp[0].avatarURL}`, () => console.log("previous user avatar has been delete"))
+                  });
               }
             }
           }
@@ -255,7 +265,15 @@ exports.modifyUser = (req, res) => {
 }
 
 exports.deleteUser = (req, res) => {
-
+  //Delete user avatar file
+  sql.query(`SELECT avatarURL FROM users WHERE id = ${req.userId}`, (err, resp) => {
+    if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+      fs.unlink(`images/${resp[0].avatarURL}`, () => console.log("previous user avatar has been delete"))
+    });
   // Delete all data associated with the user
   sql.query(`DELETE FROM likes WHERE userId = "${req.userId}"`, (err) => {
     if (err) {
