@@ -3,16 +3,20 @@ import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
-
+import InputWithvalidation from "./inputWithValidation";
+import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import Button from "./button";
 import "../css/profile.css";
+
 
 function Profile(props) {
 
     const [username, setUsername] = useState();
     const [avatar, setavatar] = useState();
     const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [password, setPassword] = useState("");
+    const [repeatedPassword, setRepetedPassword] = useState("");
+    const [passwordDifferenceMessage, setPasswordDifferenceMessage] = useState();
     const [image, setImage] = useState({preview:"", data:""});
     const [isInEditMode, setIsInEditMode] = useState(false);
     const [displayDeleteWarning, setDisplayWarning] = useState(false);
@@ -32,6 +36,13 @@ function Profile(props) {
     formData.append('password', password);
     formData.append('image', image.data);
     
+    const checkPasswords = () => {
+        if(password !== repeatedPassword) {
+            setPasswordDifferenceMessage("Les mots de passe ne sont pas identiques");
+        } else {
+            setPasswordDifferenceMessage("")
+        }
+    }
     
     const modifyProfile = () => {
         fetch(`http://localhost:3000/api/auth/${props.username}`, {
@@ -113,9 +124,30 @@ function Profile(props) {
                 <label htmlFor="email">Modifier votre e-mail :</label>
                 <input onChange={(e) => setEmail(e.target.value)} placeholder={email} type="text"></input>
                 
-                <label htmlFor="password">Modifier votre mot de passe :</label>
-                <input onChange={(e) => setPassword(e.target.value)} placeholder="*********" type="password" autoComplete="new-password"></input>
-                
+                {/* <label htmlFor="password">Modifier votre mot de passe :</label>
+                <input onChange={(e) => setPassword(e.target.value)} placeholder="*********" type="password" autoComplete="new-password"></input> */}
+                <InputWithvalidation 
+                    label="password" 
+                    checks={["valueMissing"]} 
+                    inputProps={{type:"password" , required: true}}
+                    labelText="Modifier votre mot de passe"
+                    id="password"
+                    errorMessage="Veuillez renseigner un mot de passe"
+                    setValue={setPassword}MeterPasswordStrengthMeter
+                    checkPasswords= {checkPasswords}
+                />
+                <InputWithvalidation 
+                    label="repeatedPassword" 
+                    checks={["valueMissing"]} 
+                    inputProps={{type:"password" , required: true}}
+                    labelText="Répétez le mot de passe"
+                    id="password"
+                    errorMessage="Veuillez répeter le mot de passe"
+                    setValue={setRepetedPassword}MeterPasswordStrengthMeter
+                    checkPasswords= {checkPasswords}
+                />
+                <p className="passwordWarning">{passwordDifferenceMessage}</p>        
+                <PasswordStrengthMeter password={password} />
                 <p>Changer de photo de profile:</p>
                 <input className="fileInput" type={"file"} name={"image"} id="image" accept="image/png, image/jpeg, image/jpg" onChange={getFile}/>
                 <label htmlFor="image"><FontAwesomeIcon icon={faUpload} /> Choisir un fichier</label>
@@ -135,7 +167,7 @@ function Profile(props) {
             <p className="title">Votre Profil : </p>
             <p><span className="profile-bold">Pseudo :</span> {props.username}</p>   
             <p><span className="profile-bold">e-mail :</span> {email}</p>
-            <span className="showAvatar"><span className="profile-bold">Photo de profil :  </span>{avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}</span>
+            <span className="showAvatar"><span className="profile-bold">Photo de profil :  </span>{avatar !== null ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}</span>
             
             <div>
                 <Button className="modifyProfileButton" onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>

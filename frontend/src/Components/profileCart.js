@@ -22,7 +22,7 @@ export default function Profile(props) {
     )
     return(
         <div className="profileCard">  
-        {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
+        {avatar !== null ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
                 
             <div>
                 <Link to={"profile"}>Votre profil :</Link>

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 
 import '../css/posts.css'
 
+
 export default function Posts(props) {
 
     const [posts, setPosts] = useState([]);
@@ -43,7 +44,6 @@ export default function Posts(props) {
           <div className="profileAndNewPost" >
           <NewPost getAllPosts={getAllPosts}/>
           </div>
-
           {posts.map( (post, key) => {
             return (<Post key={key} post={post} username={props.username} getAllPosts={getAllPosts}/>)  
           })}  

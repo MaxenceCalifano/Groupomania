@@ -142,13 +142,13 @@ exports.passwordReset = (req, res) => {
         html: `<p>Voici le lien pour réinitialiser votre mot de passe <a href="http://localhost:3001/reset-password/${token}">Lien</a></p>`
       }
 
-      transporter.sendMail(mailOptions, (error, info) => {
+      /* transporter.sendMail(mailOptions, (error, info) => {
         if(error) {
           console.log(error)
         } else {
           console.log("e-mail envoyé: " + info.response)
         }
-      })
+      }) */
       const userModifications = {
         id : result[0].id,
         token: token,

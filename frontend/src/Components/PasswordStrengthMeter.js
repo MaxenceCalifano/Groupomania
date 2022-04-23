@@ -23,7 +23,11 @@ export default function PasswordStrengthMeter(props) {
             return 'Weak';
         }
     }
-    useEffect(() => props.checkSecurity(testedPassword.score))
+    useEffect( () => {
+        if(props.checkSecurity) {
+            props.checkSecurity(testedPassword.score)
+        }
+    })
     return ( 
         <div className="password-strength-meter">
             <label>
