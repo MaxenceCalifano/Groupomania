@@ -7,11 +7,11 @@ export default function OptionsControl(props) {
 
     return(
         <div>
-            <div className="optionsControl" onClick={() => setIsInEditMode(!isInEditMode)}>
+            <button className="optionsControl" onClick={() => setIsInEditMode(!isInEditMode)}>
                 <span className="dot"></span>
                 <span className="dot"></span>
                 <span className="dot"></span>
-            </div>
+            </button>
             {isInEditMode ?
             <div className="optionsControl--options">
                 <button onClick={() => {props.modify(); setIsInEditMode(false)}} >Modifier</button>

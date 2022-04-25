@@ -1,3 +1,8 @@
+.comments {
+    border: none;
+    background: none;
+}
+
 .comments:hover {
     cursor: pointer;
     text-decoration: underline;

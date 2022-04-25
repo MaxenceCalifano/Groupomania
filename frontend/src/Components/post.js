@@ -189,8 +189,8 @@ export default function Post(props) {
                                             </span>
                                             {numberOfLikes}
                                         </span>
-                                        <p className="comments" onClick={() => setIsFolded(!isFolded)}>
-                                            {comments.length}{commentText}</p>
+                                        <button className="comments" onClick={() => setIsFolded(!isFolded)}>
+                                            {comments.length}{commentText}</button>
                                     </div>
                                 </div>
                                 
