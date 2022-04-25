@@ -14,10 +14,9 @@ import NewPassword from './Components/NewPassword';
 
 function App() {
   const [username, setUsername] = useState();
-  const [privilege, setPrivilege] = useState();
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  // Check if user is loggedin and get his username
+  // Check if user is loggedin get his username
   useEffect(()=> {
     if(localStorage.getItem("loggedInUser")) {
       setIsLoggedIn(true);
@@ -39,7 +38,7 @@ function App() {
           </Route>
 
           <Route path='password-reset' element={<PasswordReset/>}/>
-          <Route path="reset-password/:token" element={<NewPassword/>}/>
+          <Route path="reset-password/:token/:id" element={<NewPassword/>}/>
          
           {/*  En cas d'erreur d'URL */}
           <Route path='*' element={ 

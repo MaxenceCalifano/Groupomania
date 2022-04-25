@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faUpload, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { Link } from "react-router-dom";
 
 import InputWithvalidation from "./inputWithValidation";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
@@ -89,8 +90,8 @@ function Profile(props) {
                         setEmail(value.result.email)
                     } ) 
             
-        }, []
-         //eslint-disable-next-line react-hooks/exhaustive-deps  
+        },//eslint-disable-next-line react-hooks/exhaustive-deps
+         []
     )
     
     const navigate =  useNavigate()
@@ -173,7 +174,11 @@ function Profile(props) {
                 <Button className="modifyProfileButton" onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
                 <Button className="logoutButton" onClick={logout} action={"Se déconnecter"}/>
             </div>
-            
+            <Link className="backToHomeLink" to="/"> 
+                <FontAwesomeIcon icon={faChevronLeft} />
+                <FontAwesomeIcon icon={faChevronLeft} />
+                Revenir à la page principale
+            </Link>
 
             <Button className="deleteButton" onClick={() => setDisplayWarning(true)} action={"Supprimer le compte"}/>
 

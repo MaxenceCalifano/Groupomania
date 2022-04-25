@@ -33,6 +33,9 @@ export default function NewPost(props) {
     })
     .then( res => {
         if(res.ok) props.getAllPosts()
+        //Reset img state to default
+        const defaultImg = {preview:"", data:""};
+        setImage(defaultImg);
         toogleEditMode()
     })
     .catch(err => console.error(err))

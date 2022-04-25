@@ -20,7 +20,6 @@ export default function Post(props) {
     const [isFolded, setIsFolded] = useState(true);
     const [comment, setComment] = useState();
     const [showCommentInput, setShowCommentInput] = useState(false);
-    const [avatar, setavatar] = useState();
     const [image, setImage] = useState({preview:"", data:""});
     const [caption, setCaption] = useState();
 
@@ -32,22 +31,6 @@ export default function Post(props) {
         }
         setImage(img);
     }
-    
- /*    const getUserAvatar = () => {
-        fetch(`http://localhost:3000/api/auth/${props.post.username}`, {
-            credentials: "include",
-        })
-            .then(res => res.json())
-            .then(value => {
-                fetch(`http://localhost:3000/images/${value.avatarUrl}`)
-                    .then(res => res.blob())
-                    .then(imageBlob => {
-                        
-                        setavatar(URL.createObjectURL(imageBlob))
-                    } )
-            })
-    }; */
-
 
     const toogleEditMode = () => {
         setEditMode(!isInEditMode)

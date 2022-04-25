@@ -82,9 +82,10 @@ export default function SignUp() {
             setValidationIsDisabled(false);
        } else setValidationIsDisabled(true) 
         }     
-    ,[inputsChecks] )
+    ,//eslint-disable-next-line react-hooks/exhaustive-deps
+    [inputsChecks] )
     return(
-        <div>
+        <div className="signInUp">
             <h1>S'inscrire</h1>
                 <form>
                 <InputWithvalidation 

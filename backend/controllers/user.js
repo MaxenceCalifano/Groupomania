@@ -4,6 +4,8 @@ const randToken =  require("rand-token").uid;
 const nodemailer = require("nodemailer");
 const sql = require("../models/db");
 const fs = require("fs");
+const dotenv = require("dotenv");
+dotenv.config();
 
 
 const User = require("../models/user");
@@ -130,8 +132,9 @@ exports.passwordReset = (req, res) => {
         service: "hotmail",
         secure: false,
         auth: {
-          user: "maxence.califano@outlook.fr",
-          pass: 'Joyjoy1324'
+          user: process.env.user,
+          pass: process.env.pass,
+
         }
       });
 
@@ -139,7 +142,7 @@ exports.passwordReset = (req, res) => {
         from: "maxence.califano@outlook.fr",
         to: req.body.email,
         subject: "Réinitialisation de votre mot de passe Groupomania",
-        html: `<p>Voici le lien pour réinitialiser votre mot de passe <a href="http://localhost:3001/reset-password/${token}">Lien</a></p>`
+        html: `<p>Voici le lien pour réinitialiser votre mot de passe <a href="http://localhost:3001/reset-password/${token}/${result[0].id}">http://localhost:3001/reset-password/</a></p>`
       }
 
       /* transporter.sendMail(mailOptions, (error, info) => {
@@ -168,17 +171,22 @@ exports.passwordReset = (req, res) => {
 }
 
 exports.newPassword = (req, res) => {
-  sql.query(`SELECT * FROM users WHERE token = "${req.params.token}"`, (err, result) => {
+  sql.query(`SELECT * FROM users WHERE token = "${req.params.token}" AND id="${req.params.id}"`, (err, result) => {
     if (err) 
       res.status(500).send({
       message:
         err.message || "Some error occurred while looking for the user."
     });
     else {
-      console.log(result[0])
+      if (result.length === 0) {
+        res.status(401).send({
+          message:
+            "Unauthorized request"
+        });
+      }  else {
         if((new Date() - result[0].reinitialisationLink)/1000/60 >= 60) {
           res.status(500).send({
-            message: "Le lien de réinitisalisation a expiré"
+            message: "Le lien de réinitisalisation est invalide ou a expiré"
           });
         } else {
           bcrypt
@@ -200,7 +208,8 @@ exports.newPassword = (req, res) => {
               res.status(200).json({message:"Votre mot de passe a bien été mis à jour"})
           })
         }
-
+      }
+        
     } 
 })
 }

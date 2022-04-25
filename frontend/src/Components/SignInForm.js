@@ -40,7 +40,7 @@ export default function SignInForm(props) {
     }
    
     return(
-        <div>
+        <div className="signInUp">
             <h1>S'identifier</h1>
                 <form>
 

@@ -29,7 +29,7 @@ export default function PostModale(props) {
                             ? <img src={props.image.preview} alt="avatar" width='100' height='auto'/>
                             : "" }
                         <div className="altAttributeInput">
-                            <label htmlFor="altAttributeInput">Décrivez l'image en quelque mots</label>
+                            <label htmlFor="altAttributeInput">Décrivez l'image en quelque mots :</label>
                             <input type="text" placeholder={"un court texte déscriptif"} defaultValue={props.caption} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>
                         </div>
                     </div>

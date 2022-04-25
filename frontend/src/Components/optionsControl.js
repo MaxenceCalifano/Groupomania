@@ -1,4 +1,3 @@
-import { faSleigh } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import "../css/optionsControl.css"
 
@@ -16,7 +15,7 @@ export default function OptionsControl(props) {
             {isInEditMode ?
             <div className="optionsControl--options">
                 <button onClick={() => {props.modify(); setIsInEditMode(false)}} >Modifier</button>
-                <button onClick={props.delete} >Supprimer</button>
+                <button onClick={() => {props.delete(); setIsInEditMode(false)}} >Supprimer</button>
             </div> : ""
         }
             

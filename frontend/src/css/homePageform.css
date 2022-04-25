@@ -2,6 +2,7 @@ nav {
   padding: 25px;
   display: flex;
   justify-content: center;
+  align-items: stretch;
 }
 
 .navLinkLeft {
@@ -16,12 +17,15 @@ nav {
 
 .navLinks {
   border: 2px solid #091f43;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   margin: 5px 0;
   text-decoration: none;
   color: #091f43;
   width: 25%;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navLinks--focus {
@@ -35,9 +39,13 @@ h1 {
 
 form {
   display: flex;
-  align-content: space-around;
+  width: 100%;
   flex-wrap: wrap;
   flex-direction: column;
+}
+
+.signInUp {
+  padding: 0 10%;
 }
 
 form>* {
@@ -53,6 +61,7 @@ form>* {
 .signinButton,
 .signupButton {
   color: #d24f59;
+  width: 130px;
 }
 
 .signupButton {

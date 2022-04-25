@@ -29,7 +29,8 @@ export default function Posts(props) {
               if(value.posts !== undefined) {
                 setPosts(value.posts)
                 console.log("getAllPosts")
-              } else {
+              } else { // User is not loggedin so we redirect to login page
+                localStorage.clear();
                 navigate("/login/signIn");
               }
             } 

@@ -106,3 +106,17 @@
     color: white;
     transition: background-color 250ms;
 }
+
+.backToHomeLink {
+    display: block;
+    margin: 15px 0;
+    text-decoration: none;
+}
+
+.backToHomeLink:hover {
+    text-decoration: underline;
+}
+
+.backToHomeLink:visited {
+    color: inherit;
+}
