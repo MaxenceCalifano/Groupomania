@@ -36,7 +36,7 @@ function PasswordReset() {
     ,[inputsChecks])
 
     return ( 
-        <div>
+        <div style={{padding: '5%'}}>
             <InputWithvalidation 
                 label="email" 
                 checks={["typeMismatch", "valueMissing"]} 

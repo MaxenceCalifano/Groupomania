@@ -25,7 +25,6 @@ exports.signup = (req, res) => {
         .hash(req.body.password, 10)
         .then( hash => {
             const user = new User({
-                //uuid : uuidv4(),
                 username : req.body.username,
                 email : req.body.email,
                 password : hash,

@@ -42,7 +42,7 @@ export default function SignInForm(props) {
     return(
         <div className="signInUp">
             <h1>S'identifier</h1>
-                <form>
+                <form className="form">
 
                     <label htmlFor={"email"}>Entrez votre adresse email</label>
                     <input className="input" type={"text"} name={"email"} onChange={(e) => setEmail(e.target.value)} ></input>

@@ -1,5 +1,5 @@
 nav {
-  padding: 25px;
+  padding: 1rem;
   display: flex;
   justify-content: center;
   align-items: stretch;
@@ -26,6 +26,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 170px;
 }
 
 .navLinks--focus {
@@ -37,18 +38,19 @@ h1 {
   text-align: center;
 }
 
-form {
+.form {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
   flex-direction: column;
+  align-items: center;
 }
 
 .signInUp {
   padding: 0 10%;
 }
 
-form>* {
+.form>* {
   margin: 0.5rem 0;
 }
 
@@ -60,8 +62,10 @@ form>* {
 
 .signinButton,
 .signupButton {
-  color: #d24f59;
-  width: 130px;
+  background-color: #091f43;
+  color: white;
+  width: 200px;
+  height: 34px;
 }
 
 .signupButton {
@@ -70,8 +74,7 @@ form>* {
 
 .signinButton:hover,
 .signupButton:hover {
-  background-color: #d24f59;
-  border: 2px solid #d24f59;
+  background-color: #37527C;
   color: #fff;
 }
 
@@ -91,7 +94,9 @@ form input:focus:invalid {
 .inputWithValidation {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
+
 
 .input--warningMessage {
   color: red;

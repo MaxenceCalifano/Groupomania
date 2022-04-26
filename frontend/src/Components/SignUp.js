@@ -87,7 +87,7 @@ export default function SignUp() {
     return(
         <div className="signInUp">
             <h1>S'inscrire</h1>
-                <form>
+                <form className="form">
                 <InputWithvalidation 
                     label="username" 
                     checks={["valueMissing"]} 
@@ -137,9 +137,9 @@ export default function SignUp() {
                     checkPasswords= {checkPasswords}
                 />
 
-                    <p className="passwordWarning">{passwordDifferenceMessage}</p>
-                    <p className="passwordWarning">{passwordStrengthMessage}</p>
-                    
+                    {passwordDifferenceMessage ? <p className="passwordWarning">{passwordDifferenceMessage}</p> : "" }
+                    {passwordStrengthMessage ? <p className="passwordWarning">{passwordStrengthMessage}</p> : "" }
+                   
                     <PasswordStrengthMeter password={password} checkSecurity={setPasswordSecurityLevel}/>
                     
 

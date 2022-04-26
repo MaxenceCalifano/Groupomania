@@ -36,6 +36,17 @@
     margin: 30px 0;
 }
 
+.cancelDeleteButton {
+    color: #258916;
+    margin-left: 10px;
+}
+
+.cancelDeleteButton:hover {
+    background-color: #258916;
+    border-color: #258916;
+    color: white;
+}
+
 .deleteButton:hover {
     background-color: #d1515a;
 }
