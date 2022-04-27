@@ -166,43 +166,44 @@ export default function Post(props) {
                                             caption={props.post.caption} 
                                             setText={setText} 
                                             post={modifyPost} 
-                                            setCaption={setCaption}/>
+                                            setCaption={setCaption}
+                                            actionText="Modifier le post" />
                             </div>
                             :""}
-                            <div>
-                                <div className="postHeader">
-                                <div className="postOwner">
-                                        <Avatar avatar={props.post.avatarURL} altText="avatar de l'auteur(e) du post"/>
-                                        <p>{props.post.username}</p>
-                                    </div>
-                                    {props.username === props.post.username || localStorage.getItem("privilege") === "1" ?
-                                    
-                                        <OptionsControl modify={toogleEditMode} delete={deletePost}/>
-                                        : ""
-                                    }
-                                </div>
-                                <hr />
-
-                                <div className="postContent">
-                                    <h3>{props.post.title}</h3>
-                                    <p>{props.post.text}</p>
-                                    {props.post.mediaUrl != null ?
-                                    <img className="postImage" alt={props.post.caption} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
-                                    :""
-                                }
-                                    <div className="socialDetails">
-                                        <span className="numberOfLikes">
-                                            <span className="numberOfLikes--circle">
-                                                <FontAwesomeIcon className="numberOfLikes--thumb" icon={faThumbsUp} />
-                                            </span>
-                                            {numberOfLikes}
-                                        </span>
-                                        <button className="comments" onClick={() => setIsFolded(!isFolded)}>
-                                            {comments.length}{commentText}</button>
-                                    </div>
-                                </div>
-                                
+                    <div>
+                        <div className="postHeader">
+                            <div className="postOwner">
+                                <Avatar avatar={props.post.avatarURL} altText="avatar de l'auteur(e) du post"/>
+                                <p>{props.post.username}</p>
                             </div>
+                            {props.username === props.post.username || localStorage.getItem("privilege") === "1" ?
+                            
+                                <OptionsControl modify={toogleEditMode} delete={deletePost}/>
+                                : ""
+                            }
+                        </div>
+                        <hr />
+
+                        <div className="postContent">
+                            <h3>{props.post.title}</h3>
+                            <p>{props.post.text}</p>
+                            {props.post.mediaUrl != null ?
+                            <img className="postImage" alt={props.post.caption} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
+                            :""
+                        }
+                            <div className="socialDetails">
+                                <span className="numberOfLikes">
+                                    <span className="numberOfLikes--circle">
+                                        <FontAwesomeIcon className="numberOfLikes--thumb" icon={faThumbsUp} />
+                                    </span>
+                                    {numberOfLikes}
+                                </span>
+                                <button className="comments" onClick={() => setIsFolded(!isFolded)}>
+                                    <p>{comments.length}{commentText}</p></button>
+                            </div>
+                        </div>
+                        
+                    </div>
                     
                 </div >
                 <hr />
@@ -210,12 +211,13 @@ export default function Post(props) {
 
                     <button className="socialActions--button" onClick={likeUnlike}>
                         <FontAwesomeIcon className="socialActions--icons" icon={faThumbsUp} />
+                        <span>J'aime</span>
+                    </button>
 
-                        J'aime</button>
                     <button className="socialActions--button" onClick={() => setShowCommentInput(!showCommentInput)}>
                         <FontAwesomeIcon className="socialActions--icons" icon={faMessage} />
-
-                        Commenter</button>
+                        <span>Commenter</span>
+                    </button>
                 </div>
             </div>
             {
@@ -226,7 +228,7 @@ export default function Post(props) {
                     </div>
                     : ""
             }
-                <Comments username={props.username} postId={props.post.id} isFolded={isFolded} comment={comment} comments={comments} getAllComments={getAllComments} />
+            <Comments username={props.username} postId={props.post.id} isFolded={isFolded} comment={comment} comments={comments} getAllComments={getAllComments} />
         </div>
     );
 }

@@ -4,6 +4,7 @@
     cursor: pointer;
     padding: 4px 9px;
     border: 2px solid;
+    height: 30px;
 }
 
 .defaultButton:hover {

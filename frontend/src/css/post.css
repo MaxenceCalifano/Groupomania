@@ -67,6 +67,7 @@
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
+    /*  font-family: 'Montserrat';*/
 }
 
 .socialActions--icons {
@@ -84,6 +85,7 @@
     justify-content: space-between;
     align-items: center;
     margin: 5px 0;
+    font-weight: 700;
 }
 
 .commentInput {
@@ -95,7 +97,12 @@
     width: 100%;
     border: 2px solid #37527C;
     border-radius: 14px;
-    padding: 4px;
+    padding: 5px;
+    background-color: #e6eaf2;
+}
+
+.commentInput input:first-child:hover {
+    background-color: #d9e0eb;
 }
 
 .commentInput--button {

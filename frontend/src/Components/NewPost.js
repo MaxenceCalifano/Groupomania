@@ -63,9 +63,14 @@ export default function NewPost(props) {
             isInEditMode ?
             <div>
                 <div className="modale_background_overlay"></div>
-                <PostModale getFile={getFile} toogleEditMode={toogleEditMode}
-                            image={image} setTitle={setTitle} setText={setText} 
-                            setCaption={setCaption} post={post} />
+                <PostModale getFile={getFile}
+                            toogleEditMode={toogleEditMode}
+                            image={image} 
+                            setTitle={setTitle} 
+                            setText={setText} 
+                            setCaption={setCaption} 
+                            post={post}
+                            actionText="Créer un post" />
             </div>
             : ""
         }

@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "./button";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload } from '@fortawesome/free-solid-svg-icons';
-
+import { faUpload, faCircleXmark} from '@fortawesome/free-solid-svg-icons';
+import '../css/postModal.css';
 
 export default function PostModale(props) {
 
@@ -11,8 +11,8 @@ export default function PostModale(props) {
         <div>
                 <div style={{top:viewPosition}} className="newPost-input createNewPost">
                     <div className="createNewPost-header">
-                        <p>Créer un post</p>
-                    <Button style={{border: "none", color:"#282828", textAlign: "end"}} onClick={props.toogleEditMode} action="X"/>
+                        <p>{props.actionText}</p>
+                    <FontAwesomeIcon className="closeButton" icon={faCircleXmark} onClick={props.toogleEditMode}/>
                     </div>    
 
                     <div className="postContent">
@@ -34,7 +34,7 @@ export default function PostModale(props) {
                         </div>
                     </div>
 
-                    <Button onClick={props.post} action="Poster" style={{color:"#0B5E9E"}} />
+                    <Button onClick={props.post} action="Poster" className="modalButton" />
                 </div>
         </div>
     )

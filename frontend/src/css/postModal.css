@@ -1,0 +1,19 @@
+.modalButton {
+    background-color: #091f43;
+    color: white;
+}
+
+.modalButton:hover {
+    background-color: #37527C;
+}
+
+.closeButton {
+    font-size: larger;
+    color: #d1515a;
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    color: #a23d44;
+
+}

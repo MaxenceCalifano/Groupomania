@@ -3,6 +3,10 @@
     background: none;
 }
 
+.comments p {
+    font-weight: 500;
+}
+
 .comments:hover {
     cursor: pointer;
     text-decoration: underline;
