@@ -120,13 +120,11 @@ function Profile(props) {
                 <p className="title">Modifier votre Profil : </p>
 
                 <label htmlFor="username">Modifier votre pseudo :</label>
-                <input placeholder={props.username} onChange={(e) => setUsername(e.target.value)} type="text"></input>
+                <input className="input" placeholder={props.username} onChange={(e) => setUsername(e.target.value)} type="text"></input>
 
                 <label htmlFor="email">Modifier votre e-mail :</label>
-                <input onChange={(e) => setEmail(e.target.value)} placeholder={email} type="text"></input>
+                <input className="input" onChange={(e) => setEmail(e.target.value)} placeholder={email} type="text"></input>
                 
-                {/* <label htmlFor="password">Modifier votre mot de passe :</label>
-                <input onChange={(e) => setPassword(e.target.value)} placeholder="*********" type="password" autoComplete="new-password"></input> */}
                 <InputWithvalidation 
                     label="password" 
                     checks={["valueMissing"]} 
@@ -136,7 +134,9 @@ function Profile(props) {
                     errorMessage="Veuillez renseigner un mot de passe"
                     setValue={setPassword}MeterPasswordStrengthMeter
                     checkPasswords= {checkPasswords}
-                />
+                    style={{alignItems: 'flex-start'}}
+                    />
+
                 <InputWithvalidation 
                     label="repeatedPassword" 
                     checks={["valueMissing"]} 
@@ -146,6 +146,7 @@ function Profile(props) {
                     errorMessage="Veuillez répeter le mot de passe"
                     setValue={setRepetedPassword}MeterPasswordStrengthMeter
                     checkPasswords= {checkPasswords}
+                    style={{alignItems: 'flex-start'}}
                 />
                 <p className="passwordWarning">{passwordDifferenceMessage}</p>        
                 <PasswordStrengthMeter password={password} />
@@ -155,7 +156,7 @@ function Profile(props) {
 
                 {image.preview !== "" ? <img src={image.preview} alt="avatar" width='100' height='auto'/> : "" } 
                 
-                <div>
+                <div className="profile_buttonsContainer">
                     <Button className="modifyProfileButton" onClick={modifyProfile} action="Valider les modifications"/>
                     <Button className="cancelModificationsButton" onClick={() => setIsInEditMode(false)} action="Annuler les modifications"/>
                 </div>
@@ -164,7 +165,7 @@ function Profile(props) {
             </div>
             
             : // Not in edit mode
-            <div>
+            <div className="profile_notInEditMode">
             <p className="title">Votre Profil : </p>
             <p><span className="profile-bold">Pseudo :</span> {props.username}</p>   
             <p><span className="profile-bold">e-mail :</span> {email}</p>

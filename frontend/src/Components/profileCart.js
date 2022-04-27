@@ -4,7 +4,7 @@ import '../css/profileCard.css';
 
 export default function Profile(props) {
     const [avatar, setavatar] = useState();
-
+    const [isHovered, setIsHovered] = useState(false);
    
     useEffect(     
         () => {       
@@ -21,14 +21,20 @@ export default function Profile(props) {
       
     )
     return(
-        <div className="profileCard">  
+        <div>
+            <div className="profileCard"> 
+         <Link to={"profile"} onMouseEnter={() =>setIsHovered(true)} onMouseLeave={() =>setIsHovered(false)}> 
         {avatar !== null ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
-                
-            <div>
-                <Link to={"profile"}>Votre profil :</Link>
-            <p>{props.username}</p>
-            
-            </div>
+        {isHovered ? 
+            <div className="profileCard_options" >
+                <p>Votre profil :</p>
+                <p>{props.username}</p>
+            </div> 
+            : ""
+        }
+            </Link>
         </div>
+        </div>
+        
     )
 }

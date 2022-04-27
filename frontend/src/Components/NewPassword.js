@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import InputWithvalidation from "./inputWithValidation";
 import Button from "./button";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
+import BackToHomeLink from './BackToHomeLink'
 
 function NewPassword() {
 
@@ -51,7 +52,9 @@ function NewPassword() {
     ,[inputsChecks])
 
     return ( 
-        <div>
+        <div className="newPassword_container">
+            <BackToHomeLink/>
+            <h1>Choisissez un nouveau mot de passe :</h1>
             <InputWithvalidation 
                     label="password" 
                     checks={["valueMissing"]} 

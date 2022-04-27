@@ -2,31 +2,38 @@
     margin: 20px;
 }
 
+.profile_notInEditMode * {
+    margin-top: 20px;
+}
+
 .editProfile {
     display: flex;
     flex-direction: column;
 }
 
+.profile_buttonsContainer {
+    margin-top: 20px;
+}
+
 .modifyProfileButton {
     margin: 5px 5px 5px 0px;
-    color: #091f43;
+    color: white;
+    background-color: #091f43;
+    border-color: #091f43;
 }
 
 .modifyProfileButton:hover {
-    background-color: #091f43;
-    color: white;
-    border-color: #091f43;
-
+    background-color: #081a37;
 }
 
 .logoutButton {
-    color: #37527C;
+    color: white;
+    background-color: #d1515a;
+    border-color: #d1515a;
 }
 
 .logoutButton:hover {
-    background-color: #37527C;
-    color: rgb(255, 255, 255);
-    border-color: #37527C;
+    background-color: #e47e84;
 }
 
 .deleteButton {
@@ -52,13 +59,13 @@
 }
 
 .cancelModificationsButton {
-    color: #d1515a;
+    color: white;
+    background-color: #d1515a;
+    border-color: #d1515a;
 }
 
 .cancelModificationsButton:hover {
-    background-color: #d1515a;
-    border-color: #d1515a;
-    color: white;
+    background-color: #a0252e;
 }
 
 .deleteWarning {
