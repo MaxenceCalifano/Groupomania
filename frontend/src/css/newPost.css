@@ -8,7 +8,8 @@
 }
 
 .newPost {
-    flex-grow: 2;
+    display: flex;
+    justify-content: space-around;
 }
 
 .newPost-input {
@@ -24,7 +25,8 @@
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    width: 50vw;
+    width: 80%;
+    max-width: 450px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -43,7 +45,7 @@
 
 .startPost {
     padding: 15px;
-    width: 96%;
+    width: 100%;
     border: none;
     margin: 10px 0;
     cursor: pointer;

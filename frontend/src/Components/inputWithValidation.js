@@ -26,8 +26,7 @@ function InputWithvalidation(props) {
     return (
         <div className="inputWithValidation">
             <label htmlFor={props.id}>{props.labelText}</label>
-            <input className="input" {...props.inputProps} onChange={(e) => props.setValue(e.target.value)} onBlur={(e) => {checkValidty(e);  checkPasswords()}} />
-             
+            <input className="input" {...props.inputProps} onChange={(e) => props.setValue(e.target.value)} onKeyUp={(e) => {checkValidty(e);  checkPasswords()}}/>
              {isValid ? "" : <p className="input--warningMessage" >{props.errorMessage}</p>}
             
         </div>

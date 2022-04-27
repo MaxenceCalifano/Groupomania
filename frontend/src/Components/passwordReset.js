@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import InputWithvalidation from "./inputWithValidation";
 import Button from "./button";
+import '../css/passwordReset.css';
+import BackToHomeLink from "./BackToHomeLink";
 
 
 function PasswordReset() {
@@ -36,7 +38,9 @@ function PasswordReset() {
     ,[inputsChecks])
 
     return ( 
-        <div style={{padding: '5%'}}>
+        <div className="passwordReset">
+            <BackToHomeLink style={{alignSelf:'flex-start'}}/>
+            <h1>Réinitialiser le mot de passe</h1>
             <InputWithvalidation 
                 label="email" 
                 checks={["typeMismatch", "valueMissing"]} 

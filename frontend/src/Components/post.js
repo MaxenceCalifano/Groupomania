@@ -156,9 +156,17 @@ export default function Post(props) {
                         isInEditMode ? //Modify post is open 
                             <div>
                                 <div className="modale_background_overlay" style={{"top": "auto", "marginTop": "-300px"}}></div>
-                                <PostModale style={{"margin-top": "30px"}} getFile={getFile} toogleEditMode={toogleEditMode} 
-                                    image={image} setTitle={setTitle} text={props.post.text} title={props.post.title} caption={props.post.caption} setText={setText} post={modifyPost} setCaption={setCaption}/>
-
+                                <PostModale style={{"margin-top": "30px"}}
+                                            getFile={getFile} 
+                                            toogleEditMode={toogleEditMode} 
+                                            image={image} 
+                                            setTitle={setTitle} 
+                                            text={props.post.text} 
+                                            title={props.post.title} 
+                                            caption={props.post.caption} 
+                                            setText={setText} 
+                                            post={modifyPost} 
+                                            setCaption={setCaption}/>
                             </div>
                             :""}
                             <div>

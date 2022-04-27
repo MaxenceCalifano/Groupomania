@@ -49,7 +49,7 @@ export default function SignInForm(props) {
                     
                     <label htmlFor={"password"}>Entrez votre mot de passe</label>
                     <input className="input" type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
-                    <Link to={"../../password-reset"}>Mot de passe oublié ?</Link>
+                    <Link className="signin_password-reset" to={"../../password-reset"}>Mot de passe oublié ?</Link>
                     <Button className={"signinButton"} onClick={signIn} action="Se connecter"/>
                 </form>
         </div>

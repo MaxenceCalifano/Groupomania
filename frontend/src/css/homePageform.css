@@ -46,25 +46,26 @@ h1 {
   align-items: center;
 }
 
-.signInUp {
-  padding: 0 10%;
-}
-
 .form>* {
   margin: 0.5rem 0;
+}
+
+.signin_password-reset:visited {
+  color: initial;
 }
 
 .input {
   border-radius: 9px;
   padding: 10px;
   background-color: #e8f0fe;
+  width: 250px;
 }
 
 .signinButton,
 .signupButton {
   background-color: #091f43;
   color: white;
-  width: 200px;
+  width: 250px;
   height: 34px;
 }
 
@@ -101,4 +102,10 @@ form input:focus:invalid {
 .input--warningMessage {
   color: red;
   font-weight: bold;
+}
+
+@media screen and (max-width: 414px) {
+  .navLinks {
+    width: 50%;
+  }
 }

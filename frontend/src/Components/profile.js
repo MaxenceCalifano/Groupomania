@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { useNavigate } from "react-router";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpload, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 import InputWithvalidation from "./inputWithValidation";
 import PasswordStrengthMeter from "./PasswordStrengthMeter";
 import Button from "./button";
+import BackToHomeLink from "./BackToHomeLink";
 import "../css/profile.css";
 
 
@@ -174,11 +174,7 @@ function Profile(props) {
                 <Button className="modifyProfileButton" onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
                 <Button className="logoutButton" onClick={logout} action={"Se déconnecter"}/>
             </div>
-            <Link className="backToHomeLink" to="/"> 
-                <FontAwesomeIcon icon={faChevronLeft} />
-                <FontAwesomeIcon icon={faChevronLeft} />
-                Revenir à la page principale
-            </Link>
+            <BackToHomeLink/>
 
             <Button className="deleteButton" onClick={() => setDisplayWarning(true)} action={"Supprimer le compte"}/>
 

@@ -1,4 +1,10 @@
 .optionsControl {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.optionsControl_dots {
   cursor: pointer;
   border-radius: 50%;
   padding: 5px;
@@ -9,7 +15,7 @@
   border: none;
 }
 
-.optionsControl:hover {
+.optionsControl_dots:hover {
   background-color: #ccd9ed;
 }
 
@@ -22,18 +28,17 @@
   margin-right: 2px;
 }
 
-.optionsControl--options {
-  position: absolute;
-  right: 19px;
-  margin-top: 15px;
+.optionsControl_unfolded {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   box-shadow: 4px 2px 12px 0px rgba(0, 0, 0, 0.57);
   background-color: white;
+  position: absolute;
+  margin-top: 35px;
 }
 
-.optionsControl--options button {
+.optionsControl_unfolded button {
   border: none;
   background-color: transparent;
   margin: 3px;
@@ -41,7 +46,7 @@
   border-radius: 5px;
 }
 
-.optionsControl--options button:hover {
+.optionsControl_unfolded button:hover {
 
   background-color: rgb(218, 217, 217);
 }
