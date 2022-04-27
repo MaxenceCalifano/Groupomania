@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import "../css/optionsControl.css"
 
 export default function OptionsControl(props) {
@@ -14,8 +16,8 @@ export default function OptionsControl(props) {
             </button>
             {isInEditMode ?
             <div className="optionsControl_unfolded">
-                <button onClick={() => {props.modify(); setIsInEditMode(false)}} >Modifier</button>
-                <button onClick={() => {props.delete(); setIsInEditMode(false)}} >Supprimer</button>
+                <button className="optionsControl_unfolded--top" onClick={() => {props.modify(); setIsInEditMode(false)}} > <FontAwesomeIcon icon={faPenToSquare}/> Modifier</button>
+                <button className="optionsControl_unfolded--bottom" onClick={() => {props.delete(); setIsInEditMode(false)}} > <FontAwesomeIcon icon={faTrashCan}/> Supprimer</button>
             </div> : ""
         }
             

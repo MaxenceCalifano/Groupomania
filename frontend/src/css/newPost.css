@@ -55,6 +55,7 @@
 
 .startPost:hover {
     background-color: #d9e0eb;
+    transition: background-color 250ms;
 }
 
 .postTitle {
