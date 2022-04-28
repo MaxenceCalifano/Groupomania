@@ -1,10 +1,10 @@
-# Groupomania
+# About
 
-Groupomania is a corporate social network built with React for the frontend part, NodeJs and Express for the backend and has a MySQL database.
+**Groupomania** is a corporate social network built with React for the frontend part, NodeJs and Express for the backend and has a MySQL database.
 
 It is my 7th and last project from the Web Developer training program of OpenClassRooms.
 
-## prerequisite
+## Prerequisites
 
 To run Groupomania you'll need to have installed on your computer :
 - NodeJS
