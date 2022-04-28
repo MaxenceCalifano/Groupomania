@@ -16,4 +16,5 @@ To run Groupomania you'll need to have installed on your computer :
 - [ ] Step 2 : Run `npm install` in each folder frontend and backend
 - [ ] Step 3 : In the backend folder, find `.env` file, and type your MySQL user and password in `dbUser` and `dbPassword`
 - [ ] Step 4 : Open the MySQL CLI, login and create empty groupomania database `CREATE DATABASE groupomania;` and use it `USE groupomania;`
-- [ ] Step 5 : Import groupomania database, to do so you will need to go to MySQL server install folder on your computer, which on Windows will be at something like `C:\Program Files\MySQL\MySQL Server 8.0\bin`, past 
+- [ ] Step 5 : Import groupomania database, to do so you will need to go to MySQL server folder on your computer, which on Windows will be at something like `C:\Program Files\MySQL\MySQL Server 8.0\bin`, past `mysql -u username -p groupomania < groupomania_demo.sql`*
+- [ ] Step 6 : Finnaly run `npm start` in the frontend folder and `node server` in the backend folder
