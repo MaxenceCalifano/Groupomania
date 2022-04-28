@@ -87,6 +87,7 @@ export default function SignUp() {
     return(
         <div className="signInUp">
             <h1>S'inscrire</h1>
+                
                 <form className="form">
                 <InputWithvalidation 
                     label="username" 
@@ -150,9 +151,9 @@ export default function SignUp() {
                     {image.preview !=="" ? <img src={image.preview} alt="avatar" width='100' height='auto'/>
                     : ""    
                 }
+                    <p className="signupMessage">{message}</p>
                     <Button disabled={validationIsDisabled} className={"signupButton"} onClick={signUp} action="Créer un compte"/>
                 </form>
-                <p>{message}</p>
         </div>
     );
 }

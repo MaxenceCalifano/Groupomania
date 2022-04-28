@@ -6,7 +6,8 @@
     position: absolute;
     background-color: rgba(255, 255, 255);
     right: 15px;
-    padding: 5px;
+    border-radius: 6px;
+    box-shadow: 1px 3px 30px 1px rgba(0, 0, 0, 0.2);
 }
 
 .profileCard a {
@@ -16,4 +17,12 @@
 
 .profileCard a:hover {
     text-decoration: underline;
+}
+
+.profileCard_options p {
+    padding: 5px;
+}
+
+.profileCard_options--profileLink:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }

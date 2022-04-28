@@ -104,6 +104,13 @@ form input:focus:invalid {
   font-weight: bold;
 }
 
+.signupMessage {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #091f43;
+}
+
 @media screen and (max-width: 414px) {
   .navLinks {
     width: 50%;

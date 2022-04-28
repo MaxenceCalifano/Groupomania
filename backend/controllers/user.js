@@ -131,26 +131,26 @@ exports.passwordReset = (req, res) => {
         service: "hotmail",
         secure: false,
         auth: {
-          user: process.env.user,
-          pass: process.env.pass,
+          user: process.env.emailSender,
+          pass: process.env.emailSenderPassword,
 
         }
       });
 
       const mailOptions = {
-        from: "maxence.califano@outlook.fr",
+        from: process.env.emailSender,
         to: req.body.email,
         subject: "Réinitialisation de votre mot de passe Groupomania",
         html: `<p>Voici le lien pour réinitialiser votre mot de passe <a href="http://localhost:3001/reset-password/${token}/${result[0].id}">http://localhost:3001/reset-password/</a></p>`
       }
 
-      /* transporter.sendMail(mailOptions, (error, info) => {
+      transporter.sendMail(mailOptions, (error, info) => {
         if(error) {
           console.log(error)
         } else {
           console.log("e-mail envoyé: " + info.response)
         }
-      }) */
+      })
       const userModifications = {
         id : result[0].id,
         token: token,

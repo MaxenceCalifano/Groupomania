@@ -9,6 +9,7 @@ export default function SignInForm(props) {
     //const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setpassword] = useState();
+    const [unauthorizedMessage, setUnauthorizedMessage] = useState('');
 
     let navigate = useNavigate();
 
@@ -32,7 +33,9 @@ export default function SignInForm(props) {
                     navigate("/")
                    })
                 } else {
-                    console.log("erreur");
+                    if(res.status === 401) {
+                        setUnauthorizedMessage("Mot de passe ou nom d'utilisateur erroné")
+                    }
                 }
             }
         )
@@ -51,6 +54,7 @@ export default function SignInForm(props) {
                     <input className="input" type={"password"} name={"password"} onChange={(e) => setpassword(e.target.value)}></input>
                     <Link className="signin_password-reset" to={"../../password-reset"}>Mot de passe oublié ?</Link>
                     <Button className={"signinButton"} onClick={signIn} action="Se connecter"/>
+                    {unauthorizedMessage}
                 </form>
         </div>
     );

@@ -44,14 +44,14 @@
 }
 
 .cancelDeleteButton {
-    color: #258916;
+    background-color: #258916;
+    border-color: #258916;
+    color: white;
     margin-left: 10px;
 }
 
 .cancelDeleteButton:hover {
-    background-color: #258916;
-    border-color: #258916;
-    color: white;
+    background-color: #3ba72a;
 }
 
 .deleteButton:hover {

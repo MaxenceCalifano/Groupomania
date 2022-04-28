@@ -28,7 +28,7 @@ export default function Profile(props) {
         {isHovered ? 
             <div className="profileCard_options" >
                 <p>Votre profil :</p>
-                <p>{props.username}</p>
+                <p className="profileCard_options--profileLink">{props.username}</p>
             </div> 
             : ""
         }
