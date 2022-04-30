@@ -1,4 +1,4 @@
-# About
+# About  ![groupomania logo] (https://github.com/MaxenceCalifano/Groupomania/blob/master/frontend/src/img/icon-left-font-monochrome-white.png)
 
 **Groupomania** is a corporate social network built with React for the frontend part, NodeJs and Express for the backend and has a MySQL database.
 
