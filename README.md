@@ -1,8 +1,18 @@
-# About  ![groupomania logo] (https://github.com/MaxenceCalifano/Groupomania/blob/master/frontend/src/img/icon-left-font-monochrome-white.png)
+# About
+
 
 **Groupomania** is a corporate social network built with React for the frontend part, NodeJs and Express for the backend and has a MySQL database.
 
 It is my 7th and last project from the Web Developer training program of OpenClassRooms.
+
+### Features
+
+- The app allows you to create an account, loggin and logout
+- Modify and delete the account
+- Create posts with text and image content, modify and delete them
+-  Leave comments, modify and delete them
+
+![Capture-groupomania](https://user-images.githubusercontent.com/48595795/166098117-6b62e702-c85a-4931-8c9f-4b27639a2d74.PNG)
 
 ## Prerequisites
 
