@@ -7,7 +7,7 @@ It is my 7th and last project from the Web Developer training program of OpenCla
 
 ### Features
 
-- The app allows you to create an account, loggin and logout
+- The app allows you to create an account, login and logout
 - Modify and delete the account
 - Ask a new password if you forget it, and create a new one
 - Create posts with text and image content, modify and delete them
