@@ -9,18 +9,19 @@ export default function Header(props) {
     return(
   
         <header>
+            <div className="header_container">
             <a className="header-link" href="http://localhost:3001"> <img className="header-icon" src={icon} alt="logo de Groupomania"></img> </a>
            
-            {
-                props.isLoggedIn ?
-                        <div className="userOptions">
-                            <ProfileCart username={props.username}/>
-                            
-                        </div>   
-               :
-                ""
-                }
-            
+           {
+               props.isLoggedIn ?
+                       <div className="userOptions">
+                           <ProfileCart username={props.username}/>
+                           
+                       </div>   
+              :
+               ""
+               }
+            </div>    
         </header>
     );
 }

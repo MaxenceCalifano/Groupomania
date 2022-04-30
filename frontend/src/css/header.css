@@ -1,13 +1,19 @@
 header {
+    background-color: #091f43;
+}
+
+.header_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2%;
-    background-color: #091f43;
+    width: 85%;
+    max-width: 1440px;
+    margin: auto;
 }
 
 .header-link {
-    width: 33%;
+    width: 25%;
 }
 
 .header-icon {
