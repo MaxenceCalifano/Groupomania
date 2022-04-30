@@ -9,12 +9,13 @@ It is my 7th and last project from the Web Developer training program of OpenCla
 
 - The app allows you to create an account, loggin and logout
 - Modify and delete the account
+- Ask a new password if you forget it, and create a new one
 - Create posts with text and image content, modify and delete them
 -  Leave comments, modify and delete them
 
 ![Capture-groupomania](https://user-images.githubusercontent.com/48595795/166098889-2c00b52e-98d7-4aac-8122-4ee581f33d96.PNG)
 
-## Prerequisites
+## What you will need
 
 To run Groupomania you'll need to have installed on your computer :
 - NodeJS
