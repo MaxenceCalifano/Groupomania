@@ -22,16 +22,17 @@ export default function PostModale(props) {
                         <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" defaultValue={props.text} className="postText" name="postText"
                         rows={7} onChange={ (e) => props.setText(e.target.value)}></textarea>
 
+                        <div className="altAttributeInput">
+                            <label htmlFor="altAttributeInput">Décrivez l'image en quelque mots :</label>
+                            <input type="text" placeholder={"un court texte déscriptif"} defaultValue={props.caption} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>
+                        </div>
+
                         <input className="fileInput" type={"file"} name={"image"} id="image" accept="image/png, image/jpeg, image/jpg"
                         onChange={props.getFile} />
                         <label htmlFor="image"><FontAwesomeIcon icon={faUpload} /> Choisir un fichier</label>
                         {props.image.preview !==""
                             ? <img src={props.image.preview} alt="avatar" width='100' height='auto'/>
                             : "" }
-                        <div className="altAttributeInput">
-                            <label htmlFor="altAttributeInput">Décrivez l'image en quelque mots :</label>
-                            <input type="text" placeholder={"un court texte déscriptif"} defaultValue={props.caption} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>
-                        </div>
                     </div>
 
                     <Button onClick={props.post} action="Poster" className="modalButton" />

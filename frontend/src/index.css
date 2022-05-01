@@ -23,10 +23,6 @@ code {
     monospace;
 }
 
-input[type="text"i] {
-  font-size: 1em;
-}
-
 textarea {
   font-size: 1.1em;
 }
