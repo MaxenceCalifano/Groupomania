@@ -19,7 +19,6 @@
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.3",
     "rand-token": "^1.0.1",
-    "sequelize": "^6.17.0",
     "uuid": "^8.3.2",
     "validator": "^13.7.0"
   }
