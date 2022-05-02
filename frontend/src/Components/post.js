@@ -37,7 +37,7 @@ export default function Post(props) {
     }
 
     const deletePost = () => {
-        fetch("http://localhost:3000/api/posts", {
+        fetch("http://localhost:3001/api/posts", {
             method: "DELETE",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export default function Post(props) {
     formData.append('image', image.data);
 
     const modifyPost = () => {
-        fetch("http://localhost:3000/api/posts", {
+        fetch("http://localhost:3001/api/posts", {
             method: "PUT",
             credentials: "include",
             //headers: { "Content-Type": "application/json" },
@@ -68,7 +68,7 @@ export default function Post(props) {
 
     }
     const likeUnlike = () => {
-        fetch(`http://localhost:3000/api/likes/${props.post.postID}`, {
+        fetch(`http://localhost:3001/api/likes/${props.post.postID}`, {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -80,7 +80,7 @@ export default function Post(props) {
     }
 
     const getNumberOfLikes = () => {
-        fetch(`http://localhost:3000/api/likes/${props.post.postID}`, {
+        fetch(`http://localhost:3001/api/likes/${props.post.postID}`, {
             credentials: "include",
         })
             .then(res => res.json())
@@ -89,7 +89,7 @@ export default function Post(props) {
     //Comments
 
     const getAllComments = () => {
-        fetch(`http://localhost:3000/api/comments/${props.post.postID}`, {
+        fetch(`http://localhost:3001/api/comments/${props.post.postID}`, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -113,7 +113,7 @@ export default function Post(props) {
     }
 
     const postComment = () => {
-        fetch(`http://localhost:3000/api/comments/${props.post.postID}`, {
+        fetch(`http://localhost:3001/api/comments/${props.post.postID}`, {
             method: "POST",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -188,7 +188,7 @@ export default function Post(props) {
                             <h3>{props.post.title}</h3>
                             <p>{props.post.text}</p>
                             {props.post.mediaUrl != null ?
-                            <img className="postImage" alt={props.post.caption} src={`http://localhost:3000/images/${props.post.mediaUrl}`}></img>
+                            <img className="postImage" alt={props.post.caption} src={`http://localhost:3001/images/${props.post.mediaUrl}`}></img>
                             :""
                         }
                             <div className="socialDetails">

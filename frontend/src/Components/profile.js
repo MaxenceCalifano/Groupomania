@@ -46,7 +46,7 @@ function Profile(props) {
     }
     
     const modifyProfile = () => {
-        fetch(`http://localhost:3000/api/auth/${props.username}`, {
+        fetch(`http://localhost:3001/api/auth/${props.username}`, {
             method: "PUT",
             credentials: "include",
             body: formData,
@@ -62,7 +62,7 @@ function Profile(props) {
 
     }
     const deleteProfile = () => {
-        fetch('http://localhost:3000/api/auth/', {
+        fetch('http://localhost:3001/api/auth/', {
             method: "DELETE",
             credentials: "include",
         })
@@ -81,7 +81,7 @@ function Profile(props) {
 
     useEffect(     
         () => {       
-                fetch(`http://localhost:3000/api/auth/private/${props.username}`, {
+                fetch(`http://localhost:3001/api/auth/private/${props.username}`, {
                 credentials: "include",
             })
                 .then( res => res.json())
@@ -96,7 +96,7 @@ function Profile(props) {
     
     const navigate =  useNavigate()
     const logout = () => {
-        fetch("http://localhost:3000/api/auth/logout", { 
+        fetch("http://localhost:3001/api/auth/logout", { 
             method: "GET",
             credentials: "include",
         })
@@ -169,7 +169,7 @@ function Profile(props) {
             <p className="title">Votre Profil : </p>
             <p><span className="profile-bold">Pseudo :</span> {props.username}</p>   
             <p><span className="profile-bold">e-mail :</span> {email}</p>
-            <span className="showAvatar"><span className="profile-bold">Photo de profil :  </span>{avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}</span>
+            <span className="showAvatar"><span className="profile-bold">Photo de profil :  </span>{avatar !== undefined ? <img className="avatar" src={`http://localhost:3001/images/${avatar}`} alt="avatar"></img> :""}</span>
             
             <div>
                 <Button className="modifyProfileButton" onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>

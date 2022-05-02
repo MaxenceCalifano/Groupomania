@@ -13,7 +13,7 @@ export default function Comment(props) {
         setEditMode(!isInEditMode)
     }
     const modifyComment = () => {
-        fetch(`http://localhost:3000/api/comments/${props.postId}`, {
+        fetch(`http://localhost:3001/api/comments/${props.postId}`, {
             method: "PUT",
             credentials: "include",
             headers: { "Content-Type": "application/json" },
@@ -30,7 +30,7 @@ export default function Comment(props) {
     }
 
     const deleteComment = () => {
-        fetch("http://localhost:3000/api/comments", {
+        fetch("http://localhost:3001/api/comments", {
             method: "DELETE",
             credentials: "include",
             headers: { "Content-Type": "application/json" },

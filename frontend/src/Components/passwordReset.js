@@ -15,7 +15,7 @@ function PasswordReset() {
         });
     
     function sendEmailAdress() {
-        fetch('http://localhost:3000/api/auth/password-reset', {
+        fetch('http://localhost:3001/api/auth/password-reset', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

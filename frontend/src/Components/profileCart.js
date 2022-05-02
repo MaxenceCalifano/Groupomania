@@ -8,7 +8,7 @@ export default function Profile(props) {
    
     useEffect(     
         () => {       
-                fetch(`http://localhost:3000/api/auth/${props.username}`, {
+                fetch(`http://localhost:3001/api/auth/${props.username}`, {
                 credentials: "include",
             })
                 .then( res => res.json())
@@ -29,7 +29,7 @@ export default function Profile(props) {
                 onMouseLeave={() =>setIsHovered(false)}
                 onBlur={() =>setIsHovered(false)} 
                 > 
-            {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
+            {avatar !== undefined ? <img className="avatar" src={`http://localhost:3001/images/${avatar}`} alt="avatar"></img> : ""}
             
                 <div className={isHovered ? "profileCard_options" : "profileCard_notDisplayed"}
                     >

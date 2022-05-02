@@ -29,7 +29,7 @@ function NewPassword() {
     const {id} = useParams();
 
     function createNewPassword() {
-        fetch(`http://localhost:3000/api/auth/${token}/${id}`, {
+        fetch(`http://localhost:3001/api/auth/${token}/${id}`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
