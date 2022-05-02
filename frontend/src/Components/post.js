@@ -13,15 +13,15 @@ import OptionsControl from "./optionsControl";
 
 export default function Post(props) {
     const [isInEditMode, setEditMode] = useState(false);
-    const [title, setTitle] = useState();
-    const [text, setText] = useState();
+    const [title, setTitle] = useState(props.post.title);
+    const [text, setText] = useState(props.post.text);
     const [numberOfLikes, SetNumberOfLikes] = useState(0);
     const [comments, setComments] = useState([]); // All comments
     const [isFolded, setIsFolded] = useState(true);
     const [comment, setComment] = useState();
     const [showCommentInput, setShowCommentInput] = useState(false);
     const [image, setImage] = useState({preview:"", data:""});
-    const [caption, setCaption] = useState();
+    const [caption, setCaption] = useState(props.post.caption);
 
 
     const getFile = (e) => {

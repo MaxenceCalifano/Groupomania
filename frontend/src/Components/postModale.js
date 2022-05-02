@@ -21,7 +21,7 @@ export default function PostModale(props) {
 
                         <textarea placeholder="Écrivez ! Noircir le papier est idéal pour s'éclaircir l'esprit. -Aldous Huxley" defaultValue={props.text} className="postText" name="postText"
                         rows={7} onChange={ (e) => props.setText(e.target.value)}></textarea>
-
+                        <hr style={{width:'50%'}}/>
                         <div className="altAttributeInput">
                             <label htmlFor="altAttributeInput">Décrivez l'image en quelque mots :</label>
                             <input type="text" placeholder={"un court texte déscriptif"} defaultValue={props.caption} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>

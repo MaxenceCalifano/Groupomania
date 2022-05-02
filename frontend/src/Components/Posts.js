@@ -28,7 +28,7 @@ export default function Posts(props) {
           .then(value => {
               if(value.posts !== undefined) {
                 setPosts(value.posts)
-              } else { // User is not loggedin so we redirect to login page
+              } else { // User is not loggedin, we redirect to login page
                 localStorage.clear();
                 navigate("/login/signIn");
               }

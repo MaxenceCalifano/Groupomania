@@ -24,7 +24,7 @@ export default function Profile(props) {
         <div>
             <div className="profileCard"> 
          <Link to={"profile"} onMouseEnter={() =>setIsHovered(true)} onMouseLeave={() =>setIsHovered(false)}> 
-        {avatar !== null ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
+        {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
         {isHovered ? 
             <div className="profileCard_options" >
                 <p>Votre profil :</p>
