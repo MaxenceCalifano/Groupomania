@@ -6,7 +6,7 @@ const sql = require("../models/db");
 
 
 exports.newPost = (req, res) => {
-    sql.query(`SELECT * FROM users WHERE id = "${req.userId}"`, (err, resp) => {
+    sql.query(`SELECT * FROM users WHERE id = ?`, req.userId, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -47,7 +47,7 @@ exports.getAllPosts = (req,res) => {
 
 exports.modifyPost = (req, res) => {
 
-    sql.query(`SELECT * FROM posts WHERE id = "${req.body.id}"`, (err, resp) => {
+    sql.query(`SELECT * FROM posts WHERE id = ?`, req.body.id, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -86,7 +86,7 @@ exports.modifyPost = (req, res) => {
 
 exports.deletePost = (req, res) => {
     // First check if the request comes from the post owner
-    sql.query(`SELECT * FROM posts WHERE id = "${req.body.id}"`, (err, resp) => {
+    sql.query(`SELECT * FROM posts WHERE id = ?`, req.body.id, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -96,7 +96,7 @@ exports.deletePost = (req, res) => {
           if (req.userPrivilege == 1 || req.userId == resp[0].userID) {
             fs.unlink(`images/${resp[0].mediaUrl}`, () => console.log("post image has been delete"))
             //Delete all the comments
-            sql.query(`DELETE FROM comments WHERE postId = "${req.body.id}"`, (err) => {
+            sql.query(`DELETE FROM comments WHERE postId = ?`, req.body.id, (err) => {
             if (err) {
                 console.log("error: ", err);
                 result(err, null);
@@ -104,7 +104,7 @@ exports.deletePost = (req, res) => {
               }
             });
             //Delete all the likes
-            sql.query(`DELETE FROM likes WHERE postId = "${req.body.id}"`, (err) => {
+            sql.query(`DELETE FROM likes WHERE postId = ?`, req.body.id, (err) => {
               if (err) {
                   console.log("error: ", err);
                   result(err, null);
@@ -113,7 +113,7 @@ exports.deletePost = (req, res) => {
               });
 
             //then delete the posts
-            sql.query(`DELETE FROM posts WHERE id = "${req.body.id}"`, (err) => {
+            sql.query(`DELETE FROM posts WHERE id = ?`, req.body.id, (err) => {
                 if (err) {
                     console.log("error: ", err);
                     result(err, null);

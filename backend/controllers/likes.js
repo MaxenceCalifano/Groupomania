@@ -6,7 +6,7 @@ const Like = require("../models/like");
 
 exports.likeUnlike = (req, res) => {
 
-    sql.query(`SELECT * FROM likes WHERE postId="${req.body.postId}" AND userID = "${req.userId}"`, (err, resp) => {
+    sql.query(`SELECT * FROM likes WHERE postId = ? AND userID = ?`, [req.body.postId, req.userId], (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -30,7 +30,7 @@ exports.likeUnlike = (req, res) => {
                 })
           }
           else {
-            sql.query(`DELETE FROM likes WHERE postId="${req.body.postId}" AND userID = "${req.userId}"`, (err, resp) => {
+            sql.query(`DELETE FROM likes WHERE postId = ? AND userID = ?`, [req.body.postId, req.userId], (err, resp) => {
                 if (err) {
                     console.log("error: ", err);
                     result(err, null);
@@ -44,7 +44,7 @@ exports.likeUnlike = (req, res) => {
 
 exports.getAllLikes = (req, res) => {
    // console.log(req.params)
-    sql.query(`SELECT * FROM likes WHERE postId = "${req.params.postId}"`, (err, resp) => {
+    sql.query(`SELECT * FROM likes WHERE postId = ?`, req.params.postId, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

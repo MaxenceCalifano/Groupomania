@@ -33,7 +33,7 @@ exports.signup = (req, res) => {
               if (req.file !== undefined) {
                 user.avatarUrl = req.file.filename;
               } else {
-                user.avatarUrl = 'admin.png';
+                user.avatarUrl = 'default.png';
               }
               User.create(user, (err,data) => {
                 if (err) 
@@ -47,7 +47,7 @@ exports.signup = (req, res) => {
 }
 
  exports.login = (req, res) => {
-    sql.query(`SELECT * FROM users WHERE email = "${req.body.email}"`, (err, result) => {
+    sql.query('SELECT * FROM users WHERE email = ?',[req.body.email], (err, result) => {
      //console.log( result )
 
         if (err) 
@@ -84,7 +84,7 @@ exports.logout = (req, res) => {
 } 
 
 exports.getUser = (req, res) => {
-  sql.query(`SELECT * FROM users WHERE username = "${req.params.user}"`, (err, result) => {
+  sql.query(`SELECT * FROM users WHERE username = ?`,[req.params.user], (err, result) => {
        if (err) 
          res.status(500).send({
          message:
@@ -101,7 +101,7 @@ exports.getUser = (req, res) => {
 }
 
 exports.getPrivateUserInfos = (req, res) => {
-  sql.query(`SELECT * FROM users WHERE id = "${req.userId}"`, (err, result) => {
+  sql.query(`SELECT * FROM users WHERE id = ?`, [req.userId], (err, result) => {
        if (err) 
          res.status(500).send({
          message:
@@ -117,7 +117,7 @@ exports.getPrivateUserInfos = (req, res) => {
    })
 }
 exports.passwordReset = (req, res) => {
-  sql.query(`SELECT * FROM users WHERE email = "${req.body.email}"`, (err, result) => {
+  sql.query(`SELECT * FROM users WHERE email = ?`, [req.body.email], (err, result) => {
     if (err) {
       res.status(500).send({
         message:
@@ -172,7 +172,7 @@ exports.passwordReset = (req, res) => {
 }
 
 exports.newPassword = (req, res) => {
-  sql.query(`SELECT * FROM users WHERE token = "${req.params.token}" AND id="${req.params.id}"`, (err, result) => {
+  sql.query(`SELECT * FROM users WHERE token = ? AND id= ?`, [req.params.token, req.params.id], (err, result) => {
     if (err) 
       res.status(500).send({
       message:
@@ -234,7 +234,7 @@ exports.modifyUser = (req, res) => {
               if (req.file !== undefined) {
                 userModifications.avatarUrl = req.file.filename;
                 //Delete previous avatar image file
-                sql.query(`SELECT avatarURL FROM users WHERE id = ${req.userId}`, (err, resp) => {
+                sql.query(`SELECT avatarURL FROM users WHERE id = ?`, [req.userId], (err, resp) => {
                   if (err) {
                       console.log("error: ", err);
                       result(err, null);
@@ -277,30 +277,32 @@ exports.modifyUser = (req, res) => {
 
 exports.deleteUser = (req, res) => {
   //Delete user avatar file
-  sql.query(`SELECT avatarURL FROM users WHERE id = ${req.userId}`, (err, resp) => {
+  sql.query(`SELECT avatarURL FROM users WHERE id = ?`, [req.userId], (err, resp) => {
     if (err) {
         console.log("error: ", err);
         result(err, null);
         return;
       }
+      if (resp[0].avatarURL !== 'default.png') {
       fs.unlink(`images/${resp[0].avatarURL}`, () => console.log("previous user avatar has been delete"))
+      }
     });
   // Delete all data associated with the user
-  sql.query(`DELETE FROM likes WHERE userId = "${req.userId}"`, (err) => {
+  sql.query(`DELETE FROM likes WHERE userId = ?`, [req.userId], (err) => {
     if (err) {
         console.log("error: ", err);
         result(err, null);
         return;
       }
     });
-    sql.query(`DELETE FROM comments WHERE userId = "${req.userId}"`, (err) => {
+    sql.query(`DELETE FROM comments WHERE userId = ?`, [req.userId], (err) => {
       if (err) {
           console.log("error: ", err);
           result(err, null);
           return;
         }
       });
-      sql.query(`DELETE FROM posts WHERE userID = "${req.userId}"`, (err) => {
+      sql.query(`DELETE FROM posts WHERE userId = ?`, [req.userId], (err) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -309,7 +311,7 @@ exports.deleteUser = (req, res) => {
         });
 
     // Then delete the user
-    sql.query(`DELETE FROM users WHERE id = "${req.userId}"`, (err) => {
+    sql.query(`DELETE FROM users WHERE id = ?`, [req.userId], (err) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);

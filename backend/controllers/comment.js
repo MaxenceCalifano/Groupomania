@@ -2,7 +2,7 @@ const Comment = require("../models/comments");
 const sql = require("../models/db");
 
 exports.newComment = (req, res) => {
-    sql.query(`SELECT * FROM users WHERE id = "${req.userId}"`, (err, resp) => {
+    sql.query(`SELECT * FROM users WHERE id = ?`, req.userId, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -39,7 +39,7 @@ exports.getAllPostComments = (req, res) => {
 }
 
 exports.modifyComment = (req, res) => {
-    sql.query(`SELECT * FROM comments WHERE id = "${req.body.id}"`, (err, resp) => {
+    sql.query(`SELECT * FROM comments WHERE id = ?`, req.body.id, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
@@ -68,14 +68,14 @@ exports.modifyComment = (req, res) => {
 };
 
 exports.deleteComment = (req, res) => {
-    sql.query(`SELECT * FROM comments WHERE id = "${req.body.id}"`, (err, resp) => {
+    sql.query(`SELECT * FROM comments WHERE id = ?`, req.body.id, (err, resp) => {
         if (err) {
             console.log("error: ", err);
             result(err, null);
             return;
           }
           if (req.userPrivilege == 1 || req.userId == resp[0].userId) {
-            sql.query(`DELETE FROM comments WHERE id = "${req.body.id}"`, (err, resp) => {
+            sql.query(`DELETE FROM comments WHERE id = ?`, req.body.id, (err, resp) => {
                 if (err) {
                     console.log("error: ", err);
                     result(err, null);

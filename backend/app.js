@@ -5,6 +5,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require('cors');
+const helmet = require('helmet');
 
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
@@ -21,6 +22,10 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
+app.use(helmet({
+  crossOriginResourcePolicy: false,
+  hidePoweredBy: true,
+})); //Appel tous les middleware d'Helmet mais autorise CORS
 
 app.use(express.json()); //Intercepte toutes les requetes qui ont comme content-type application/json et met leur body à disposition
 
