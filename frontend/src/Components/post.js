@@ -173,7 +173,7 @@ export default function Post(props) {
                     <div>
                         <div className="postHeader">
                             <div className="postOwner">
-                                <Avatar avatar={props.post.avatarURL} altText="avatar de l'auteur(e) du post"/>
+                                <Avatar avatar={props.post.avatarURL} altText={`avatar de ${props.post.username}`}/>
                                 <p>{props.post.username}</p>
                             </div>
                             {props.username === props.post.username || localStorage.getItem("privilege") === "1" ?

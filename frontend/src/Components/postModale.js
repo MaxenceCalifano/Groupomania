@@ -6,13 +6,19 @@ import '../css/postModal.css';
 
 export default function PostModale(props) {
 
+    const toogleEditModeOnPressEnter = (e) => {
+        if (e.code === "Enter") {
+            props.toogleEditMode()
+        } 
+    }
+
     const viewPosition = window.scrollY + 30;
     return (
         <div>
                 <div style={{top:viewPosition}} className="newPost-input createNewPost">
                     <div className="createNewPost-header">
                         <p>{props.actionText}</p>
-                    <FontAwesomeIcon className="closeButton" icon={faCircleXmark} onClick={props.toogleEditMode}/>
+                    <FontAwesomeIcon tabIndex={0} className="closeButton" icon={faCircleXmark} onClick={props.toogleEditMode} onKeyPress={toogleEditModeOnPressEnter}/>
                     </div>    
 
                     <div className="postContent">

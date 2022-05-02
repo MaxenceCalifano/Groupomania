@@ -33,7 +33,7 @@ exports.signup = (req, res) => {
               if (req.file !== undefined) {
                 user.avatarUrl = req.file.filename;
               } else {
-                user.avatarUrl = 'admin.png1649961381928.png';
+                user.avatarUrl = 'admin.png';
               }
               User.create(user, (err,data) => {
                 if (err) 

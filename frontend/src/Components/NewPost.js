@@ -48,6 +48,7 @@ export default function NewPost(props) {
     const toogleEditModeOnPressEnter = (e) => {
         if(e.code === "Enter") toogleEditMode(!isInEditMode)
     }
+
     if(isInEditMode) {
         document.body.style.overflow = "hidden";
     } else {
@@ -57,7 +58,8 @@ export default function NewPost(props) {
 
     return (
         <div className="newPost">
-           <input className="startPost" name="text" type="text" placeholder="Ecrivez quelque chose..." onClick={toogleEditMode} onKeyPress={toogleEditModeOnPressEnter} ></input>
+            <label hidden htmlFor="newPost">Créer un nouveau post</label>
+           <input className="startPost" id="newPost" name="newPost" type="text" placeholder="Ecrivez quelque chose..." onClick={toogleEditMode} onKeyPress={toogleEditModeOnPressEnter} ></input>
 
         {
             isInEditMode ?

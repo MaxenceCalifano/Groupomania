@@ -11,7 +11,7 @@ import "../css/profile.css";
 
 
 function Profile(props) {
-
+    
     const [username, setUsername] = useState();
     const [avatar, setavatar] = useState();
     const [email, setEmail] = useState();
@@ -22,7 +22,7 @@ function Profile(props) {
     const [isInEditMode, setIsInEditMode] = useState(false);
     const [displayDeleteWarning, setDisplayWarning] = useState(false);
     const [userDeletedMessage, setUserDeletedMessage] = useState();
-    
+
     const getFile = (e) => {
             const img = {
                 preview: URL.createObjectURL(e.target.files[0]),
@@ -169,7 +169,7 @@ function Profile(props) {
             <p className="title">Votre Profil : </p>
             <p><span className="profile-bold">Pseudo :</span> {props.username}</p>   
             <p><span className="profile-bold">e-mail :</span> {email}</p>
-            <span className="showAvatar"><span className="profile-bold">Photo de profil :  </span>{avatar !== null ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}</span>
+            <span className="showAvatar"><span className="profile-bold">Photo de profil :  </span>{avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> :""}</span>
             
             <div>
                 <Button className="modifyProfileButton" onClick={() => setIsInEditMode(true)} action="Modifier le profil"/>
