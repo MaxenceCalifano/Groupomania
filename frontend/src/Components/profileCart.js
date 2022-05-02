@@ -23,19 +23,20 @@ export default function Profile(props) {
     return(
         <div>
             <div className="profileCard"> 
-         <Link to={"profile"}  
-            onFocus= {() => setIsHovered(true)} 
-            onMouseEnter={() =>setIsHovered(true)} 
-            onMouseLeave={() =>setIsHovered(false)}
-            onBlur={() =>setIsHovered(false)}> 
-        {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
-        {isHovered ? 
-            <div className="profileCard_options" >
-                <p>Votre profil :</p>
-                <p className="profileCard_options--profileLink">{props.username}</p>
-            </div> 
-            : ""
-        }
+            <Link className="profileCard_link" to={"profile"}  
+                onFocus= {() => setIsHovered(true)} 
+                onMouseEnter={() =>setIsHovered(true)}
+                onMouseLeave={() =>setIsHovered(false)}
+                onBlur={() =>setIsHovered(false)} 
+                > 
+            {avatar !== undefined ? <img className="avatar" src={`http://localhost:3000/images/${avatar}`} alt="avatar"></img> : ""}
+            
+                <div className={isHovered ? "profileCard_options" : "profileCard_notDisplayed"}
+                    >
+                    <p>Votre profil :</p>
+                    <p className="profileCard_options--profileLink">{props.username}</p>
+                </div> 
+                
             </Link>
         </div>
         </div>

@@ -30,7 +30,7 @@ export default function PostModale(props) {
                         <hr style={{width:'50%'}}/>
                         <div className="altAttributeInput">
                             <label htmlFor="altAttributeInput">Décrivez l'image en quelque mots :</label>
-                            <input type="text" placeholder={"un court texte déscriptif"} defaultValue={props.caption} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>
+                            <input type="text" placeholder={"un court texte descriptif"} defaultValue={props.caption} maxLength="50" onChange={ (e) => props.setCaption(e.target.value)}/>
                         </div>
 
                         <input className="fileInput" type={"file"} name={"image"} id="image" accept="image/png, image/jpeg, image/jpg"

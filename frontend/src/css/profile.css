@@ -41,13 +41,13 @@
     border-color: red;
     color: white;
     margin: 30px 0;
+    height: auto;
 }
 
 .cancelDeleteButton {
     background-color: #258916;
     border-color: #258916;
     color: white;
-    margin-left: 10px;
 }
 
 .cancelDeleteButton:hover {
@@ -66,6 +66,11 @@
 
 .cancelModificationsButton:hover {
     background-color: #a0252e;
+}
+
+.deleteWarning_container {
+    display: flex;
+    flex-direction: column;
 }
 
 .deleteWarning {
@@ -137,4 +142,12 @@
 
 .backToHomeLink:visited {
     color: inherit;
+}
+
+@media screen and (max-width:576px) {
+
+    .editProfile input[type="text"],
+    .editProfile input[type="password"] {
+        width: 80%;
+    }
 }

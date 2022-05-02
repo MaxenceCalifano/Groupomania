@@ -25,3 +25,9 @@ header {
     display: flex;
     flex-direction: column;
 }
+
+@media screen and (max-width:576px) {
+    .header-link {
+        width: 50%;
+    }
+}

@@ -2,20 +2,24 @@
     border-radius: 9px;
 }
 
+.profileCard_link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .profileCard_options {
     position: absolute;
     background-color: rgba(255, 255, 255);
     border-radius: 6px;
     box-shadow: 1px 3px 30px 1px rgba(0, 0, 0, 0.2);
-}
-
-.profileCard a {
+    margin-top: 61px;
     text-decoration: none;
     color: #091f43;
 }
 
-.profileCard a:hover {
-    text-decoration: underline;
+.profileCard_notDisplayed {
+    display: none;
 }
 
 .profileCard_options p {

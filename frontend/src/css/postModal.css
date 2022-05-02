@@ -1,6 +1,7 @@
 .modalButton {
     background-color: #091f43;
     color: white;
+    width: 100%;
 }
 
 .modalButton:hover {

@@ -26,7 +26,6 @@ exports.newComment = (req, res) => {
 )}
 
 exports.getAllPostComments = (req, res) => {
-    //SELECT * FROM comments JOIN users ON comments.userID = users.id WHERE comments.postId = "${req.params.id}"
     sql.query(`SELECT c.id AS commentId, c.userId, c.postId, c.text, users.username, users.avatarUrl 
                 FROM comments c JOIN users ON c.userId = users.id WHERE c.postId = "${req.params.id}"`, (err, resp) => {
         if (err) {

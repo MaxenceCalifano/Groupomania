@@ -180,11 +180,10 @@ function Profile(props) {
             <Button className="deleteButton" onClick={() => setDisplayWarning(true)} action={"Supprimer le compte"}/>
 
             {displayDeleteWarning ?
-                <div>
+                <div className="deleteWarning_container">
                     <strong className="deleteWarning">Cette action est irréversible, voulez-vous vraiment supprimer votre compte Groupomania ?</strong>
-                    <Button className="deleteButton" onClick={deleteProfile} action={"Oui, supprimer mon compte"}/>
                     <Button className="cancelDeleteButton" onClick={() => setDisplayWarning(false)} action={"Non, annuler la demande"}/>
-
+                    <Button className="deleteButton" onClick={deleteProfile} action={"Oui, supprimer mon compte"}/>
                 </div>      
                 :
                 ""

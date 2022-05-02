@@ -5,6 +5,7 @@
     padding: 4px 9px;
     border: 2px solid;
     height: 30px;
+    width: 230px;
 }
 
 .defaultButton:hover {
