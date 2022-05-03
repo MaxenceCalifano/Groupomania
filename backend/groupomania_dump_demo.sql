@@ -98,7 +98,7 @@ VALUES
     'un chat qui s\'ennui'
   ),(
     251,
-    'Quelqu\'un a u mon stylo',
+    'Quelqu\'un a vu mon stylo ?',
     'J\'ai perdu mon 4 couleurs',
     NULL,
     116,
