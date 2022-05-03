@@ -2,6 +2,16 @@
     border-radius: 9px;
 }
 
+.profileCard_notHovered {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profileCard_icon {
+    color: rgb(227, 227, 227);
+}
+
 .profileCard_link {
     display: flex;
     flex-direction: column;
