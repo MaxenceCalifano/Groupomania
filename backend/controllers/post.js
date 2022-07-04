@@ -54,7 +54,7 @@ exports.modifyPost = (req, res) => {
             return;
           }
           
-          if(req.userID !== resp[0].userID) { //Compare id in the request with id of the post 
+          if(req.userId !== resp[0].userID) { //Compare id in the request with id of the post 
             res.status(401).json({
                 message: "You're not allowed to modify this post"
             })
