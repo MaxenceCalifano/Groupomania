@@ -46,7 +46,7 @@ function Profile(props) {
     }
     
     const modifyProfile = () => {
-        fetch(`http://localhost:3001/api/auth/${props.username}`, {
+        fetch(`https://mc-groupomania.herokuapp.com/api/auth/${props.username}`, {
             method: "PUT",
             credentials: "include",
             body: formData,
@@ -62,7 +62,7 @@ function Profile(props) {
 
     }
     const deleteProfile = () => {
-        fetch('http://localhost:3001/api/auth/', {
+        fetch('https://mc-groupomania.herokuapp.com/api/auth/', {
             method: "DELETE",
             credentials: "include",
         })
@@ -81,7 +81,7 @@ function Profile(props) {
 
     useEffect(     
         () => {       
-                fetch(`http://localhost:3001/api/auth/private/${props.username}`, {
+                fetch(`https://mc-groupomania.herokuapp.com/api/auth/private/${props.username}`, {
                 credentials: "include",
             })
                 .then( res => res.json())
@@ -96,7 +96,7 @@ function Profile(props) {
     
     const navigate =  useNavigate()
     const logout = () => {
-        fetch("http://localhost:3001/api/auth/logout", { 
+        fetch("https://mc-groupomania.herokuapp.com/api/auth/logout", { 
             method: "GET",
             credentials: "include",
         })

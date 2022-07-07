@@ -10,7 +10,7 @@ export default function Header(props) {
   
         <header>
             <div className="header_container">
-            <a className="header-link" href="http://localhost:3000"> <img className="header-icon" src={icon} alt="logo de Groupomania"></img> </a>
+            <a className="header-link" href="https://groupomania-maxencecalifano.vercel.app/"> <img className="header-icon" src={icon} alt="logo de Groupomania"></img> </a>
            
            {
                props.isLoggedIn ?

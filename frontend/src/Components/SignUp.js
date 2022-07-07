@@ -57,7 +57,7 @@ export default function SignUp() {
         formData.append('password', password)
 
 
-        fetch("http://localhost:3001/api/auth/signup", {
+        fetch("https://mc-groupomania.herokuapp.com/api/auth/signup", {
             method: "POST",
             body: formData,
         })

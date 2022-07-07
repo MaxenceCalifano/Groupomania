@@ -26,7 +26,7 @@ export default function NewPost(props) {
     formData.append('caption', caption);
 
     const post = () => {
-        fetch("http://localhost:3001/api/posts", {
+        fetch("https://mc-groupomania.herokuapp.com/api/posts", {
         method: "POST",
         credentials: "include",
         body: formData,

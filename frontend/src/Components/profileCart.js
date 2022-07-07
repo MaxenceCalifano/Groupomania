@@ -33,7 +33,7 @@ export default function Profile(props) {
                 >
             <div className="profileCard_notHovered">
                 <FontAwesomeIcon icon={faChevronDown}  className="profileCard_icon"/>
-                {avatar !== undefined ? <img className="avatar" src={`http://localhost:3001/images/${avatar}`} alt="avatar"></img> : ""}
+                {avatar !== undefined ? <img className="avatar" src={`https://mc-groupomania.herokuapp.com/images/${avatar}`} alt="avatar"></img> : ""}
             </div>
                 <div className={isHovered ? "profileCard_options" : "profileCard_notDisplayed"}
                     >

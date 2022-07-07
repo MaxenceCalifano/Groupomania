@@ -14,7 +14,7 @@ export default function Posts(props) {
     const navigate = useNavigate();
 
     const getAllPosts = () => {
-      fetch("http://localhost:3001/api/posts", { 
+      fetch("https://mc-groupomania.herokuapp.com/api/posts", { 
         method: "GET",
         credentials: "include",
         headers: {
