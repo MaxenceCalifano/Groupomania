@@ -10,7 +10,7 @@ export default function Profile(props) {
    
     useEffect(     
         () => {       
-                fetch(`http://localhost:3001/api/auth/${props.username}`, {
+                fetch(`https://mc-groupomania.herokuapp.com/api/auth/${props.username}`, {
                 credentials: "include",
             })
                 .then( res => res.json())
